@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <title>Le titre de ma page</title>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{ message }}</h1>
+        </div>
+
+        <script>
+            const { createApp } = Vue;
+
+            createApp({
+                data() {
+                    return {
+                        message: 'projet page web Vue.js'
+                    }
+                }
+            }).mount('#app');
+        </script>
+
+    </body>
+</html>
+
+
