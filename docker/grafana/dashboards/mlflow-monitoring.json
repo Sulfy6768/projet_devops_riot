@@ -1,0 +1,171 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            { "options": { "0": { "color": "red", "index": 1, "text": "DOWN" } }, "type": "value" },
+            { "options": { "1": { "color": "green", "index": 0, "text": "UP" } }, "type": "value" }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
+            ]
+          }
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name"
+      },
+      "title": "MLflow Status",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "up{job=\"mlflow\"}",
+          "legendFormat": "MLflow Server",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "gridPos": { "h": 8, "w": 18, "x": 6, "y": 0 },
+      "id": 2,
+      "options": {
+        "content": "## 🤖 MLflow - Model Tracking\n\n### Accès rapide\n- **MLflow UI**: [http://localhost:5000](http://localhost:5000)\n\n### Fonctionnalités\n- Tracking des expériences ML\n- Versioning des modèles\n- Comparaison des métriques\n- Gestion des artifacts\n\n### Modèles IA prévus\n- Prédiction de draft optimal\n- Analyse de winrate par composition\n- Recommandation de bans",
+        "mode": "markdown"
+      },
+      "title": "MLflow Information",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null }
+            ]
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "title": "MLflow Uptime",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "up{job=\"mlflow\"}",
+          "legendFormat": "MLflow Status",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "id": 4,
+      "options": {
+        "content": "## 📊 Métriques à tracker\n\n### Entraînement\n- `accuracy` - Précision du modèle\n- `loss` - Fonction de perte\n- `f1_score` - Score F1\n- `training_time` - Temps d'entraînement\n\n### Inference\n- `prediction_latency` - Latence de prédiction\n- `requests_per_second` - Requêtes par seconde\n- `model_version` - Version du modèle actif\n\n### Draft Analysis\n- `draft_winrate_accuracy` - Précision des prédictions de winrate\n- `champion_recommendation_score` - Score de recommandation",
+        "mode": "markdown"
+      },
+      "title": "Metrics Guide",
+      "type": "text"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["riot-devops", "mlflow", "ml"],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Riot DevOps - MLflow Monitoring",
+  "uid": "riot-mlflow-monitoring",
+  "version": 1,
+  "weekStart": ""
+}
