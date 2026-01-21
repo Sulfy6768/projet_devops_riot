@@ -1,0 +1,14 @@
+# Configuration automatique des dashboards Grafana
+apiVersion: 1
+
+providers:
+  - name: 'Riot DevOps Dashboards'
+    orgId: 1
+    folder: 'Riot DevOps'
+    folderUid: 'riot-devops'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards

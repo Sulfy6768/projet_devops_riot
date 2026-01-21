@@ -1,0 +1,51 @@
+# Configuration Prometheus pour Projet Riot DevOps
+global:
+  scrape_interval: 15s          # Intervalle de collecte des métriques
+  evaluation_interval: 15s       # Intervalle d'évaluation des règles
+  external_labels:
+    monitor: 'riot-devops'
+
+# Règles d'alerting
+rule_files:
+  - "alerts.yml"
+
+# Configuration Alertmanager (optionnel)
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets:
+#           - alertmanager:9093
+
+# Configuration des cibles de scraping
+scrape_configs:
+  # Prometheus lui-même
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus'
+
+  # Node Exporter - Métriques système
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          service: 'node-exporter'
+
+  # MLflow - Métriques MLflow (si exposées)
+  - job_name: 'mlflow'
+    static_configs:
+      - targets: ['mlflow:5000']
+        labels:
+          service: 'mlflow'
+    metrics_path: /metrics
+    # MLflow n'expose pas de métriques par défaut, 
+    # mais ceci est prêt si vous ajoutez un exporter
+
+  # API Backend FastAPI - Métriques applicatives
+  - job_name: 'riot-api'
+    static_configs:
+      - targets: ['riot-api:8000']
+        labels:
+          service: 'riot-api'
+    metrics_path: /metrics

@@ -1,0 +1,55 @@
+# Règles d'alertes Prometheus pour Projet Riot DevOps
+groups:
+  - name: riot-alerts
+    rules:
+      # Alerte si un service est down
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service {{ $labels.job }} est down"
+          description: "Le service {{ $labels.job }} sur {{ $labels.instance }} est indisponible depuis plus d'1 minute."
+
+      # Alerte si utilisation CPU élevée
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Utilisation CPU élevée sur {{ $labels.instance }}"
+          description: "L'utilisation CPU est supérieure à 80% depuis 5 minutes (actuel: {{ $value }}%)."
+
+      # Alerte si mémoire faible
+      - alert: LowMemory
+        expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 < 20
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Mémoire disponible faible sur {{ $labels.instance }}"
+          description: "Moins de 20% de mémoire disponible (actuel: {{ $value }}%)."
+
+      # Alerte si espace disque faible
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes{fstype!~"tmpfs|overlay"}) * 100 < 15
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Espace disque faible sur {{ $labels.instance }}"
+          description: "Moins de 15% d'espace disque disponible sur {{ $labels.mountpoint }} (actuel: {{ $value }}%)."
+
+  - name: mlflow-alerts
+    rules:
+      # Alerte si MLflow est indisponible
+      - alert: MLflowDown
+        expr: up{job="mlflow"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "MLflow est indisponible"
+          description: "Le serveur MLflow est down depuis plus de 2 minutes."
