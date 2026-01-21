@@ -63,7 +63,10 @@ class RiotAPI:
                 "championId": participant["championId"],
                 "championName": participant["championName"],
                 "teamPosition": participant["teamPosition"],  # TOP, JUNGLE, MIDDLE, BOTTOM, UTILITY
-                "win": participant["win"]
+                "win": participant["win"],
+                "summonerName": participant.get("summonerName", ""),
+                "riotIdGameName": participant.get("riotIdGameName", ""),
+                "riotIdTagline": participant.get("riotIdTagline", "")
             }
             
             if participant["teamId"] == 100:
@@ -127,7 +130,7 @@ def collect_games(api: RiotAPI, players: list, games_per_player: int = 100) -> l
 
 
 if __name__ == "__main__":
-    API_KEY = "RGAPI-243c484b-624d-436d-9dd3-28f208284ff0"
+    API_KEY = "RGAPI-bccf07af-c667-4d42-aebd-748aa565c813"
     
     api = RiotAPI(API_KEY, region="euw1")
     

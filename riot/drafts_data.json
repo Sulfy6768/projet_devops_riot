@@ -1,0 +1,5735 @@
+[
+  {
+    "match_id": "EUW1_7690511202",
+    "game_version": "16.1.737.4870",
+    "queue_id": 420,
+    "game_duration": 2031,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 904,
+        "championName": "Zaahen",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "TheShy Son",
+        "riotIdTagline": "PDV"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 84,
+        "championName": "Akali",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "OpDf",
+        "riotIdTagline": "8967"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Spinning Doggo",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 432,
+        "championName": "Bard",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "5N4K3",
+        "riotIdTagline": "09xxx"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 83,
+        "championName": "Yorick",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "nicoph\u00e9",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 60,
+        "championName": "Elise",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "1 Man 4 Pigs",
+        "riotIdTagline": "1806"
+      },
+      {
+        "championId": 142,
+        "championName": "Zoe",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Zainx",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 51,
+        "championName": "Caitlyn",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Anahata",
+        "riotIdTagline": "hata"
+      },
+      {
+        "championId": 201,
+        "championName": "Braum",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Linh91",
+        "riotIdTagline": "VIET"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        154,
+        800,
+        3,
+        86,
+        131
+      ],
+      "team_200": [
+        32,
+        800,
+        111,
+        122,
+        950
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7690485880",
+    "game_version": "16.1.737.4870",
+    "queue_id": 420,
+    "game_duration": 1492,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 777,
+        "championName": "Yone",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Obermieming",
+        "riotIdTagline": "Anna"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 8,
+        "championName": "Vladimir",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Azero5000",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Spinning Doggo",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 555,
+        "championName": "Pyke",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "HAAAN Solo",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 223,
+        "championName": "TahmKench",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "USECLUX",
+        "riotIdTagline": "1570"
+      },
+      {
+        "championId": 517,
+        "championName": "Sylas",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "AmenaGOD",
+        "riotIdTagline": "DIEL"
+      },
+      {
+        "championId": 166,
+        "championName": "Akshan",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "theo",
+        "riotIdTagline": "3x3"
+      },
+      {
+        "championId": 523,
+        "championName": "Aphelios",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Mithrandir",
+        "riotIdTagline": "TUR"
+      },
+      {
+        "championId": 412,
+        "championName": "Thresh",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sauron",
+        "riotIdTagline": "TUR"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        154,
+        800,
+        131,
+        711,
+        24
+      ],
+      "team_200": [
+        157,
+        266,
+        54,
+        36,
+        134
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7685442688",
+    "game_version": "16.1.737.4870",
+    "queue_id": 420,
+    "game_duration": 1827,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 39,
+        "championName": "Irelia",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "makosinkai",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 19,
+        "championName": "Warwick",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Aclaa",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 1,
+        "championName": "Annie",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Helena Eko",
+        "riotIdTagline": "Washu"
+      },
+      {
+        "championId": 22,
+        "championName": "Ashe",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Glitchoop",
+        "riotIdTagline": "GLTCH"
+      },
+      {
+        "championId": 201,
+        "championName": "Braum",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "TheCatSaysMeows",
+        "riotIdTagline": "3246"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 110,
+        "championName": "Varus",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Pedu",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 103,
+        "championName": "Ahri",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Lina",
+        "riotIdTagline": "Salty"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 902,
+        "championName": "Milio",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "GermanAimbot",
+        "riotIdTagline": "NNO"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        901,
+        8,
+        54,
+        133,
+        35
+      ],
+      "team_200": [
+        157,
+        51,
+        876,
+        107,
+        119
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7678476422",
+    "game_version": "16.1.737.4870",
+    "queue_id": 420,
+    "game_duration": 2254,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 54,
+        "championName": "Malphite",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Oubadouba",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 34,
+        "championName": "Anivia",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Dry Fart",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 35,
+        "championName": "Shaco",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "ausfragezeichen",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 777,
+        "championName": "Yone",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "ToGamer26",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 92,
+        "championName": "Riven",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "SFX Jumpy",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 38,
+        "championName": "Kassadin",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Jiru",
+        "riotIdTagline": "ESP"
+      },
+      {
+        "championId": 498,
+        "championName": "Xayah",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "dnes a z\u00edtra",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 111,
+        "championName": "Nautilus",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Hryzulin",
+        "riotIdTagline": "hadra"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        51,
+        134,
+        131,
+        -1,
+        58
+      ],
+      "team_200": [
+        238,
+        141,
+        85,
+        78,
+        25
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7676846279",
+    "game_version": "16.1.737.1049",
+    "queue_id": 420,
+    "game_duration": 1747,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 39,
+        "championName": "Irelia",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Naughty Chupacab",
+        "riotIdTagline": "6969"
+      },
+      {
+        "championId": 887,
+        "championName": "Gwen",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 517,
+        "championName": "Sylas",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Larvataren",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "ADC LIFE IS SAD",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 147,
+        "championName": "Seraphine",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "JuicyFatMarc",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 36,
+        "championName": "DrMundo",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "ItsHorror",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 59,
+        "championName": "JarvanIV",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Taz",
+        "riotIdTagline": "papap"
+      },
+      {
+        "championId": 74,
+        "championName": "Heimerdinger",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Gtrock90",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 18,
+        "championName": "Tristana",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "SuperHanss",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 50,
+        "championName": "Swain",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Blood \u0421o\u0441k",
+        "riotIdTagline": "DAUN"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        55,
+        25,
+        10,
+        119,
+        234
+      ],
+      "team_200": [
+        89,
+        233,
+        555,
+        799,
+        105
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7676811735",
+    "game_version": "16.1.737.1049",
+    "queue_id": 420,
+    "game_duration": 2368,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 24,
+        "championName": "Jax",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Quinceauddanda",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 131,
+        "championName": "Diana",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 3,
+        "championName": "Galio",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Joney",
+        "riotIdTagline": "six7"
+      },
+      {
+        "championId": 202,
+        "championName": "Jhin",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "SitGazdaIsHere",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 143,
+        "championName": "Zyra",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Gyzy",
+        "riotIdTagline": "8586"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 133,
+        "championName": "Quinn",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Way of Bae",
+        "riotIdTagline": "66699"
+      },
+      {
+        "championId": 238,
+        "championName": "Zed",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "ege",
+        "riotIdTagline": "1968"
+      },
+      {
+        "championId": 13,
+        "championName": "Ryze",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "1ooper",
+        "riotIdTagline": "666"
+      },
+      {
+        "championId": 14,
+        "championName": "Sion",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "xzlruenl",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 25,
+        "championName": "Morgana",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "CRISTRONALDOSUWI",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        89,
+        234,
+        875,
+        51,
+        84
+      ],
+      "team_200": [
+        7,
+        31,
+        54,
+        67,
+        51
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7676783306",
+    "game_version": "16.1.737.1049",
+    "queue_id": 420,
+    "game_duration": 1341,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 105,
+        "championName": "Fizz",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "X9jngsupporta",
+        "riotIdTagline": "2753"
+      },
+      {
+        "championId": 141,
+        "championName": "Kayn",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Im Tyler Durden",
+        "riotIdTagline": "best"
+      },
+      {
+        "championId": 45,
+        "championName": "Veigar",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "JOKERGEXDDD",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 901,
+        "championName": "Smolder",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Baron du Dollex",
+        "riotIdTagline": "CASH"
+      },
+      {
+        "championId": 201,
+        "championName": "Braum",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "LIGEDAL",
+        "riotIdTagline": "SWE"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 113,
+        "championName": "Sejuani",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Mevaxes",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 131,
+        "championName": "Diana",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 96,
+        "championName": "KogMaw",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Ginellan",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 236,
+        "championName": "Lucian",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Jerry le Dindon",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 902,
+        "championName": "Milio",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "heliumlover101",
+        "riotIdTagline": "1000"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        222,
+        15,
+        950,
+        10,
+        11
+      ],
+      "team_200": [
+        234,
+        904,
+        55,
+        -1,
+        360
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7676758270",
+    "game_version": "16.1.737.1049",
+    "queue_id": 420,
+    "game_duration": 1489,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 777,
+        "championName": "Yone",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Kanax1967",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 876,
+        "championName": "Lillia",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "SPL FRN7",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 134,
+        "championName": "Syndra",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "AlvaritoG95",
+        "riotIdTagline": "4221"
+      },
+      {
+        "championId": 498,
+        "championName": "Xayah",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Filtre \u00e0 Gaz",
+        "riotIdTagline": "1933"
+      },
+      {
+        "championId": 432,
+        "championName": "Bard",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "LuffLouuuuff",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 23,
+        "championName": "Tryndamere",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "h\u00e4m\u00e4r\u00e4",
+        "riotIdTagline": "heebo"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 99,
+        "championName": "Lux",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "talisderboss",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "TheAdrihead",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 37,
+        "championName": "Sona",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "SilentSona",
+        "riotIdTagline": "ECHO"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        555,
+        51,
+        55,
+        24,
+        122
+      ],
+      "team_200": [
+        54,
+        131,
+        111,
+        904,
+        7
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7676203041",
+    "game_version": "16.1.734.5787",
+    "queue_id": 420,
+    "game_duration": 2494,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 82,
+        "championName": "Mordekaiser",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "TheHidde",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 121,
+        "championName": "Khazix",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 238,
+        "championName": "Zed",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "ByVreax",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 412,
+        "championName": "Thresh",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "TopSyKret",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 122,
+        "championName": "Darius",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Ylane",
+        "riotIdTagline": "6069"
+      },
+      {
+        "championId": 131,
+        "championName": "Diana",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Chrollo",
+        "riotIdTagline": "Phbg"
+      },
+      {
+        "championId": 246,
+        "championName": "Qiyana",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Gewpacarbra",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 18,
+        "championName": "Tristana",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Streakxx",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 888,
+        "championName": "Renata",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "HimeSenpai",
+        "riotIdTagline": "GOD"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        51,
+        887,
+        25,
+        234,
+        517
+      ],
+      "team_200": [
+        54,
+        157,
+        117,
+        55,
+        35
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7676107322",
+    "game_version": "16.1.734.5787",
+    "queue_id": 420,
+    "game_duration": 2032,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 84,
+        "championName": "Akali",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Selimmmmmmmmmmmm",
+        "riotIdTagline": "00000"
+      },
+      {
+        "championId": 876,
+        "championName": "Lillia",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Chete",
+        "riotIdTagline": "0511"
+      },
+      {
+        "championId": 777,
+        "championName": "Yone",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Baltasar",
+        "riotIdTagline": "4948"
+      },
+      {
+        "championId": 15,
+        "championName": "Sivir",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Mousmou",
+        "riotIdTagline": "6086"
+      },
+      {
+        "championId": 267,
+        "championName": "Nami",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "KeriaSupremeLOVE",
+        "riotIdTagline": "KEK"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 39,
+        "championName": "Irelia",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "3 mal abgepumpt",
+        "riotIdTagline": "slim"
+      },
+      {
+        "championId": 35,
+        "championName": "Shaco",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 134,
+        "championName": "Syndra",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "bhalgor",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 25,
+        "championName": "Morgana",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "lordadri19",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        420,
+        32,
+        114,
+        141,
+        142
+      ],
+      "team_200": [
+        75,
+        360,
+        90,
+        51,
+        234
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7676092166",
+    "game_version": "16.1.734.5787",
+    "queue_id": 420,
+    "game_duration": 99,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 17,
+        "championName": "Teemo",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Double XX1",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 131,
+        "championName": "Diana",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "\u30b4\u30f3\u30b6 \u30d6\u30fc",
+        "riotIdTagline": "BOO"
+      },
+      {
+        "championId": 901,
+        "championName": "Smolder",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sainglir",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Orzygo\u0142ek3000",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 89,
+        "championName": "Leona",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "KannyRaido",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 90,
+        "championName": "Malzahar",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "schmarra",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 35,
+        "championName": "Shaco",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 91,
+        "championName": "Talon",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "II Saitama II",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 111,
+        "championName": "Nautilus",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "FlexBunker",
+        "riotIdTagline": "9493"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        800,
+        777,
+        36,
+        523,
+        122
+      ],
+      "team_200": [
+        234,
+        950,
+        51,
+        122,
+        134
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7676026549",
+    "game_version": "16.1.734.5787",
+    "queue_id": 420,
+    "game_duration": 2035,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 83,
+        "championName": "Yorick",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "dhofma",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 59,
+        "championName": "JarvanIV",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sven \u03a4vesk\u00e6g",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 84,
+        "championName": "Akali",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "SnakeHEayter3MGS",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "daddy is smurf",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 201,
+        "championName": "Braum",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "tiekenei",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 777,
+        "championName": "Yone",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "The Holy Kight",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 113,
+        "championName": "Sejuani",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 13,
+        "championName": "Ryze",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Homunkulus",
+        "riotIdTagline": "1337"
+      },
+      {
+        "championId": 202,
+        "championName": "Jhin",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "LutheriWe",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 53,
+        "championName": "Blitzcrank",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Farina00",
+        "riotIdTagline": "8239"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        119,
+        800,
+        161,
+        19,
+        39
+      ],
+      "team_200": [
+        63,
+        126,
+        134,
+        234,
+        51
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7653813944",
+    "game_version": "15.24.734.7485",
+    "queue_id": 420,
+    "game_duration": 2493,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 85,
+        "championName": "Kennen",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Combatente96",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 35,
+        "championName": "Shaco",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 3,
+        "championName": "Galio",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "VIQUE91",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 81,
+        "championName": "Ezreal",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "airbax",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 111,
+        "championName": "Nautilus",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "HGruels",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 122,
+        "championName": "Darius",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "poussindefeu",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 245,
+        "championName": "Ekko",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "HaineOfCycle",
+        "riotIdTagline": "667"
+      },
+      {
+        "championId": 112,
+        "championName": "Viktor",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "KidBuu",
+        "riotIdTagline": "8060"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "AdriHoruS",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 99,
+        "championName": "Lux",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "LaSauceQuiPyke",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        36,
+        876,
+        14,
+        555,
+        8
+      ],
+      "team_200": [
+        11,
+        360,
+        89,
+        55,
+        54
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7653761811",
+    "game_version": "15.24.734.7485",
+    "queue_id": 420,
+    "game_duration": 1890,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 122,
+        "championName": "Darius",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "yo bien ou bien",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 131,
+        "championName": "Diana",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Lucho40",
+        "riotIdTagline": "40100"
+      },
+      {
+        "championId": 39,
+        "championName": "Irelia",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KurOwO",
+        "riotIdTagline": "meow"
+      },
+      {
+        "championId": 202,
+        "championName": "Jhin",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Thyristorm",
+        "riotIdTagline": "98EUW"
+      },
+      {
+        "championId": 143,
+        "championName": "Zyra",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Redhead9616",
+        "riotIdTagline": "MMM"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 92,
+        "championName": "Riven",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Techno Turlinckx",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 245,
+        "championName": "Ekko",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "RollOnMyLevel",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 901,
+        "championName": "Smolder",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Chiaru1",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 902,
+        "championName": "Milio",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Apollo",
+        "riotIdTagline": "EU55"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        119,
+        11,
+        43,
+        6,
+        711
+      ],
+      "team_200": [
+        145,
+        21,
+        876,
+        56,
+        17
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7652269094",
+    "game_version": "15.24.734.7485",
+    "queue_id": 420,
+    "game_duration": 1762,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 904,
+        "championName": "Zaahen",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "ER0INE",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 103,
+        "championName": "Ahri",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "JuicyFatMarc",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 236,
+        "championName": "Lucian",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "gamesTmusic",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 99,
+        "championName": "Lux",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "EL Choppper",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 19,
+        "championName": "Warwick",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "15FFGG",
+        "riotIdTagline": "GGWP"
+      },
+      {
+        "championId": 54,
+        "championName": "Malphite",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Conss",
+        "riotIdTagline": "2112"
+      },
+      {
+        "championId": 910,
+        "championName": "Hwei",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Shadooxs",
+        "riotIdTagline": "Shadx"
+      },
+      {
+        "championId": 145,
+        "championName": "Kaisa",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Broke boi",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 267,
+        "championName": "Nami",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Origami Nami",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        89,
+        234,
+        24,
+        412,
+        238
+      ],
+      "team_200": [
+        17,
+        7,
+        35,
+        800,
+        555
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7652215988",
+    "game_version": "15.24.734.7485",
+    "queue_id": 420,
+    "game_duration": 1862,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 150,
+        "championName": "Gnar",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "nibo",
+        "riotIdTagline": "yoo"
+      },
+      {
+        "championId": 131,
+        "championName": "Diana",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "LufyxN2",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 134,
+        "championName": "Syndra",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Frogner",
+        "riotIdTagline": "MOM"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Chriny24",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 143,
+        "championName": "Zyra",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Enidia",
+        "riotIdTagline": "007"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 420,
+        "championName": "Illaoi",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "edcwsxqazogamer",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 25,
+        "championName": "Morgana",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 13,
+        "championName": "Ryze",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "JuicyFatMarc",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 29,
+        "championName": "Twitch",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "MtyKlaud",
+        "riotIdTagline": "BBZ"
+      },
+      {
+        "championId": 37,
+        "championName": "Sona",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Beganie",
+        "riotIdTagline": "BAFE"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        245,
+        902,
+        51,
+        10,
+        157
+      ],
+      "team_200": [
+        36,
+        904,
+        234,
+        21,
+        238
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7638367787",
+    "game_version": "15.24.732.64",
+    "queue_id": 420,
+    "game_duration": 2246,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 86,
+        "championName": "Garen",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Luke",
+        "riotIdTagline": "7770"
+      },
+      {
+        "championId": 35,
+        "championName": "Shaco",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 85,
+        "championName": "Kennen",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "PainOMerguez",
+        "riotIdTagline": "3112"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 117,
+        "championName": "Lulu",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "HuevosVerdes",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 10,
+        "championName": "Kayle",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "S3tr3",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 19,
+        "championName": "Warwick",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "CorSysV2",
+        "riotIdTagline": "4326"
+      },
+      {
+        "championId": 134,
+        "championName": "Syndra",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KittenGoesBRR",
+        "riotIdTagline": "MEOW"
+      },
+      {
+        "championId": 18,
+        "championName": "Tristana",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "jsRaven1",
+        "riotIdTagline": "Spice"
+      },
+      {
+        "championId": 3,
+        "championName": "Galio",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "WMI Black Mamba",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        800,
+        51,
+        82,
+        106,
+        234
+      ],
+      "team_200": [
+        17,
+        904,
+        53,
+        -1,
+        105
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7637704825",
+    "game_version": "15.24.732.64",
+    "queue_id": 420,
+    "game_duration": 1960,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 799,
+        "championName": "Ambessa",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "dikenpiken",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 36,
+        "championName": "DrMundo",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "GomenAmanaiii",
+        "riotIdTagline": "345"
+      },
+      {
+        "championId": 711,
+        "championName": "Vex",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "icreedi",
+        "riotIdTagline": "318"
+      },
+      {
+        "championId": 29,
+        "championName": "Twitch",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Skarmory",
+        "riotIdTagline": "1403"
+      },
+      {
+        "championId": 35,
+        "championName": "Shaco",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Norwegian QT",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 83,
+        "championName": "Yorick",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "tox33",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 800,
+        "championName": "Mel",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "PinkiePieMLP",
+        "riotIdTagline": "epony"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 80,
+        "championName": "Pantheon",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Realz",
+        "riotIdTagline": "iwnl"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        910,
+        904,
+        -1,
+        131,
+        234
+      ],
+      "team_200": [
+        51,
+        238,
+        234,
+        902,
+        904
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7630969138",
+    "game_version": "15.24.731.5210",
+    "queue_id": 420,
+    "game_duration": 1811,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 82,
+        "championName": "Mordekaiser",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Escanor T",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 32,
+        "championName": "Amumu",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Skeyher",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 38,
+        "championName": "Kassadin",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "EKKOJIN",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 119,
+        "championName": "Draven",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "BloodyFnow",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 111,
+        "championName": "Nautilus",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "KOLLADEN",
+        "riotIdTagline": "ramo"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 904,
+        "championName": "Zaahen",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Tete2Noeud",
+        "riotIdTagline": "TEUB"
+      },
+      {
+        "championId": 113,
+        "championName": "Sejuani",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 268,
+        "championName": "Azir",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "IMMORTAL MARA",
+        "riotIdTagline": "KILL"
+      },
+      {
+        "championId": 901,
+        "championName": "Smolder",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "youwillGawkGawk",
+        "riotIdTagline": "Down"
+      },
+      {
+        "championId": 78,
+        "championName": "Poppy",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "nayiQ",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        902,
+        141,
+        518,
+        893,
+        -1
+      ],
+      "team_200": [
+        54,
+        875,
+        800,
+        799,
+        234
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7630908551",
+    "game_version": "15.24.731.5210",
+    "queue_id": 420,
+    "game_duration": 2036,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 63,
+        "championName": "Brand",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Kelith",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 54,
+        "championName": "Malphite",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "K\u03c3d\u03c3s",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 711,
+        "championName": "Vex",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "ZimJoJo",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 15,
+        "championName": "Sivir",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Fabrin",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 117,
+        "championName": "Lulu",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Saray",
+        "riotIdTagline": "love"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 61,
+        "championName": "Orianna",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "IMMORTAL MARA",
+        "riotIdTagline": "KILL"
+      },
+      {
+        "championId": 950,
+        "championName": "Naafiri",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 29,
+        "championName": "Twitch",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Mac N Tosh",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 202,
+        "championName": "Jhin",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "xMecha",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 80,
+        "championName": "Pantheon",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Dynaxas",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        800,
+        157,
+        28,
+        115,
+        234
+      ],
+      "team_200": [
+        147,
+        234,
+        799,
+        111,
+        800
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7630866356",
+    "game_version": "15.24.731.5210",
+    "queue_id": 420,
+    "game_duration": 1054,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 122,
+        "championName": "Darius",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "ianbalc",
+        "riotIdTagline": "6101"
+      },
+      {
+        "championId": 200,
+        "championName": "Belveth",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Fedora",
+        "riotIdTagline": "x11"
+      },
+      {
+        "championId": 99,
+        "championName": "Lux",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Ackerdominator",
+        "riotIdTagline": "187"
+      },
+      {
+        "championId": 145,
+        "championName": "Kaisa",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Alfrontie",
+        "riotIdTagline": "BOSS"
+      },
+      {
+        "championId": 432,
+        "championName": "Bard",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "MAIKOS LOVER",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 80,
+        "championName": "Pantheon",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "GC Reyden",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 91,
+        "championName": "Talon",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "IMMORTAL MARA",
+        "riotIdTagline": "KILL"
+      },
+      {
+        "championId": 30,
+        "championName": "Karthus",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "\u017bona Trenera2115",
+        "riotIdTagline": "szeli"
+      },
+      {
+        "championId": 63,
+        "championName": "Brand",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "DrYzYY",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        31,
+        266,
+        800,
+        54,
+        39
+      ],
+      "team_200": [
+        800,
+        43,
+        904,
+        234,
+        777
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7630663930",
+    "game_version": "15.24.731.5210",
+    "queue_id": 420,
+    "game_duration": 1974,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 54,
+        "championName": "Malphite",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Tomatensaftsack",
+        "riotIdTagline": "5437"
+      },
+      {
+        "championId": 64,
+        "championName": "LeeSin",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "TIKTAKTOKI",
+        "riotIdTagline": "69200"
+      },
+      {
+        "championId": 90,
+        "championName": "Malzahar",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Goggs",
+        "riotIdTagline": "Goggs"
+      },
+      {
+        "championId": 29,
+        "championName": "Twitch",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "k\u03cbr\u00f8",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 267,
+        "championName": "Nami",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Muesli bar",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 114,
+        "championName": "Fiora",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "giwtassexysoles\u03a8",
+        "riotIdTagline": "L9L9"
+      },
+      {
+        "championId": 62,
+        "championName": "MonkeyKing",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Avictovelle",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 61,
+        "championName": "Orianna",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Anivia Criof\u00e9nix",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 22,
+        "championName": "Ashe",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Lothus",
+        "riotIdTagline": "36098"
+      },
+      {
+        "championId": 16,
+        "championName": "Soraka",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        904,
+        44,
+        -1,
+        17,
+        238
+      ],
+      "team_200": [
+        51,
+        48,
+        58,
+        -1,
+        238
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7630620678",
+    "game_version": "15.24.731.5210",
+    "queue_id": 420,
+    "game_duration": 2135,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 83,
+        "championName": "Yorick",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "IvanCHAI",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 950,
+        "championName": "Naafiri",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 910,
+        "championName": "Hwei",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Bl7a",
+        "riotIdTagline": "msr"
+      },
+      {
+        "championId": 221,
+        "championName": "Zeri",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "CacaPipiVitesse",
+        "riotIdTagline": "LJTM"
+      },
+      {
+        "championId": 888,
+        "championName": "Renata",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "MyFirstAccount",
+        "riotIdTagline": "1234"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 875,
+        "championName": "Sett",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Ash4ra",
+        "riotIdTagline": "4444"
+      },
+      {
+        "championId": 14,
+        "championName": "Sion",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KatarinaOPhashel",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 13,
+        "championName": "Ryze",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Le Big Hammer",
+        "riotIdTagline": "EUWaz"
+      },
+      {
+        "championId": 18,
+        "championName": "Tristana",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Larvitar",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 35,
+        "championName": "Shaco",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sc\u00f8ld",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        51,
+        105,
+        234,
+        39,
+        -1
+      ],
+      "team_200": [
+        904,
+        54,
+        119,
+        28,
+        114
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7621191431",
+    "game_version": "15.23.728.3286",
+    "queue_id": 420,
+    "game_duration": 2339,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 106,
+        "championName": "Volibear",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Rickykukpasta",
+        "riotIdTagline": "tusan"
+      },
+      {
+        "championId": 57,
+        "championName": "Maokai",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 268,
+        "championName": "Azir",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "unfortunatelee",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 22,
+        "championName": "Ashe",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Fafrucel",
+        "riotIdTagline": "SIGMA"
+      },
+      {
+        "championId": 902,
+        "championName": "Milio",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Hendanirenyixia",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 904,
+        "championName": "Zaahen",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Rhuno",
+        "riotIdTagline": "994"
+      },
+      {
+        "championId": 5,
+        "championName": "XinZhao",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "apestyles 75",
+        "riotIdTagline": "int"
+      },
+      {
+        "championId": 34,
+        "championName": "Anivia",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Amancio Ortiga",
+        "riotIdTagline": "9169"
+      },
+      {
+        "championId": 901,
+        "championName": "Smolder",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "OTP PITRE",
+        "riotIdTagline": "1506"
+      },
+      {
+        "championId": 235,
+        "championName": "Senna",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "HeffaSupprt",
+        "riotIdTagline": "12345"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        90,
+        420,
+        234,
+        101,
+        86
+      ],
+      "team_200": [
+        10,
+        145,
+        887,
+        53,
+        35
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7617201929",
+    "game_version": "15.23.728.3286",
+    "queue_id": 420,
+    "game_duration": 1777,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 777,
+        "championName": "Yone",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Ketchxp",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 233,
+        "championName": "Briar",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Noctherion",
+        "riotIdTagline": "FEAR"
+      },
+      {
+        "championId": 115,
+        "championName": "Ziggs",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Prof Caramba",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 51,
+        "championName": "Caitlyn",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "narrvaloo",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 143,
+        "championName": "Zyra",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "fkr",
+        "riotIdTagline": "7331"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 14,
+        "championName": "Sion",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "BOOMBAMM0",
+        "riotIdTagline": "000"
+      },
+      {
+        "championId": 120,
+        "championName": "Hecarim",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "djipaa",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 112,
+        "championName": "Viktor",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "MahaManneS",
+        "riotIdTagline": "1313"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "quanintin",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 3,
+        "championName": "Galio",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        75,
+        -1,
+        350,
+        142,
+        800
+      ],
+      "team_200": [
+        8,
+        107,
+        35,
+        86,
+        22
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7615903533",
+    "game_version": "15.23.728.3286",
+    "queue_id": 420,
+    "game_duration": 1598,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 10,
+        "championName": "Kayle",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Azak",
+        "riotIdTagline": "4949"
+      },
+      {
+        "championId": 106,
+        "championName": "Volibear",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "DoduDnt",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 112,
+        "championName": "Viktor",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Oe c greg",
+        "riotIdTagline": "Crane"
+      },
+      {
+        "championId": 222,
+        "championName": "Jinx",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "StE Lenny",
+        "riotIdTagline": "619"
+      },
+      {
+        "championId": 267,
+        "championName": "Nami",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Vangeur2Merges",
+        "riotIdTagline": "5846"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 86,
+        "championName": "Garen",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Ycentje",
+        "riotIdTagline": "1224"
+      },
+      {
+        "championId": 200,
+        "championName": "Belveth",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Skibidi BelVeth",
+        "riotIdTagline": "dota2"
+      },
+      {
+        "championId": 134,
+        "championName": "Syndra",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "thomas51150",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 99,
+        "championName": "Lux",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        24,
+        238,
+        904,
+        35,
+        44
+      ],
+      "team_200": [
+        122,
+        -1,
+        51,
+        22,
+        904
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7615856366",
+    "game_version": "15.23.728.3286",
+    "queue_id": 420,
+    "game_duration": 1947,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 82,
+        "championName": "Mordekaiser",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "MORDAYYYYYYY",
+        "riotIdTagline": "NO1"
+      },
+      {
+        "championId": 950,
+        "championName": "Naafiri",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 910,
+        "championName": "Hwei",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "EndlessFaith",
+        "riotIdTagline": "5577"
+      },
+      {
+        "championId": 15,
+        "championName": "Sivir",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 902,
+        "championName": "Milio",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "agartha resident",
+        "riotIdTagline": "xyz"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 48,
+        "championName": "Trundle",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "RIT0 S3XSKL4VE",
+        "riotIdTagline": "187"
+      },
+      {
+        "championId": 131,
+        "championName": "Diana",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Joint Operation",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 143,
+        "championName": "Zyra",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "God Lockdown",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 51,
+        "championName": "Caitlyn",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Grape",
+        "riotIdTagline": "4u4"
+      },
+      {
+        "championId": 99,
+        "championName": "Lux",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "zuii1",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        106,
+        25,
+        234,
+        904,
+        22
+      ],
+      "team_200": [
+        360,
+        234,
+        800,
+        904,
+        238
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7615826217",
+    "game_version": "15.23.728.3286",
+    "queue_id": 420,
+    "game_duration": 1632,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 84,
+        "championName": "Akali",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "mdr xd",
+        "riotIdTagline": "999"
+      },
+      {
+        "championId": 113,
+        "championName": "Sejuani",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 55,
+        "championName": "Katarina",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "YasSwain",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 15,
+        "championName": "Sivir",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 16,
+        "championName": "Soraka",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Buddynaarr",
+        "riotIdTagline": "9630"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 904,
+        "championName": "Zaahen",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Gainshrad",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "RiodShaco",
+        "riotIdTagline": "WARN"
+      },
+      {
+        "championId": 105,
+        "championName": "Fizz",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Andreazack1990",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 51,
+        "championName": "Caitlyn",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Scrot",
+        "riotIdTagline": "balls"
+      },
+      {
+        "championId": 25,
+        "championName": "Morgana",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "faydar",
+        "riotIdTagline": "217"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        420,
+        69,
+        22,
+        234,
+        555
+      ],
+      "team_200": [
+        799,
+        143,
+        35,
+        78,
+        53
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7609368885",
+    "game_version": "15.23.726.9074",
+    "queue_id": 420,
+    "game_duration": 2698,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 82,
+        "championName": "Mordekaiser",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Polloamarir",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 56,
+        "championName": "Nocturne",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "RdHRQN",
+        "riotIdTagline": "MTK"
+      },
+      {
+        "championId": 8,
+        "championName": "Vladimir",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Chococod",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 202,
+        "championName": "Jhin",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Michicross",
+        "riotIdTagline": "00000"
+      },
+      {
+        "championId": 267,
+        "championName": "Nami",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Doudelinette",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 133,
+        "championName": "Quinn",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Ripperie",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 950,
+        "championName": "Naafiri",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "KKC Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 115,
+        "championName": "Ziggs",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "XxduendexX",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 22,
+        "championName": "Ashe",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Supa Topuria",
+        "riotIdTagline": "KOI"
+      },
+      {
+        "championId": 45,
+        "championName": "Veigar",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Headshot996",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        90,
+        99,
+        901,
+        122,
+        517
+      ],
+      "team_200": [
+        234,
+        96,
+        17,
+        901,
+        105
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7606540288",
+    "game_version": "15.22.724.5161",
+    "queue_id": 420,
+    "game_duration": 2224,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 41,
+        "championName": "Gangplank",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "DuriLkaKartona9I",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 950,
+        "championName": "Naafiri",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 55,
+        "championName": "Katarina",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Katapult",
+        "riotIdTagline": "18755"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 143,
+        "championName": "Zyra",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "BlueGodfish",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 17,
+        "championName": "Teemo",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Brocostique",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 234,
+        "championName": "Viego",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "vi\u00e9GOAT",
+        "riotIdTagline": "12345"
+      },
+      {
+        "championId": 34,
+        "championName": "Anivia",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "umezo",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 145,
+        "championName": "Kaisa",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "FENTANYAHU",
+        "riotIdTagline": "GAY"
+      },
+      {
+        "championId": 78,
+        "championName": "Poppy",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "PALLE INONDATE",
+        "riotIdTagline": "1551"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        161,
+        90,
+        36,
+        22,
+        83
+      ],
+      "team_200": [
+        157,
+        28,
+        902,
+        25,
+        86
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7606484690",
+    "game_version": "15.22.724.5161",
+    "queue_id": 420,
+    "game_duration": 1818,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Oilliph\u00e9ist",
+        "riotIdTagline": "WHY"
+      },
+      {
+        "championId": 113,
+        "championName": "Sejuani",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 45,
+        "championName": "Veigar",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "\u4e03\u6d77\u71c8\u5b50",
+        "riotIdTagline": "4804"
+      },
+      {
+        "championId": 15,
+        "championName": "Sivir",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      },
+      {
+        "championId": 875,
+        "championName": "Sett",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "MrAster",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 54,
+        "championName": "Malphite",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "FrenchKabloY",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 24,
+        "championName": "Jax",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "SmokySmoke",
+        "riotIdTagline": "GALIO"
+      },
+      {
+        "championId": 134,
+        "championName": "Syndra",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "CodeCCbV",
+        "riotIdTagline": "9335"
+      },
+      {
+        "championId": 222,
+        "championName": "Jinx",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Naod",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 117,
+        "championName": "Lulu",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "WardIngo",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        -1,
+        22,
+        25,
+        90,
+        234
+      ],
+      "team_200": [
+        48,
+        223,
+        25,
+        777,
+        7
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7606251297",
+    "game_version": "15.22.724.5161",
+    "queue_id": 420,
+    "game_duration": 1969,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 24,
+        "championName": "Jax",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "departem",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 950,
+        "championName": "Naafiri",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 84,
+        "championName": "Akali",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Hantenthon",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "kusiciel",
+        "riotIdTagline": "1v9"
+      },
+      {
+        "championId": 44,
+        "championName": "Taric",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "ujd\u017akap",
+        "riotIdTagline": "1v9"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 901,
+        "championName": "Smolder",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Snensenn",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 203,
+        "championName": "Kindred",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Gibic",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 800,
+        "championName": "Mel",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "rangercarlo",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 51,
+        "championName": "Caitlyn",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Loide",
+        "riotIdTagline": "BOT"
+      },
+      {
+        "championId": 412,
+        "championName": "Thresh",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "MrHallou",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        90,
+        234,
+        22,
+        887,
+        111
+      ],
+      "team_200": [
+        233,
+        25,
+        36,
+        360,
+        86
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7606232700",
+    "game_version": "15.22.724.5161",
+    "queue_id": 420,
+    "game_duration": 110,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 54,
+        "championName": "Malphite",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "bwatox",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 245,
+        "championName": "Ekko",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Proxsy",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 134,
+        "championName": "Syndra",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Swooshii",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 222,
+        "championName": "Jinx",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "RK V\u03b1\u03b9\u03c1erK\u03b9ng",
+        "riotIdTagline": "RKT"
+      },
+      {
+        "championId": 99,
+        "championName": "Lux",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "JorgeJPR23",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 79,
+        "championName": "Gragas",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Akalean",
+        "riotIdTagline": "3138"
+      },
+      {
+        "championId": 121,
+        "championName": "Khazix",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 157,
+        "championName": "Yasuo",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "kushy",
+        "riotIdTagline": "plug"
+      },
+      {
+        "championId": 115,
+        "championName": "Ziggs",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "rokOcola",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 143,
+        "championName": "Zyra",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "TremboLux",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        84,
+        25,
+        7,
+        -1,
+        82
+      ],
+      "team_200": [
+        90,
+        101,
+        234,
+        266,
+        2
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7606163050",
+    "game_version": "15.22.724.5161",
+    "queue_id": 420,
+    "game_duration": 1984,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 150,
+        "championName": "Gnar",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "a Fox",
+        "riotIdTagline": "6676"
+      },
+      {
+        "championId": 141,
+        "championName": "Kayn",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "BM rop003",
+        "riotIdTagline": "ESP"
+      },
+      {
+        "championId": 90,
+        "championName": "Malzahar",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "selam ben eeemre",
+        "riotIdTagline": "TR1"
+      },
+      {
+        "championId": 498,
+        "championName": "Xayah",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "aldclaus",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 37,
+        "championName": "Sona",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Degas",
+        "riotIdTagline": "1529"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 48,
+        "championName": "Trundle",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Blorghkim",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 24,
+        "championName": "Jax",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "departem",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 45,
+        "championName": "Veigar",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Gomorra",
+        "riotIdTagline": "CASTO"
+      },
+      {
+        "championId": 15,
+        "championName": "Sivir",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "mini",
+        "riotIdTagline": "jcw"
+      },
+      {
+        "championId": 50,
+        "championName": "Swain",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        799,
+        555,
+        950,
+        119,
+        11
+      ],
+      "team_200": [
+        360,
+        -1,
+        238,
+        22,
+        234
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7606113141",
+    "game_version": "15.22.724.5161",
+    "queue_id": 420,
+    "game_duration": 1586,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 31,
+        "championName": "Chogath",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "ro7",
+        "riotIdTagline": "555"
+      },
+      {
+        "championId": 24,
+        "championName": "Jax",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "departem",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 517,
+        "championName": "Sylas",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "TH\u03a3 \u00df\u03a3\u039b\u0160T",
+        "riotIdTagline": "0001"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Yunah",
+        "riotIdTagline": "TAZ"
+      },
+      {
+        "championId": 111,
+        "championName": "Nautilus",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 887,
+        "championName": "Gwen",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "uolis",
+        "riotIdTagline": "uolis"
+      },
+      {
+        "championId": 234,
+        "championName": "Viego",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "jemechiedessus",
+        "riotIdTagline": "ren\u00e9"
+      },
+      {
+        "championId": 45,
+        "championName": "Veigar",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Mol Lkik",
+        "riotIdTagline": "8888"
+      },
+      {
+        "championId": 236,
+        "championName": "Lucian",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "GENGX Ruler",
+        "riotIdTagline": "geng"
+      },
+      {
+        "championId": 902,
+        "championName": "Milio",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "FlakyAngel",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        157,
+        28,
+        122,
+        -1,
+        22
+      ],
+      "team_200": [
+        121,
+        800,
+        67,
+        420,
+        11
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7606059798",
+    "game_version": "15.22.724.5161",
+    "queue_id": 420,
+    "game_duration": 1932,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 13,
+        "championName": "Ryze",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Marocain Gluant",
+        "riotIdTagline": "94800"
+      },
+      {
+        "championId": 24,
+        "championName": "Jax",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "departem",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 910,
+        "championName": "Hwei",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "stopticklingme",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 110,
+        "championName": "Varus",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Croogan",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 78,
+        "championName": "Poppy",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 86,
+        "championName": "Garen",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "EDO200404",
+        "riotIdTagline": "2269"
+      },
+      {
+        "championId": 234,
+        "championName": "Viego",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "pianthree",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 90,
+        "championName": "Malzahar",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "FarolaHD",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 804,
+        "championName": "Yunara",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "MOST WANTED",
+        "riotIdTagline": "EUNW"
+      },
+      {
+        "championId": 143,
+        "championName": "Zyra",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "JesusTheHedgehog",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        22,
+        107,
+        238,
+        777,
+        31
+      ],
+      "team_200": [
+        420,
+        800,
+        11,
+        89,
+        51
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7556966684",
+    "game_version": "15.19.715.1836",
+    "queue_id": 420,
+    "game_duration": 2083,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 92,
+        "championName": "Riven",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Nigo",
+        "riotIdTagline": "main"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 134,
+        "championName": "Syndra",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "JuicyFatMarc",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 51,
+        "championName": "Caitlyn",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Rioc0",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 555,
+        "championName": "Pyke",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Foxxy",
+        "riotIdTagline": "3103"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 82,
+        "championName": "Mordekaiser",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Timan",
+        "riotIdTagline": "777"
+      },
+      {
+        "championId": 5,
+        "championName": "XinZhao",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "plexdima",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 90,
+        "championName": "Malzahar",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "DiegoSunGera",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 18,
+        "championName": "Tristana",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "PfKkOmPaNy15",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 60,
+        "championName": "Elise",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Gragussy Milkers",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        236,
+        234,
+        238,
+        58,
+        24
+      ],
+      "team_200": [
+        950,
+        804,
+        35,
+        133,
+        -1
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7555088597",
+    "game_version": "15.19.715.1836",
+    "queue_id": 420,
+    "game_duration": 2032,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 67,
+        "championName": "Vayne",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Anticristos9a20",
+        "riotIdTagline": "1987"
+      },
+      {
+        "championId": 876,
+        "championName": "Lillia",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 55,
+        "championName": "Katarina",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Janvi",
+        "riotIdTagline": "cute"
+      },
+      {
+        "championId": 222,
+        "championName": "Jinx",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "lifeendnow",
+        "riotIdTagline": "die"
+      },
+      {
+        "championId": 902,
+        "championName": "Milio",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "UwU Sussy MF",
+        "riotIdTagline": "UwU"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 31,
+        "championName": "Chogath",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Flufferly",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 59,
+        "championName": "JarvanIV",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Zenthya",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 103,
+        "championName": "Ahri",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Beargrillz",
+        "riotIdTagline": "AHOU"
+      },
+      {
+        "championId": 51,
+        "championName": "Caitlyn",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "noepoe",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 111,
+        "championName": "Nautilus",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Bongibong",
+        "riotIdTagline": "EUWBB"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        57,
+        54,
+        25,
+        56,
+        36
+      ],
+      "team_200": [
+        800,
+        39,
+        518,
+        555,
+        106
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7555020393",
+    "game_version": "15.19.715.1836",
+    "queue_id": 420,
+    "game_duration": 2302,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 114,
+        "championName": "Fiora",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "DMV KushDriker",
+        "riotIdTagline": "b\u00e9bou"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 517,
+        "championName": "Sylas",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Kusxhard",
+        "riotIdTagline": "1464"
+      },
+      {
+        "championId": 202,
+        "championName": "Jhin",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Chief Crenick",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 22,
+        "championName": "Ashe",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "JevHHD",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 150,
+        "championName": "Gnar",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "QUETNA",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 234,
+        "championName": "Viego",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Vlatko7",
+        "riotIdTagline": "1313"
+      },
+      {
+        "championId": 99,
+        "championName": "Lux",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "PRX Ryu",
+        "riotIdTagline": "4376"
+      },
+      {
+        "championId": 145,
+        "championName": "Kaisa",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Monferi",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 89,
+        "championName": "Leona",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Tohtori",
+        "riotIdTagline": "00000"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        267,
+        876,
+        103,
+        -1,
+        777
+      ],
+      "team_200": [
+        238,
+        157,
+        32,
+        902,
+        17
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7554990780",
+    "game_version": "15.19.715.1836",
+    "queue_id": 420,
+    "game_duration": 2068,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 777,
+        "championName": "Yone",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "creepig",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 120,
+        "championName": "Hecarim",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Man Without Fear",
+        "riotIdTagline": "1021"
+      },
+      {
+        "championId": 163,
+        "championName": "Taliyah",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Shiryu",
+        "riotIdTagline": "1676"
+      },
+      {
+        "championId": 81,
+        "championName": "Ezreal",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Argonauta",
+        "riotIdTagline": "PIN"
+      },
+      {
+        "championId": 60,
+        "championName": "Elise",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "1e02193123e12031",
+        "riotIdTagline": "EUWEW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 98,
+        "championName": "Shen",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Zero",
+        "riotIdTagline": "AUE"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 238,
+        "championName": "Zed",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "\u041b\u0418\u0414\u0415\u0420 \u041c\u041d\u0415\u041d\u0418\u0419",
+        "riotIdTagline": "1111"
+      },
+      {
+        "championId": 800,
+        "championName": "Mel",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "BOTS ZZZ",
+        "riotIdTagline": "2709"
+      },
+      {
+        "championId": 412,
+        "championName": "Thresh",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "rudikuh",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        804,
+        121,
+        222,
+        7,
+        75
+      ],
+      "team_200": [
+        25,
+        51,
+        92,
+        105,
+        876
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7554981013",
+    "game_version": "15.19.715.1836",
+    "queue_id": 420,
+    "game_duration": 125,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 24,
+        "championName": "Jax",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Lukarat\u00e9",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 59,
+        "championName": "JarvanIV",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "TatouCompris",
+        "riotIdTagline": "TTS"
+      },
+      {
+        "championId": 55,
+        "championName": "Katarina",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Kat1strophe",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 15,
+        "championName": "Sivir",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "SneakyTentacle",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 350,
+        "championName": "Yuumi",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "MumflrPie",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 31,
+        "championName": "Chogath",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Jibbanz\u00e8",
+        "riotIdTagline": "6508"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 246,
+        "championName": "Qiyana",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "BBBAB",
+        "riotIdTagline": "EUWNG"
+      },
+      {
+        "championId": 145,
+        "championName": "Kaisa",
+        "teamPosition": "",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Hweit A Minute",
+        "riotIdTagline": "GGEZZ"
+      },
+      {
+        "championId": 12,
+        "championName": "Alistar",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Motomil",
+        "riotIdTagline": "WIML"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        39,
+        89,
+        107,
+        517,
+        119
+      ],
+      "team_200": [
+        876,
+        157,
+        523,
+        -1,
+        11
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7554957254",
+    "game_version": "15.19.715.1836",
+    "queue_id": 420,
+    "game_duration": 1617,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 14,
+        "championName": "Sion",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Juan y Medio",
+        "riotIdTagline": "zagal"
+      },
+      {
+        "championId": 33,
+        "championName": "Rammus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 85,
+        "championName": "Kennen",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "GeorgeB\u00f9sh",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 901,
+        "championName": "Smolder",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "HornyForWarwick",
+        "riotIdTagline": "ORI20"
+      },
+      {
+        "championId": 267,
+        "championName": "Nami",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "NINFYBLU",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 887,
+        "championName": "Gwen",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Uchi",
+        "riotIdTagline": "123"
+      },
+      {
+        "championId": 56,
+        "championName": "Nocturne",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "FenixD3",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 92,
+        "championName": "Riven",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "W1ndblade",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 235,
+        "championName": "Senna",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Bro Ariane",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 89,
+        "championName": "Leona",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Project Idda",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        117,
+        238,
+        51,
+        122,
+        69
+      ],
+      "team_200": [
+        90,
+        35,
+        233,
+        -1,
+        86
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7546714488",
+    "game_version": "15.19.715.1836",
+    "queue_id": 420,
+    "game_duration": 2308,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 266,
+        "championName": "Aatrox",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "aatroxmain",
+        "riotIdTagline": "EUWdd"
+      },
+      {
+        "championId": 876,
+        "championName": "Lillia",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 950,
+        "championName": "Naafiri",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Dremblack",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 147,
+        "championName": "Seraphine",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Ghostly Inter",
+        "riotIdTagline": "INT"
+      },
+      {
+        "championId": 37,
+        "championName": "Sona",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "TaIe Of Us",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 14,
+        "championName": "Sion",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Joote",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 59,
+        "championName": "JarvanIV",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "UrFour",
+        "riotIdTagline": "suuuu"
+      },
+      {
+        "championId": 245,
+        "championName": "Ekko",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Kahlazar",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 202,
+        "championName": "Jhin",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "LlandashKelizee",
+        "riotIdTagline": "1928"
+      },
+      {
+        "championId": 99,
+        "championName": "Lux",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Allen",
+        "riotIdTagline": "TG62"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        106,
+        234,
+        86,
+        55,
+        119
+      ],
+      "team_200": [
+        19,
+        875,
+        119,
+        517,
+        523
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7546629056",
+    "game_version": "15.19.715.1836",
+    "queue_id": 420,
+    "game_duration": 1625,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 36,
+        "championName": "DrMundo",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Fantasil\u00f6s",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 59,
+        "championName": "JarvanIV",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 131,
+        "championName": "Diana",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Dremblack",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 22,
+        "championName": "Ashe",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Norsk Brunost",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 37,
+        "championName": "Sona",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "xRawer",
+        "riotIdTagline": "1607"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 106,
+        "championName": "Volibear",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Feaker",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 238,
+        "championName": "Zed",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Branhzou",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 54,
+        "championName": "Malphite",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "TYPHOON9055",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Susoo18",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 161,
+        "championName": "Velkoz",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Reryx69",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        55,
+        25,
+        799,
+        234,
+        202
+      ],
+      "team_200": [
+        -1,
+        19,
+        141,
+        23,
+        35
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7546209448",
+    "game_version": "15.19.715.1836",
+    "queue_id": 420,
+    "game_duration": 1861,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 122,
+        "championName": "Darius",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Flash 4th Sh\u00f8t",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 421,
+        "championName": "RekSai",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Tyliath",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 131,
+        "championName": "Diana",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "No Headsz",
+        "riotIdTagline": "EUW01"
+      },
+      {
+        "championId": 804,
+        "championName": "Yunara",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "kiriyaki",
+        "riotIdTagline": "1365"
+      },
+      {
+        "championId": 43,
+        "championName": "Karma",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "MetalMaster96",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 58,
+        "championName": "Renekton",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "stagiaire motiv\u00e9",
+        "riotIdTagline": "work"
+      },
+      {
+        "championId": 35,
+        "championName": "Shaco",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 61,
+        "championName": "Orianna",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Dremblack",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 166,
+        "championName": "Akshan",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Perfect Enemies",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 412,
+        "championName": "Thresh",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Uber Thresh",
+        "riotIdTagline": "LTRN"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        233,
+        75,
+        90,
+        901,
+        36
+      ],
+      "team_200": [
+        234,
+        51,
+        55,
+        53,
+        36
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7540192882",
+    "game_version": "15.19.713.5912",
+    "queue_id": 420,
+    "game_duration": 2109,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 266,
+        "championName": "Aatrox",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "\u6e05\u6e05\u90a6\u90a6\u90a6\u660c\u90a6\u9673\u80af\u842c\u862d\u90a6\u548c\u5409\u6ce2",
+        "riotIdTagline": "\u97d3\u570b\u721b"
+      },
+      {
+        "championId": 106,
+        "championName": "Volibear",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "duke hyou",
+        "riotIdTagline": "1170"
+      },
+      {
+        "championId": 910,
+        "championName": "Hwei",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Oomori",
+        "riotIdTagline": "1312"
+      },
+      {
+        "championId": 157,
+        "championName": "Yasuo",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "DaYmEpLaYz",
+        "riotIdTagline": "EUNE"
+      },
+      {
+        "championId": 54,
+        "championName": "Malphite",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Deda Re\u0161o",
+        "riotIdTagline": "EUNE"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 36,
+        "championName": "DrMundo",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "The Child",
+        "riotIdTagline": "Hood"
+      },
+      {
+        "championId": 30,
+        "championName": "Karthus",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 238,
+        "championName": "Zed",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Phinks04",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 29,
+        "championName": "Twitch",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Dremblack",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 161,
+        "championName": "Velkoz",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "RetearreV",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        517,
+        82,
+        19,
+        90,
+        800
+      ],
+      "team_200": [
+        91,
+        5,
+        15,
+        555,
+        711
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7535047434",
+    "game_version": "15.18.710.2811",
+    "queue_id": 420,
+    "game_duration": 1754,
+    "team_100_win": true,
+    "team_100_champions": [
+      {
+        "championId": 75,
+        "championName": "Nasus",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Emireli\u00e2",
+        "riotIdTagline": "GOAT"
+      },
+      {
+        "championId": 30,
+        "championName": "Karthus",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 103,
+        "championName": "Ahri",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "disata",
+        "riotIdTagline": "why"
+      },
+      {
+        "championId": 145,
+        "championName": "Kaisa",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "G2 incendiery",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 80,
+        "championName": "Pantheon",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Raoul73",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 31,
+        "championName": "Chogath",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "XiaoLing",
+        "riotIdTagline": "1891"
+      },
+      {
+        "championId": 9,
+        "championName": "FiddleSticks",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "BlueBrownie",
+        "riotIdTagline": "0839"
+      },
+      {
+        "championId": 131,
+        "championName": "Diana",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "floyd barclay",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 901,
+        "championName": "Smolder",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Benjii78",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 555,
+        "championName": "Pyke",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "DagisV\u00e4ktare",
+        "riotIdTagline": "AJ0"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        91,
+        86,
+        157,
+        36,
+        360
+      ],
+      "team_200": [
+        25,
+        35,
+        38,
+        122,
+        222
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7532947749",
+    "game_version": "15.18.710.2811",
+    "queue_id": 420,
+    "game_duration": 2111,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 17,
+        "championName": "Teemo",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Kenton",
+        "riotIdTagline": "1337"
+      },
+      {
+        "championId": 20,
+        "championName": "Nunu",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Entropy",
+        "riotIdTagline": "00008"
+      },
+      {
+        "championId": 238,
+        "championName": "Zed",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "swaqline",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 145,
+        "championName": "Kaisa",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "lceScream",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 25,
+        "championName": "Morgana",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "OTP Aatroce",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 36,
+        "championName": "DrMundo",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "N 7x7",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 887,
+        "championName": "Gwen",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 166,
+        "championName": "Akshan",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "sanjoza",
+        "riotIdTagline": "COYG"
+      },
+      {
+        "championId": 21,
+        "championName": "MissFortune",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "adriguille",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 235,
+        "championName": "Senna",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Amiral Saemon",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        141,
+        117,
+        19,
+        51,
+        12
+      ],
+      "team_200": [
+        360,
+        69,
+        91,
+        84,
+        350
+      ]
+    }
+  },
+  {
+    "match_id": "EUW1_7532932465",
+    "game_version": "15.18.710.2811",
+    "queue_id": 420,
+    "game_duration": 1996,
+    "team_100_win": false,
+    "team_100_champions": [
+      {
+        "championId": 54,
+        "championName": "Malphite",
+        "teamPosition": "TOP",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Left Shark",
+        "riotIdTagline": "shark"
+      },
+      {
+        "championId": 876,
+        "championName": "Lillia",
+        "teamPosition": "JUNGLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "D1ppes",
+        "riotIdTagline": "EUWES"
+      },
+      {
+        "championId": 800,
+        "championName": "Mel",
+        "teamPosition": "MIDDLE",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "\u81f4\u547d\u4e00\u51fb",
+        "riotIdTagline": "\u81f4\u547d\u4e00\u51fb"
+      },
+      {
+        "championId": 360,
+        "championName": "Samira",
+        "teamPosition": "BOTTOM",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Whitebuffed",
+        "riotIdTagline": "2951"
+      },
+      {
+        "championId": 555,
+        "championName": "Pyke",
+        "teamPosition": "UTILITY",
+        "win": false,
+        "summonerName": "",
+        "riotIdGameName": "Hi Im Gudish",
+        "riotIdTagline": "EUW"
+      }
+    ],
+    "team_200_champions": [
+      {
+        "championId": 23,
+        "championName": "Tryndamere",
+        "teamPosition": "TOP",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "XxTheDanixX04",
+        "riotIdTagline": "EUW"
+      },
+      {
+        "championId": 113,
+        "championName": "Sejuani",
+        "teamPosition": "JUNGLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Sulfy",
+        "riotIdTagline": "SuS"
+      },
+      {
+        "championId": 115,
+        "championName": "Ziggs",
+        "teamPosition": "MIDDLE",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "ShiroX",
+        "riotIdTagline": "Lord"
+      },
+      {
+        "championId": 145,
+        "championName": "Kaisa",
+        "teamPosition": "BOTTOM",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "LePostit",
+        "riotIdTagline": "7536"
+      },
+      {
+        "championId": 85,
+        "championName": "Kennen",
+        "teamPosition": "UTILITY",
+        "win": true,
+        "summonerName": "",
+        "riotIdGameName": "Show Patate",
+        "riotIdTagline": "KCORP"
+      }
+    ],
+    "bans": {
+      "team_100": [
+        80,
+        12,
+        14,
+        8,
+        19
+      ],
+      "team_200": [
+        895,
+        26,
+        91,
+        420,
+        910
+      ]
+    }
+  }
+]
