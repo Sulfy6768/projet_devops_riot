@@ -32,15 +32,14 @@ scrape_configs:
         labels:
           service: 'node-exporter'
 
-  # MLflow - Métriques MLflow (si exposées)
-  - job_name: 'mlflow'
-    static_configs:
-      - targets: ['mlflow:5000']
-        labels:
-          service: 'mlflow'
-    metrics_path: /metrics
-    # MLflow n'expose pas de métriques par défaut, 
-    # mais ceci est prêt si vous ajoutez un exporter
+  # MLflow - Désactivé car MLflow n'expose pas de métriques Prometheus par défaut
+  # Pour activer, il faudrait ajouter un exporter custom ou utiliser mlflow-prometheus-exporter
+  # - job_name: 'mlflow'
+  #   static_configs:
+  #     - targets: ['mlflow:5000']
+  #       labels:
+  #         service: 'mlflow'
+  #   metrics_path: /metrics
 
   # API Backend FastAPI - Métriques applicatives
   - job_name: 'riot-api'
