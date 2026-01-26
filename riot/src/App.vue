@@ -11,6 +11,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/draft">Draft</RouterLink>
         <RouterLink to="/joueur">Joueur</RouterLink>
         <RouterLink to="/champions">Champions</RouterLink>
+        <RouterLink to="/analyseur">Analyseur</RouterLink>
       </nav>
     </div>
   </header>

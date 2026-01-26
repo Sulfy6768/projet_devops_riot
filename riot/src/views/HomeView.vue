@@ -27,6 +27,12 @@ import { RouterLink } from 'vue-router'
         <p>Win rates par poste</p>
         <RouterLink to="/champions" class="btn">Statistiques</RouterLink>
       </div>
+
+      <div class="stat-card">
+        <h3>🎓 Analyseur</h3>
+        <p>Etudie les probabilité de victoire d'équipe d'un match</p>
+        <RouterLink to="/analyseur" class="btn">Analyser</RouterLink>
+      </div>
     </div>
   </div>
 </template>
