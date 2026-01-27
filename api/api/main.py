@@ -200,7 +200,7 @@ async def register(user: UserRegister):
     
     game_name, tag_line = user.riot_id.rsplit("#", 1)
     
-    # Récupérer le PUUID depuis Riot
+    # Récupérer le PUUID depuis riot
     puuid = get_puuid_from_riot_id(game_name, tag_line)
     
     # Créer l'utilisateur
