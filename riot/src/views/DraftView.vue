@@ -59,7 +59,7 @@ interface Draft {
 const drafts = ref<Draft[]>([])
 
 onMounted(() => {
-  drafts.value = draftsData.slice(0, 20) // Afficher les 20 premiers
+  drafts.value = draftsData.slice(0, 20)
 })
 
 function formatDuration(seconds: number): string {

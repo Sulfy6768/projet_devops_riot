@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { useUserStore } from './stores/user'
+
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -12,6 +15,9 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/joueur">Joueur</RouterLink>
         <RouterLink to="/champions">Champions</RouterLink>
         <RouterLink to="/analyseur">Analyseur</RouterLink>
+        <RouterLink to="/mastery" class="mastery-link">🏆 Mastery</RouterLink>
+        <RouterLink v-if="!userStore.isLoggedIn" to="/login" class="login-link">Connexion</RouterLink>
+        <button v-else @click="userStore.logout()" class="logout-btn">Déconnexion</button>
       </nav>
     </div>
   </header>
@@ -71,6 +77,38 @@ nav a:hover {
 nav a.router-link-active {
   color: #42b883;
   background: rgba(66, 184, 131, 0.1);
+}
+
+.mastery-link {
+  background: linear-gradient(135deg, #c0a060, #e8d48c);
+  color: #1a1a2e !important;
+  font-weight: 600;
+}
+
+.mastery-link:hover {
+  background: linear-gradient(135deg, #d4b870, #f0e0a0) !important;
+}
+
+.login-link {
+  background: #42b883;
+  color: #1a1a2e !important;
+  font-weight: 600;
+}
+
+.logout-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: inherit;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
 }
 
 main {
