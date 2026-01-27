@@ -414,7 +414,7 @@
     }
   ],
   "preload": true,
-  "refresh": "10s",
+  "refresh": "5s",
   "schemaVersion": 42,
   "tags": [
     "riot-devops",
