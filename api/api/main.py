@@ -39,18 +39,22 @@ os.makedirs(DATA_DIR, exist_ok=True)
 # Modèles Pydantic
 # ============================================
 
+
 class UserRegister(BaseModel):
     riot_id: str  # Format: GameName#TagLine
     password: str
+
 
 class UserLogin(BaseModel):
     riot_id: str
     password: str
 
+
 class UserResponse(BaseModel):
     riot_id: str
     puuid: Optional[str] = None
     region: str = "euw1"
+
 
 class MasteryData(BaseModel):
     champion_id: int
@@ -59,9 +63,11 @@ class MasteryData(BaseModel):
     champion_points: int
     last_play_time: Optional[int] = None
 
+
 # ============================================
 # Fonctions utilitaires
 # ============================================
+
 
 def load_json(filepath: str) -> dict:
     """Charge un fichier JSON, retourne {} si n'existe pas"""
@@ -70,24 +76,40 @@ def load_json(filepath: str) -> dict:
             return json.load(f)
     return {}
 
+
 def save_json(filepath: str, data: dict):
     """Sauvegarde un fichier JSON"""
     with open(filepath, "w") as f:
         json.dump(data, f, indent=2)
 
+
 def hash_password(password: str) -> str:
     """Hash un mot de passe avec SHA256"""
     return hashlib.sha256(password.encode()).hexdigest()
 
+
 def get_routing(region: str) -> str:
     """Retourne le routing régional pour les endpoints Riot"""
     routing_map = {
-        "euw1": "europe", "eun1": "europe", "tr1": "europe", "ru": "europe",
-        "na1": "americas", "br1": "americas", "la1": "americas", "la2": "americas",
-        "kr": "asia", "jp1": "asia",
-        "oc1": "sea", "ph2": "sea", "sg2": "sea", "th2": "sea", "tw2": "sea", "vn2": "sea"
+        "euw1": "europe",
+        "eun1": "europe",
+        "tr1": "europe",
+        "ru": "europe",
+        "na1": "americas",
+        "br1": "americas",
+        "la1": "americas",
+        "la2": "americas",
+        "kr": "asia",
+        "jp1": "asia",
+        "oc1": "sea",
+        "ph2": "sea",
+        "sg2": "sea",
+        "th2": "sea",
+        "tw2": "sea",
+        "vn2": "sea",
     }
     return routing_map.get(region, "europe")
+
 
 def get_puuid_from_riot_id(game_name: str, tag_line: str) -> Optional[str]:
     """Récupère le PUUID depuis un Riot ID"""
@@ -106,6 +128,7 @@ def get_puuid_from_riot_id(game_name: str, tag_line: str) -> Optional[str]:
         print(f"Error getting PUUID: {e}")
     return None
 
+
 def get_summoner_id_from_puuid(puuid: str) -> Optional[str]:
     """Récupère le Summoner ID depuis un PUUID"""
     if not RIOT_API_KEY:
@@ -121,6 +144,7 @@ def get_summoner_id_from_puuid(puuid: str) -> Optional[str]:
     except Exception as e:
         print(f"Error getting Summoner ID: {e}")
     return None
+
 
 def fetch_masteries_from_riot(puuid: str) -> list:
     """Récupère les masteries depuis l'API Riot"""
@@ -139,52 +163,191 @@ def fetch_masteries_from_riot(puuid: str) -> list:
         print(f"Error fetching masteries: {e}")
     return []
 
+
 # Mapping champion ID -> Name (simplifié, à compléter)
 CHAMPION_NAMES = {
-    1: "Annie", 2: "Olaf", 3: "Galio", 4: "TwistedFate", 5: "XinZhao",
-    6: "Urgot", 7: "LeBlanc", 8: "Vladimir", 9: "Fiddlesticks", 10: "Kayle",
-    11: "MasterYi", 12: "Alistar", 13: "Ryze", 14: "Sion", 15: "Sivir",
-    16: "Soraka", 17: "Teemo", 18: "Tristana", 19: "Warwick", 20: "Nunu",
-    21: "MissFortune", 22: "Ashe", 23: "Tryndamere", 24: "Jax", 25: "Morgana",
-    26: "Zilean", 27: "Singed", 28: "Evelynn", 29: "Twitch", 30: "Karthus",
-    31: "ChoGath", 32: "Amumu", 33: "Rammus", 34: "Anivia", 35: "Shaco",
-    36: "DrMundo", 37: "Sona", 38: "Kassadin", 39: "Irelia", 40: "Janna",
-    41: "Gangplank", 42: "Corki", 43: "Karma", 44: "Taric", 45: "Veigar",
-    48: "Trundle", 50: "Swain", 51: "Caitlyn", 53: "Blitzcrank", 54: "Malphite",
-    55: "Katarina", 56: "Nocturne", 57: "Maokai", 58: "Renekton", 59: "JarvanIV",
-    60: "Elise", 61: "Orianna", 62: "MonkeyKing", 63: "Brand", 64: "LeeSin",
-    67: "Vayne", 68: "Rumble", 69: "Cassiopeia", 72: "Skarner", 74: "Heimerdinger",
-    75: "Nasus", 76: "Nidalee", 77: "Udyr", 78: "Poppy", 79: "Gragas",
-    80: "Pantheon", 81: "Ezreal", 82: "Mordekaiser", 83: "Yorick", 84: "Akali",
-    85: "Kennen", 86: "Garen", 89: "Leona", 90: "Malzahar", 91: "Talon",
-    92: "Riven", 96: "KogMaw", 98: "Shen", 99: "Lux", 101: "Xerath",
-    102: "Shyvana", 103: "Ahri", 104: "Graves", 105: "Fizz", 106: "Volibear",
-    107: "Rengar", 110: "Varus", 111: "Nautilus", 112: "Viktor", 113: "Sejuani",
-    114: "Fiora", 115: "Ziggs", 117: "Lulu", 119: "Draven", 120: "Hecarim",
-    121: "KhaZix", 122: "Darius", 126: "Jayce", 127: "Lissandra", 131: "Diana",
-    133: "Quinn", 134: "Syndra", 136: "AurelionSol", 141: "Kayn", 142: "Zoe",
-    143: "Zyra", 145: "KaiSa", 147: "Seraphine", 150: "Gnar", 154: "Zac",
-    157: "Yasuo", 161: "VelKoz", 163: "Taliyah", 164: "Camille", 166: "Akshan",
-    200: "BelVeth", 201: "Braum", 202: "Jhin", 203: "Kindred", 221: "Zeri",
-    222: "Jinx", 223: "TahmKench", 233: "Briar", 234: "Viego", 235: "Senna",
-    236: "Lucian", 238: "Zed", 240: "Kled", 245: "Ekko", 246: "Qiyana",
-    254: "Vi", 266: "Aatrox", 267: "Nami", 268: "Azir", 350: "Yuumi",
-    360: "Samira", 412: "Thresh", 420: "Illaoi", 421: "RekSai", 427: "Ivern",
-    429: "Kalista", 432: "Bard", 497: "Rakan", 498: "Xayah", 516: "Ornn",
-    517: "Sylas", 518: "Neeko", 523: "Aphelios", 526: "Rell", 555: "Pyke",
-    711: "Vex", 777: "Yone", 875: "Sett", 876: "Lillia", 887: "Gwen",
-    888: "Renata", 895: "Nilah", 897: "KSante", 901: "Smolder", 902: "Milio",
-    910: "Hwei", 950: "Naafiri", 893: "Aurora", 903: "Ambessa", 904: "Zaahen"
+    1: "Annie",
+    2: "Olaf",
+    3: "Galio",
+    4: "TwistedFate",
+    5: "XinZhao",
+    6: "Urgot",
+    7: "LeBlanc",
+    8: "Vladimir",
+    9: "Fiddlesticks",
+    10: "Kayle",
+    11: "MasterYi",
+    12: "Alistar",
+    13: "Ryze",
+    14: "Sion",
+    15: "Sivir",
+    16: "Soraka",
+    17: "Teemo",
+    18: "Tristana",
+    19: "Warwick",
+    20: "Nunu",
+    21: "MissFortune",
+    22: "Ashe",
+    23: "Tryndamere",
+    24: "Jax",
+    25: "Morgana",
+    26: "Zilean",
+    27: "Singed",
+    28: "Evelynn",
+    29: "Twitch",
+    30: "Karthus",
+    31: "ChoGath",
+    32: "Amumu",
+    33: "Rammus",
+    34: "Anivia",
+    35: "Shaco",
+    36: "DrMundo",
+    37: "Sona",
+    38: "Kassadin",
+    39: "Irelia",
+    40: "Janna",
+    41: "Gangplank",
+    42: "Corki",
+    43: "Karma",
+    44: "Taric",
+    45: "Veigar",
+    48: "Trundle",
+    50: "Swain",
+    51: "Caitlyn",
+    53: "Blitzcrank",
+    54: "Malphite",
+    55: "Katarina",
+    56: "Nocturne",
+    57: "Maokai",
+    58: "Renekton",
+    59: "JarvanIV",
+    60: "Elise",
+    61: "Orianna",
+    62: "MonkeyKing",
+    63: "Brand",
+    64: "LeeSin",
+    67: "Vayne",
+    68: "Rumble",
+    69: "Cassiopeia",
+    72: "Skarner",
+    74: "Heimerdinger",
+    75: "Nasus",
+    76: "Nidalee",
+    77: "Udyr",
+    78: "Poppy",
+    79: "Gragas",
+    80: "Pantheon",
+    81: "Ezreal",
+    82: "Mordekaiser",
+    83: "Yorick",
+    84: "Akali",
+    85: "Kennen",
+    86: "Garen",
+    89: "Leona",
+    90: "Malzahar",
+    91: "Talon",
+    92: "Riven",
+    96: "KogMaw",
+    98: "Shen",
+    99: "Lux",
+    101: "Xerath",
+    102: "Shyvana",
+    103: "Ahri",
+    104: "Graves",
+    105: "Fizz",
+    106: "Volibear",
+    107: "Rengar",
+    110: "Varus",
+    111: "Nautilus",
+    112: "Viktor",
+    113: "Sejuani",
+    114: "Fiora",
+    115: "Ziggs",
+    117: "Lulu",
+    119: "Draven",
+    120: "Hecarim",
+    121: "KhaZix",
+    122: "Darius",
+    126: "Jayce",
+    127: "Lissandra",
+    131: "Diana",
+    133: "Quinn",
+    134: "Syndra",
+    136: "AurelionSol",
+    141: "Kayn",
+    142: "Zoe",
+    143: "Zyra",
+    145: "KaiSa",
+    147: "Seraphine",
+    150: "Gnar",
+    154: "Zac",
+    157: "Yasuo",
+    161: "VelKoz",
+    163: "Taliyah",
+    164: "Camille",
+    166: "Akshan",
+    200: "BelVeth",
+    201: "Braum",
+    202: "Jhin",
+    203: "Kindred",
+    221: "Zeri",
+    222: "Jinx",
+    223: "TahmKench",
+    233: "Briar",
+    234: "Viego",
+    235: "Senna",
+    236: "Lucian",
+    238: "Zed",
+    240: "Kled",
+    245: "Ekko",
+    246: "Qiyana",
+    254: "Vi",
+    266: "Aatrox",
+    267: "Nami",
+    268: "Azir",
+    350: "Yuumi",
+    360: "Samira",
+    412: "Thresh",
+    420: "Illaoi",
+    421: "RekSai",
+    427: "Ivern",
+    429: "Kalista",
+    432: "Bard",
+    497: "Rakan",
+    498: "Xayah",
+    516: "Ornn",
+    517: "Sylas",
+    518: "Neeko",
+    523: "Aphelios",
+    526: "Rell",
+    555: "Pyke",
+    711: "Vex",
+    777: "Yone",
+    875: "Sett",
+    876: "Lillia",
+    887: "Gwen",
+    888: "Renata",
+    895: "Nilah",
+    897: "KSante",
+    901: "Smolder",
+    902: "Milio",
+    910: "Hwei",
+    950: "Naafiri",
+    893: "Aurora",
+    903: "Ambessa",
+    904: "Zaahen",
 }
 
 # ============================================
 # Routes API
 # ============================================
 
+
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "service": "riot-api"}
+
 
 @app.post("/auth/register", response_model=UserResponse)
 async def register(user: UserRegister):
@@ -209,7 +372,7 @@ async def register(user: UserRegister):
         "password_hash": hash_password(user.password),
         "puuid": puuid,
         "region": RIOT_REGION,
-        "created_at": int(time.time())
+        "created_at": int(time.time()),
     }
     save_json(USERS_FILE, users)
 
@@ -218,6 +381,7 @@ async def register(user: UserRegister):
         await update_user_masteries(user.riot_id, puuid)
 
     return UserResponse(riot_id=user.riot_id, puuid=puuid, region=RIOT_REGION)
+
 
 @app.post("/auth/login", response_model=UserResponse)
 async def login(user: UserLogin):
@@ -238,10 +402,9 @@ async def login(user: UserLogin):
         await update_user_masteries(user.riot_id, puuid)
 
     return UserResponse(
-        riot_id=user.riot_id,
-        puuid=puuid,
-        region=stored_user.get("region", RIOT_REGION)
+        riot_id=user.riot_id, puuid=puuid, region=stored_user.get("region", RIOT_REGION)
     )
+
 
 async def update_user_masteries(riot_id: str, puuid: str):
     """Met à jour les masteries d'un utilisateur"""
@@ -254,21 +417,24 @@ async def update_user_masteries(riot_id: str, puuid: str):
     masteries = []
     for m in raw_masteries:
         champion_id = m.get("championId")
-        masteries.append({
-            "champion_id": champion_id,
-            "champion_name": CHAMPION_NAMES.get(champion_id, f"Champion_{champion_id}"),
-            "champion_level": m.get("championLevel", 0),
-            "champion_points": m.get("championPoints", 0),
-            "last_play_time": m.get("lastPlayTime")
-        })
+        masteries.append(
+            {
+                "champion_id": champion_id,
+                "champion_name": CHAMPION_NAMES.get(champion_id, f"Champion_{champion_id}"),
+                "champion_level": m.get("championLevel", 0),
+                "champion_points": m.get("championPoints", 0),
+                "last_play_time": m.get("lastPlayTime"),
+            }
+        )
 
     # Sauvegarder
     masteries_data[riot_id] = {
         "puuid": puuid,
         "masteries": masteries,
-        "updated_at": int(time.time())
+        "updated_at": int(time.time()),
     }
     save_json(MASTERIES_FILE, masteries_data)
+
 
 @app.get("/masteries/{riot_id}")
 async def get_masteries(riot_id: str):
@@ -279,6 +445,7 @@ async def get_masteries(riot_id: str):
         raise HTTPException(status_code=404, detail="Masteries non trouvées")
 
     return masteries_data[riot_id]
+
 
 @app.get("/masteries/{riot_id}/top")
 async def get_top_masteries(riot_id: str, limit: int = 10):
@@ -294,6 +461,7 @@ async def get_top_masteries(riot_id: str, limit: int = 10):
 
     return {"masteries": sorted_masteries[:limit]}
 
+
 @app.get("/users/{riot_id}")
 async def get_user(riot_id: str):
     """Récupère les infos d'un utilisateur"""
@@ -304,10 +472,9 @@ async def get_user(riot_id: str):
 
     user = users[riot_id]
     return UserResponse(
-        riot_id=riot_id,
-        puuid=user.get("puuid"),
-        region=user.get("region", RIOT_REGION)
+        riot_id=riot_id, puuid=user.get("puuid"), region=user.get("region", RIOT_REGION)
     )
+
 
 @app.post("/masteries/{riot_id}/refresh")
 async def refresh_masteries(riot_id: str):
@@ -344,18 +511,16 @@ async def lookup_masteries(game_name: str, tag_line: str, limit: int = 50):
     masteries = []
     for m in raw_masteries[:limit]:
         champion_id = m.get("championId")
-        masteries.append({
-            "champion_id": champion_id,
-            "champion_name": CHAMPION_NAMES.get(champion_id, f"Champion_{champion_id}"),
-            "champion_level": m.get("championLevel", 0),
-            "champion_points": m.get("championPoints", 0)
-        })
+        masteries.append(
+            {
+                "champion_id": champion_id,
+                "champion_name": CHAMPION_NAMES.get(champion_id, f"Champion_{champion_id}"),
+                "champion_level": m.get("championLevel", 0),
+                "champion_points": m.get("championPoints", 0),
+            }
+        )
 
-    return {
-        "riot_id": f"{game_name}#{tag_line}",
-        "puuid": puuid,
-        "masteries": masteries
-    }
+    return {"riot_id": f"{game_name}#{tag_line}", "puuid": puuid, "masteries": masteries}
 
 
 # ============================================
@@ -367,37 +532,197 @@ ROLES = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
 
 # Champions par rôle (simplifié - à compléter avec les données réelles)
 CHAMPIONS_BY_ROLE = {
-    "TOP": ["Aatrox", "Camille", "Darius", "Fiora", "Gangplank", "Garen", "Gnar", "Gwen",
-            "Illaoi", "Irelia", "Jax", "Jayce", "KSante", "Kayle", "Kennen", "Kled",
-            "Malphite", "Mordekaiser", "Nasus", "Olaf", "Ornn", "Pantheon", "Poppy",
-            "Quinn", "Renekton", "Riven", "Rumble", "Sett", "Shen", "Singed", "Sion",
-            "Teemo", "Trundle", "Tryndamere", "Urgot", "Vayne", "Volibear", "Yorick"],
-    "JUNGLE": ["Amumu", "BelVeth", "Briar", "Diana", "Ekko", "Elise", "Evelynn", "Fiddlesticks",
-               "Gragas", "Graves", "Hecarim", "Ivern", "JarvanIV", "Karthus", "Kayn", "KhaZix",
-               "Kindred", "LeeSin", "Lillia", "MasterYi", "Naafiri", "Nidalee", "Nocturne",
-               "Nunu", "Olaf", "Poppy", "Rammus", "RekSai", "Rengar", "Sejuani", "Shaco",
-               "Shyvana", "Skarner", "Taliyah", "Udyr", "Vi", "Viego", "Volibear", "Warwick",
-               "MonkeyKing", "XinZhao", "Zac"],
-    "MIDDLE": ["Ahri", "Akali", "Akshan", "Anivia", "Annie", "AurelionSol", "Azir", "Brand",
-               "Cassiopeia", "Corki", "Diana", "Ekko", "Fizz", "Galio", "Hwei", "Irelia",
-               "Kassadin", "Katarina", "LeBlanc", "Lissandra", "Lux", "Malzahar", "Naafiri",
-               "Neeko", "Orianna", "Pantheon", "Qiyana", "Ryze", "Sylas", "Syndra", "Talon",
-               "TwistedFate", "Veigar", "Vex", "Viktor", "Vladimir", "Xerath", "Yasuo",
-               "Yone", "Zed", "Ziggs", "Zoe"],
-    "BOTTOM": ["Aphelios", "Ashe", "Caitlyn", "Draven", "Ezreal", "Jhin", "Jinx", "KaiSa",
-               "Kalista", "KogMaw", "Lucian", "MissFortune", "Nilah", "Samira", "Senna",
-               "Sivir", "Smolder", "Tristana", "Twitch", "Varus", "Vayne", "Xayah", "Zeri"],
-    "UTILITY": ["Alistar", "Bard", "Blitzcrank", "Braum", "Janna", "Karma", "Leona", "Lulu",
-                "Lux", "Milio", "Morgana", "Nami", "Nautilus", "Pyke", "Rakan", "Rell",
-                "Renata", "Senna", "Seraphine", "Sona", "Soraka", "TahmKench", "Taric",
-                "Thresh", "Yuumi", "Zilean", "Zyra"]
+    "TOP": [
+        "Aatrox",
+        "Camille",
+        "Darius",
+        "Fiora",
+        "Gangplank",
+        "Garen",
+        "Gnar",
+        "Gwen",
+        "Illaoi",
+        "Irelia",
+        "Jax",
+        "Jayce",
+        "KSante",
+        "Kayle",
+        "Kennen",
+        "Kled",
+        "Malphite",
+        "Mordekaiser",
+        "Nasus",
+        "Olaf",
+        "Ornn",
+        "Pantheon",
+        "Poppy",
+        "Quinn",
+        "Renekton",
+        "Riven",
+        "Rumble",
+        "Sett",
+        "Shen",
+        "Singed",
+        "Sion",
+        "Teemo",
+        "Trundle",
+        "Tryndamere",
+        "Urgot",
+        "Vayne",
+        "Volibear",
+        "Yorick",
+    ],
+    "JUNGLE": [
+        "Amumu",
+        "BelVeth",
+        "Briar",
+        "Diana",
+        "Ekko",
+        "Elise",
+        "Evelynn",
+        "Fiddlesticks",
+        "Gragas",
+        "Graves",
+        "Hecarim",
+        "Ivern",
+        "JarvanIV",
+        "Karthus",
+        "Kayn",
+        "KhaZix",
+        "Kindred",
+        "LeeSin",
+        "Lillia",
+        "MasterYi",
+        "Naafiri",
+        "Nidalee",
+        "Nocturne",
+        "Nunu",
+        "Olaf",
+        "Poppy",
+        "Rammus",
+        "RekSai",
+        "Rengar",
+        "Sejuani",
+        "Shaco",
+        "Shyvana",
+        "Skarner",
+        "Taliyah",
+        "Udyr",
+        "Vi",
+        "Viego",
+        "Volibear",
+        "Warwick",
+        "MonkeyKing",
+        "XinZhao",
+        "Zac",
+    ],
+    "MIDDLE": [
+        "Ahri",
+        "Akali",
+        "Akshan",
+        "Anivia",
+        "Annie",
+        "AurelionSol",
+        "Azir",
+        "Brand",
+        "Cassiopeia",
+        "Corki",
+        "Diana",
+        "Ekko",
+        "Fizz",
+        "Galio",
+        "Hwei",
+        "Irelia",
+        "Kassadin",
+        "Katarina",
+        "LeBlanc",
+        "Lissandra",
+        "Lux",
+        "Malzahar",
+        "Naafiri",
+        "Neeko",
+        "Orianna",
+        "Pantheon",
+        "Qiyana",
+        "Ryze",
+        "Sylas",
+        "Syndra",
+        "Talon",
+        "TwistedFate",
+        "Veigar",
+        "Vex",
+        "Viktor",
+        "Vladimir",
+        "Xerath",
+        "Yasuo",
+        "Yone",
+        "Zed",
+        "Ziggs",
+        "Zoe",
+    ],
+    "BOTTOM": [
+        "Aphelios",
+        "Ashe",
+        "Caitlyn",
+        "Draven",
+        "Ezreal",
+        "Jhin",
+        "Jinx",
+        "KaiSa",
+        "Kalista",
+        "KogMaw",
+        "Lucian",
+        "MissFortune",
+        "Nilah",
+        "Samira",
+        "Senna",
+        "Sivir",
+        "Smolder",
+        "Tristana",
+        "Twitch",
+        "Varus",
+        "Vayne",
+        "Xayah",
+        "Zeri",
+    ],
+    "UTILITY": [
+        "Alistar",
+        "Bard",
+        "Blitzcrank",
+        "Braum",
+        "Janna",
+        "Karma",
+        "Leona",
+        "Lulu",
+        "Lux",
+        "Milio",
+        "Morgana",
+        "Nami",
+        "Nautilus",
+        "Pyke",
+        "Rakan",
+        "Rell",
+        "Renata",
+        "Senna",
+        "Seraphine",
+        "Sona",
+        "Soraka",
+        "TahmKench",
+        "Taric",
+        "Thresh",
+        "Yuumi",
+        "Zilean",
+        "Zyra",
+    ],
 }
+
 
 class DraftAnalysisRequest(BaseModel):
     players: list[dict]  # [{riot_id: "Name#Tag", role: "TOP"}, ...]
     banned_champions: list[str] = []
     picked_champions: list[str] = []
     enemy_champions: list[str] = []
+
 
 @app.post("/draft/analyze")
 async def analyze_draft(request: DraftAnalysisRequest):
@@ -424,11 +749,13 @@ async def analyze_draft(request: DraftAnalysisRequest):
                     champ_id = m.get("championId")
                     champ_name = CHAMPION_NAMES.get(champ_id, "")
                     if champ_name:
-                        player_masteries.append({
-                            "name": champ_name,
-                            "level": m.get("championLevel", 0),
-                            "points": m.get("championPoints", 0)
-                        })
+                        player_masteries.append(
+                            {
+                                "name": champ_name,
+                                "level": m.get("championLevel", 0),
+                                "points": m.get("championPoints", 0),
+                            }
+                        )
 
         # Champions jouables pour ce rôle
         role_champions = set(CHAMPIONS_BY_ROLE.get(role, []))
@@ -448,22 +775,26 @@ async def analyze_draft(request: DraftAnalysisRequest):
             if mastery:
                 # Score basé sur niveau de maîtrise et points
                 score = mastery["level"] * 10000 + mastery["points"]
-                scored_champions.append({
-                    "champion": champ,
-                    "mastery_level": mastery["level"],
-                    "mastery_points": mastery["points"],
-                    "score": score,
-                    "playable": True
-                })
+                scored_champions.append(
+                    {
+                        "champion": champ,
+                        "mastery_level": mastery["level"],
+                        "mastery_points": mastery["points"],
+                        "score": score,
+                        "playable": True,
+                    }
+                )
             else:
                 # Champion disponible mais pas joué par le joueur
-                scored_champions.append({
-                    "champion": champ,
-                    "mastery_level": 0,
-                    "mastery_points": 0,
-                    "score": 0,
-                    "playable": False
-                })
+                scored_champions.append(
+                    {
+                        "champion": champ,
+                        "mastery_level": 0,
+                        "mastery_points": 0,
+                        "score": 0,
+                        "playable": False,
+                    }
+                )
 
         # Trier par score décroissant
         scored_champions.sort(key=lambda x: x["score"], reverse=True)
@@ -473,16 +804,18 @@ async def analyze_draft(request: DraftAnalysisRequest):
         if not playable:
             playable = scored_champions[:5]
 
-        recommendations.append({
-            "riot_id": riot_id,
-            "role": role,
-            "recommended_champions": playable[:10],  # Top 10 recommendations
-            "total_masteries_found": len(player_masteries)
-        })
+        recommendations.append(
+            {
+                "riot_id": riot_id,
+                "role": role,
+                "recommended_champions": playable[:10],  # Top 10 recommendations
+                "total_masteries_found": len(player_masteries),
+            }
+        )
 
     return {
         "recommendations": recommendations,
         "banned": request.banned_champions,
         "picked": request.picked_champions,
-        "enemy": request.enemy_champions
+        "enemy": request.enemy_champions,
     }
