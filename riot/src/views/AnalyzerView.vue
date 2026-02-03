@@ -570,15 +570,6 @@ function getRoleClass(index: number): string {
   const classes = ['top', 'jungle', 'middle', 'bottom', 'utility']
   return classes[index] || ''
 }
-
-function getChampionImage(championName: string): string {
-  return `/champ_img/${championName}.png`
-}
-
-function handleImageError(event: Event) {
-  const img = event.target as HTMLImageElement
-  img.src = '/champ_img/Ahri.png'
-}
 </script>
 
 <style scoped>

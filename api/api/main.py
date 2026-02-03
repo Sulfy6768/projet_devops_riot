@@ -3,15 +3,16 @@ Riot Stats API - Backend FastAPI
 Gestion des utilisateurs, masteries et statistiques
 """
 
-from fastapi import FastAPI, HTTPException, Depends
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import Optional
+import hashlib
 import json
 import os
-import hashlib
-import requests
 import time
+from typing import Optional
+
+import requests
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 app = FastAPI(title="Riot Stats API", version="1.0.0")
 
@@ -92,11 +93,11 @@ def get_puuid_from_riot_id(game_name: str, tag_line: str) -> Optional[str]:
     """Récupère le PUUID depuis un Riot ID"""
     if not RIOT_API_KEY:
         return None
-    
+
     routing = get_routing(RIOT_REGION)
     url = f"https://{routing}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{game_name}/{tag_line}"
     headers = {"X-Riot-Token": RIOT_API_KEY}
-    
+
     try:
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code == 200:
@@ -109,10 +110,10 @@ def get_summoner_id_from_puuid(puuid: str) -> Optional[str]:
     """Récupère le Summoner ID depuis un PUUID"""
     if not RIOT_API_KEY:
         return None
-    
+
     url = f"https://{RIOT_REGION}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
     headers = {"X-Riot-Token": RIOT_API_KEY}
-    
+
     try:
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code == 200:
@@ -125,11 +126,11 @@ def fetch_masteries_from_riot(puuid: str) -> list:
     """Récupère les masteries depuis l'API Riot"""
     if not RIOT_API_KEY:
         return []
-    
+
     # Utiliser l'endpoint v4 avec le PUUID
     url = f"https://{RIOT_REGION}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}"
     headers = {"X-Riot-Token": RIOT_API_KEY}
-    
+
     try:
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code == 200:
@@ -189,20 +190,20 @@ async def health_check():
 async def register(user: UserRegister):
     """Inscription d'un nouvel utilisateur"""
     users = load_json(USERS_FILE)
-    
+
     # Vérifier si l'utilisateur existe déjà
     if user.riot_id in users:
         raise HTTPException(status_code=400, detail="Utilisateur déjà existant")
-    
+
     # Parser le Riot ID
     if "#" not in user.riot_id:
         raise HTTPException(status_code=400, detail="Format invalide. Utilisez: GameName#TagLine")
-    
+
     game_name, tag_line = user.riot_id.rsplit("#", 1)
-    
+
     # Récupérer le PUUID depuis riot
     puuid = get_puuid_from_riot_id(game_name, tag_line)
-    
+
     # Créer l'utilisateur
     users[user.riot_id] = {
         "password_hash": hash_password(user.password),
@@ -211,31 +212,31 @@ async def register(user: UserRegister):
         "created_at": int(time.time())
     }
     save_json(USERS_FILE, users)
-    
+
     # Récupérer et sauvegarder les masteries
     if puuid:
         await update_user_masteries(user.riot_id, puuid)
-    
+
     return UserResponse(riot_id=user.riot_id, puuid=puuid, region=RIOT_REGION)
 
 @app.post("/auth/login", response_model=UserResponse)
 async def login(user: UserLogin):
     """Connexion d'un utilisateur"""
     users = load_json(USERS_FILE)
-    
+
     if user.riot_id not in users:
         raise HTTPException(status_code=401, detail="Utilisateur non trouvé")
-    
+
     stored_user = users[user.riot_id]
     if stored_user["password_hash"] != hash_password(user.password):
         raise HTTPException(status_code=401, detail="Mot de passe incorrect")
-    
+
     puuid = stored_user.get("puuid")
-    
+
     # Mettre à jour les masteries à chaque login
     if puuid:
         await update_user_masteries(user.riot_id, puuid)
-    
+
     return UserResponse(
         riot_id=user.riot_id,
         puuid=puuid,
@@ -245,10 +246,10 @@ async def login(user: UserLogin):
 async def update_user_masteries(riot_id: str, puuid: str):
     """Met à jour les masteries d'un utilisateur"""
     masteries_data = load_json(MASTERIES_FILE)
-    
+
     # Récupérer les masteries depuis Riot
     raw_masteries = fetch_masteries_from_riot(puuid)
-    
+
     # Transformer les données
     masteries = []
     for m in raw_masteries:
@@ -260,7 +261,7 @@ async def update_user_masteries(riot_id: str, puuid: str):
             "champion_points": m.get("championPoints", 0),
             "last_play_time": m.get("lastPlayTime")
         })
-    
+
     # Sauvegarder
     masteries_data[riot_id] = {
         "puuid": puuid,
@@ -273,34 +274,34 @@ async def update_user_masteries(riot_id: str, puuid: str):
 async def get_masteries(riot_id: str):
     """Récupère les masteries d'un utilisateur"""
     masteries_data = load_json(MASTERIES_FILE)
-    
+
     if riot_id not in masteries_data:
         raise HTTPException(status_code=404, detail="Masteries non trouvées")
-    
+
     return masteries_data[riot_id]
 
 @app.get("/masteries/{riot_id}/top")
 async def get_top_masteries(riot_id: str, limit: int = 10):
     """Récupère les top masteries d'un utilisateur"""
     masteries_data = load_json(MASTERIES_FILE)
-    
+
     if riot_id not in masteries_data:
         raise HTTPException(status_code=404, detail="Masteries non trouvées")
-    
+
     masteries = masteries_data[riot_id].get("masteries", [])
     # Trier par points décroissants
     sorted_masteries = sorted(masteries, key=lambda x: x["champion_points"], reverse=True)
-    
+
     return {"masteries": sorted_masteries[:limit]}
 
 @app.get("/users/{riot_id}")
 async def get_user(riot_id: str):
     """Récupère les infos d'un utilisateur"""
     users = load_json(USERS_FILE)
-    
+
     if riot_id not in users:
         raise HTTPException(status_code=404, detail="Utilisateur non trouvé")
-    
+
     user = users[riot_id]
     return UserResponse(
         riot_id=riot_id,
@@ -312,33 +313,33 @@ async def get_user(riot_id: str):
 async def refresh_masteries(riot_id: str):
     """Force le rafraîchissement des masteries"""
     users = load_json(USERS_FILE)
-    
+
     if riot_id not in users:
         raise HTTPException(status_code=404, detail="Utilisateur non trouvé")
-    
+
     puuid = users[riot_id].get("puuid")
     if not puuid:
         raise HTTPException(status_code=400, detail="PUUID non disponible")
-    
+
     await update_user_masteries(riot_id, puuid)
-    
+
     return {"message": "Masteries mises à jour"}
 
 
 @app.get("/masteries/lookup/{game_name}/{tag_line}")
 async def lookup_masteries(game_name: str, tag_line: str, limit: int = 50):
     """Récupère les masteries d'un joueur directement via son Riot ID (sans compte)"""
-    
+
     # Récupérer le PUUID
     puuid = get_puuid_from_riot_id(game_name, tag_line)
     if not puuid:
         raise HTTPException(status_code=404, detail="Joueur non trouvé")
-    
+
     # Récupérer les masteries
     raw_masteries = fetch_masteries_from_riot(puuid)
     if not raw_masteries:
         raise HTTPException(status_code=404, detail="Masteries non disponibles")
-    
+
     # Transformer les données
     masteries = []
     for m in raw_masteries[:limit]:
@@ -349,7 +350,7 @@ async def lookup_masteries(game_name: str, tag_line: str, limit: int = 50):
             "champion_level": m.get("championLevel", 0),
             "champion_points": m.get("championPoints", 0)
         })
-    
+
     return {
         "riot_id": f"{game_name}#{tag_line}",
         "puuid": puuid,
@@ -366,7 +367,7 @@ ROLES = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
 
 # Champions par rôle (simplifié - à compléter avec les données réelles)
 CHAMPIONS_BY_ROLE = {
-    "TOP": ["Aatrox", "Camille", "Darius", "Fiora", "Gangplank", "Garen", "Gnar", "Gwen", 
+    "TOP": ["Aatrox", "Camille", "Darius", "Fiora", "Gangplank", "Garen", "Gnar", "Gwen",
             "Illaoi", "Irelia", "Jax", "Jayce", "KSante", "Kayle", "Kennen", "Kled",
             "Malphite", "Mordekaiser", "Nasus", "Olaf", "Ornn", "Pantheon", "Poppy",
             "Quinn", "Renekton", "Riven", "Rumble", "Sett", "Shen", "Singed", "Sion",
@@ -401,16 +402,16 @@ class DraftAnalysisRequest(BaseModel):
 @app.post("/draft/analyze")
 async def analyze_draft(request: DraftAnalysisRequest):
     """Analyse un draft et recommande des champions basés sur les masteries des joueurs"""
-    
+
     recommendations = []
-    
+
     for player in request.players:
         riot_id = player.get("riot_id", "")
         role = player.get("role", "").upper()
-        
+
         if not riot_id or not role or role not in ROLES:
             continue
-        
+
         # Récupérer les masteries du joueur
         player_masteries = []
         if "#" in riot_id:
@@ -428,18 +429,20 @@ async def analyze_draft(request: DraftAnalysisRequest):
                             "level": m.get("championLevel", 0),
                             "points": m.get("championPoints", 0)
                         })
-        
+
         # Champions jouables pour ce rôle
         role_champions = set(CHAMPIONS_BY_ROLE.get(role, []))
-        
+
         # Exclure les bans et les picks déjà pris
-        excluded = set(request.banned_champions + request.picked_champions + request.enemy_champions)
+        excluded = set(
+            request.banned_champions + request.picked_champions + request.enemy_champions
+        )
         available_champions = role_champions - excluded
-        
+
         # Filtrer et scorer les champions basés sur les masteries
         scored_champions = []
         mastery_dict = {m["name"]: m for m in player_masteries}
-        
+
         for champ in available_champions:
             mastery = mastery_dict.get(champ)
             if mastery:
@@ -461,22 +464,22 @@ async def analyze_draft(request: DraftAnalysisRequest):
                     "score": 0,
                     "playable": False
                 })
-        
+
         # Trier par score décroissant
         scored_champions.sort(key=lambda x: x["score"], reverse=True)
-        
+
         # Garder seulement les champions que le joueur joue (mastery > 0) ou top 5 si aucun
         playable = [c for c in scored_champions if c["playable"]]
         if not playable:
             playable = scored_champions[:5]
-        
+
         recommendations.append({
             "riot_id": riot_id,
             "role": role,
             "recommended_champions": playable[:10],  # Top 10 recommendations
             "total_masteries_found": len(player_masteries)
         })
-    
+
     return {
         "recommendations": recommendations,
         "banned": request.banned_champions,

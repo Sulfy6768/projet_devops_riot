@@ -119,8 +119,8 @@ async function fetchMasteries() {
 
     const data = await response.json()
     masteries.value = data.masteries || []
-  } catch (e: any) {
-    error.value = e.message
+  } catch (e: unknown) {
+    error.value = e instanceof Error ? e.message : 'Une erreur est survenue'
   } finally {
     loading.value = false
   }
@@ -144,8 +144,8 @@ async function refreshMasteries() {
 
     // Recharger les masteries
     await fetchMasteries()
-  } catch (e: any) {
-    error.value = e.message
+  } catch (e: unknown) {
+    error.value = e instanceof Error ? e.message : 'Une erreur est survenue'
     loading.value = false
   }
 }

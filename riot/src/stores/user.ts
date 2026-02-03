@@ -15,7 +15,7 @@ export const useUserStore = defineStore('user', () => {
   if (savedUser) {
     try {
       user.value = JSON.parse(savedUser)
-    } catch (e) {
+    } catch {
       localStorage.removeItem('riot_user')
     }
   }

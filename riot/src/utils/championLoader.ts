@@ -39,7 +39,7 @@ const ROLE_MAP: Record<string, string> = {
  */
 function fileNameToChampionName(fileName: string): string {
   // Remove extension
-  let name = fileName.replace(/\.[^.]*$/, '')
+  const name = fileName.replace(/\.[^.]*$/, '')
 
   // Convert snake_case to camelCase (first letter capitalized)
   return name
