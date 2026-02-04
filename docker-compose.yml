@@ -52,7 +52,9 @@ services:
   # MLflow - Gestion des modèles ML
   # ============================================
   mlflow:
-    image: ghcr.io/mlflow/mlflow:v2.17.0
+    build:
+      context: ./docker/mlflow
+      dockerfile: Dockerfile
     container_name: mlflow
     ports:
       - "5000:5000"
@@ -61,12 +63,19 @@ services:
     volumes:
       - mlflow_data:/mlflow
       - ./mlflow/artifacts:/mlflow/artifacts
+      - mlflow_prometheus:/mlflow/prometheus
     command: >
       mlflow server
       --host 0.0.0.0
       --port 5000
       --backend-store-uri sqlite:///mlflow/mlflow.db
       --default-artifact-root /mlflow/artifacts
+      --expose-prometheus /mlflow/prometheus
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     networks:
       - riot-network
     restart: unless-stopped
@@ -152,6 +161,7 @@ networks:
 
 volumes:
   mlflow_data:
+  mlflow_prometheus:
   prometheus_data:
   grafana_data:
   api_data:
