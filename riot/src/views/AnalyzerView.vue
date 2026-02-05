@@ -61,7 +61,11 @@
       <div class="team blue-team">
         <div class="team-header">
           <h2>🔵 Blue Team</h2>
-          <div class="win-rate">{{ blueWinRate }}%</div>
+          <div class="win-rate" :class="{ loading: mlPrediction.loading, 'ml-active': mlPrediction.model_loaded }">
+            <span v-if="mlPrediction.loading">⏳</span>
+            <span v-else>{{ blueWinRate }}%</span>
+            <span v-if="mlPrediction.model_loaded && !mlPrediction.loading" class="ml-badge" title="Prédiction ML">🤖</span>
+          </div>
         </div>
         <div class="champions-slots">
           <div
@@ -141,7 +145,11 @@
       <div class="team red-team">
         <div class="team-header">
           <h2>🔴 Red Team</h2>
-          <div class="win-rate">{{ redWinRate }}%</div>
+          <div class="win-rate" :class="{ loading: mlPrediction.loading, 'ml-active': mlPrediction.model_loaded }">
+            <span v-if="mlPrediction.loading">⏳</span>
+            <span v-else>{{ redWinRate }}%</span>
+            <span v-if="mlPrediction.model_loaded && !mlPrediction.loading" class="ml-badge" title="Prédiction ML">🤖</span>
+          </div>
         </div>
         <div class="champions-slots">
           <div
@@ -203,8 +211,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
-import { calculateWinRate } from '../components/useTeamWinRate'
+import { computed, ref, onMounted, watch } from 'vue'
 import { loadChampionsSync } from '../utils/championLoader'
 
 interface Champion {
@@ -306,6 +313,18 @@ const selectedSlot = ref<{ team: 'blue' | 'red' | null; index: number | null; ty
   type: 'pick'
 })
 
+// ML Prediction state
+const mlPrediction = ref({
+  blue_winrate: 50.0,
+  red_winrate: 50.0,
+  model_loaded: false,
+  loading: false,
+  confidence: 'low' as 'low' | 'high'
+})
+
+// Position mapping for picks
+const POSITION_MAP = ['top', 'jng', 'mid', 'bot', 'sup']
+
 onMounted(() => {
   champions.value = loadChampionsSync()
   updateCurrentSelection()
@@ -320,16 +339,13 @@ const currentPhaseLabel = computed(() => {
   return `${action} - Équipe ${teamName}`
 })
 
+// Use ML prediction for winrates
 const blueWinRate = computed(() => {
-  const blueChamps = blueSlots.value.map(s => s.champion)
-  const redChamps = redSlots.value.map(s => s.champion)
-  return calculateWinRate(blueChamps, redChamps)
+  return mlPrediction.value.blue_winrate.toFixed(1)
 })
 
 const redWinRate = computed(() => {
-  const blueChamps = blueSlots.value.map(s => s.champion)
-  const redChamps = redSlots.value.map(s => s.champion)
-  return calculateWinRate(redChamps, blueChamps)
+  return mlPrediction.value.red_winrate.toFixed(1)
 })
 
 const currentSlotMasteries = computed(() => {
@@ -369,6 +385,99 @@ function updateCurrentSelection() {
     }
   }
 }
+
+// ============================================
+// ML Prediction Functions
+// ============================================
+
+async function fetchMLPrediction() {
+  // Build draft data for the API
+  const blueBanNames = blueBans.value
+    .filter(b => b !== null)
+    .map(b => b!.name)
+  
+  const redBanNames = redBans.value
+    .filter(b => b !== null)
+    .map(b => b!.name)
+  
+  // Format picks as "Champion.position"
+  const bluePicks = blueSlots.value
+    .map((slot, idx) => {
+      if (!slot.champion) return ''
+      const position = POSITION_MAP[idx] || 'unknown'
+      return `${slot.champion.name}.${position}`
+    })
+    .filter(p => p !== '')
+  
+  const redPicks = redSlots.value
+    .map((slot, idx) => {
+      if (!slot.champion) return ''
+      const position = POSITION_MAP[idx] || 'unknown'
+      return `${slot.champion.name}.${position}`
+    })
+    .filter(p => p !== '')
+  
+  // Only call API if we have at least some data
+  if (blueBanNames.length === 0 && redBanNames.length === 0 && 
+      bluePicks.length === 0 && redPicks.length === 0) {
+    mlPrediction.value = {
+      blue_winrate: 50.0,
+      red_winrate: 50.0,
+      model_loaded: false,
+      loading: false,
+      confidence: 'low'
+    }
+    return
+  }
+  
+  mlPrediction.value.loading = true
+  
+  try {
+    const response = await fetch(`${API_URL}/draft/predict`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        blue_bans: blueBanNames,
+        red_bans: redBanNames,
+        blue_picks: bluePicks,
+        red_picks: redPicks
+      })
+    })
+    
+    if (response.ok) {
+      const data = await response.json()
+      mlPrediction.value = {
+        blue_winrate: data.blue_winrate || 50.0,
+        red_winrate: data.red_winrate || 50.0,
+        model_loaded: data.model_loaded || false,
+        loading: false,
+        confidence: data.confidence || 'low'
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching ML prediction:', error)
+    mlPrediction.value.loading = false
+  }
+}
+
+// Watch for draft changes and update prediction
+watch(
+  () => [
+    blueBans.value.filter(b => b).length,
+    redBans.value.filter(b => b).length,
+    blueSlots.value.filter(s => s.champion).length,
+    redSlots.value.filter(s => s.champion).length
+  ],
+  () => {
+    // Debounce: wait 300ms after last change
+    fetchMLPrediction()
+  },
+  { deep: true }
+)
+
+// ============================================
+// Draft Selection Functions
+// ============================================
 
 function isCurrentBanSlot(team: 'blue' | 'red', index: number): boolean {
   return selectedSlot.value.type === 'ban' && 
@@ -709,6 +818,23 @@ function getRoleClass(index: number): string {
   border-radius: 15px;
   font-weight: bold;
   font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.win-rate.loading {
+  opacity: 0.7;
+}
+
+.win-rate.ml-active {
+  background: linear-gradient(45deg, #42b883, #2c7a56);
+  box-shadow: 0 0 10px rgba(66, 184, 131, 0.4);
+}
+
+.ml-badge {
+  font-size: 0.75rem;
 }
 
 .champions-slots {

@@ -12,6 +12,8 @@ from typing import Optional
 import requests
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from prometheus_client import Counter, Histogram
+from prometheus_fastapi_instrumentator import Instrumentator
 from pydantic import BaseModel
 
 app = FastAPI(title="Riot Stats API", version="1.0.0")
@@ -23,6 +25,25 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
+# ============================================
+# Prometheus Metrics
+# ============================================
+
+# Instrumenter automatiquement toutes les requêtes HTTP
+Instrumentator().instrument(app).expose(app, endpoint="/metrics")
+
+# Métriques personnalisées
+DRAFT_PREDICTIONS_TOTAL = Counter(
+    "draft_predictions_total",
+    "Total number of draft predictions made",
+    ["model_loaded"],
+)
+DRAFT_PREDICTION_LATENCY = Histogram(
+    "draft_prediction_latency_seconds",
+    "Latency of draft predictions",
+    buckets=[0.01, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0],
 )
 
 # Configuration
@@ -62,6 +83,42 @@ class MasteryData(BaseModel):
     champion_level: int
     champion_points: int
     last_play_time: Optional[int] = None
+
+
+class DraftPredictionRequest(BaseModel):
+    """Requête pour prédire le winrate d'une draft"""
+
+    blue_bans: list[str] = []
+    red_bans: list[str] = []
+    blue_picks: list[str] = []  # Format: ["Champion.position", ...]
+    red_picks: list[str] = []  # Format: ["Champion.position", ...]
+
+
+# ============================================
+# Draft Transformer Model (lazy loading)
+# ============================================
+_draft_predictor = None
+
+
+def get_draft_predictor():
+    """Charge le modèle de prédiction de draft (lazy loading)"""
+    global _draft_predictor
+    if _draft_predictor is None:
+        try:
+            import sys
+
+            sys.path.insert(0, "/app/mlflow")
+            from draft_predictor import DraftPredictor
+
+            _draft_predictor = DraftPredictor(
+                model_path="/app/mlflow/best_draft_model.pth",
+                encoders_path="/app/mlflow/draft_encoders.json"
+            )
+            print("✅ Draft Transformer model loaded!")
+        except Exception as e:
+            print(f"⚠️ Could not load Draft Transformer: {e}")
+            _draft_predictor = "error"
+    return _draft_predictor if _draft_predictor != "error" else None
 
 
 # ============================================
@@ -360,7 +417,9 @@ async def register(user: UserRegister):
 
     # Parser le Riot ID
     if "#" not in user.riot_id:
-        raise HTTPException(status_code=400, detail="Format invalide. Utilisez: GameName#TagLine")
+        raise HTTPException(
+            status_code=400, detail="Format invalide. Utilisez: GameName#TagLine"
+        )
 
     game_name, tag_line = user.riot_id.rsplit("#", 1)
 
@@ -420,7 +479,9 @@ async def update_user_masteries(riot_id: str, puuid: str):
         masteries.append(
             {
                 "champion_id": champion_id,
-                "champion_name": CHAMPION_NAMES.get(champion_id, f"Champion_{champion_id}"),
+                "champion_name": CHAMPION_NAMES.get(
+                    champion_id, f"Champion_{champion_id}"
+                ),
                 "champion_level": m.get("championLevel", 0),
                 "champion_points": m.get("championPoints", 0),
                 "last_play_time": m.get("lastPlayTime"),
@@ -457,7 +518,9 @@ async def get_top_masteries(riot_id: str, limit: int = 10):
 
     masteries = masteries_data[riot_id].get("masteries", [])
     # Trier par points décroissants
-    sorted_masteries = sorted(masteries, key=lambda x: x["champion_points"], reverse=True)
+    sorted_masteries = sorted(
+        masteries, key=lambda x: x["champion_points"], reverse=True
+    )
 
     return {"masteries": sorted_masteries[:limit]}
 
@@ -514,13 +577,19 @@ async def lookup_masteries(game_name: str, tag_line: str, limit: int = 50):
         masteries.append(
             {
                 "champion_id": champion_id,
-                "champion_name": CHAMPION_NAMES.get(champion_id, f"Champion_{champion_id}"),
+                "champion_name": CHAMPION_NAMES.get(
+                    champion_id, f"Champion_{champion_id}"
+                ),
                 "champion_level": m.get("championLevel", 0),
                 "champion_points": m.get("championPoints", 0),
             }
         )
 
-    return {"riot_id": f"{game_name}#{tag_line}", "puuid": puuid, "masteries": masteries}
+    return {
+        "riot_id": f"{game_name}#{tag_line}",
+        "puuid": puuid,
+        "masteries": masteries,
+    }
 
 
 # ============================================
@@ -762,7 +831,9 @@ async def analyze_draft(request: DraftAnalysisRequest):
 
         # Exclure les bans et les picks déjà pris
         excluded = set(
-            request.banned_champions + request.picked_champions + request.enemy_champions
+            request.banned_champions
+            + request.picked_champions
+            + request.enemy_champions
         )
         available_champions = role_champions - excluded
 
@@ -819,3 +890,95 @@ async def analyze_draft(request: DraftAnalysisRequest):
         "picked": request.picked_champions,
         "enemy": request.enemy_champions,
     }
+
+
+@app.post("/draft/predict")
+async def predict_draft_winrate(request: DraftPredictionRequest):
+    """
+    Prédit le winrate d'une draft avec le modèle Transformer.
+
+    Format des picks: "Champion.position" (ex: "Varus.bot", "Yone.mid")
+    Les bans sont juste le nom du champion.
+    """
+    start_time = time.time()
+    predictor = get_draft_predictor()
+
+    if predictor is None:
+        DRAFT_PREDICTIONS_TOTAL.labels(model_loaded="false").inc()
+        DRAFT_PREDICTION_LATENCY.observe(time.time() - start_time)
+        raise HTTPException(status_code=503, detail="Draft prediction model not loaded")
+
+    try:
+        # Construire le draft dict pour le predictor
+        # Parser les picks au format "Champion.position" en tuples ("Champion", "position")
+        def parse_pick(p: str) -> tuple:
+            if "." in p:
+                parts = p.rsplit(".", 1)
+                return (parts[0], parts[1])
+            return (p, "mid")  # fallback position
+
+        draft = {
+            "blue_bans": [b for b in request.blue_bans if b],
+            "red_bans": [b for b in request.red_bans if b],
+            "blue_picks": [parse_pick(p) for p in request.blue_picks if p],
+            "red_picks": [parse_pick(p) for p in request.red_picks if p],
+        }
+
+        # Prédiction
+        result = predictor.predict_win_probability(draft)
+        blue_winrate = result["blue_win_probability"]
+        red_winrate = result["red_win_probability"]
+
+        # Métriques Prometheus
+        DRAFT_PREDICTIONS_TOTAL.labels(model_loaded="true").inc()
+        DRAFT_PREDICTION_LATENCY.observe(time.time() - start_time)
+
+        return {
+            "blue_winrate": blue_winrate,
+            "red_winrate": red_winrate,
+            "confidence": (
+                "high"
+                if len(draft["blue_picks"]) >= 3 and len(draft["red_picks"]) >= 3
+                else "low"
+            ),
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error predicting draft: {e}")
+        DRAFT_PREDICTIONS_TOTAL.labels(model_loaded="error").inc()
+        DRAFT_PREDICTION_LATENCY.observe(time.time() - start_time)
+        raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
+
+
+@app.post("/draft/suggest")
+async def suggest_champion(
+    request: DraftPredictionRequest, step: int = 0, top_k: int = 5
+):
+    """
+    Suggère les meilleurs champions pour une étape de la draft.
+
+    step: 0-19 selon l'ordre de draft compétitif
+    top_k: nombre de suggestions à retourner
+    """
+    predictor = get_draft_predictor()
+
+    if predictor is None:
+        return {"suggestions": [], "model_loaded": False, "message": "Model not loaded"}
+
+    try:
+        draft = {
+            "blue_bans": [b for b in request.blue_bans if b],
+            "red_bans": [b for b in request.red_bans if b],
+            "blue_picks": [p for p in request.blue_picks if p],
+            "red_picks": [p for p in request.red_picks if p],
+        }
+
+        suggestions = predictor.suggest_champion(draft, step=step, top_k=top_k)
+
+        return {"suggestions": suggestions, "step": step, "model_loaded": True}
+
+    except Exception as e:
+        print(f"Error suggesting champion: {e}")
+        return {"suggestions": [], "model_loaded": False, "error": str(e)}
