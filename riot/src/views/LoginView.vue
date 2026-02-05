@@ -94,8 +94,8 @@ async function handleSubmit() {
     
     // Rediriger vers la page mastery
     router.push('/mastery')
-  } catch (e: any) {
-    error.value = e.message || 'Une erreur est survenue'
+  } catch (e: unknown) {
+    error.value = e instanceof Error ? e.message : 'Une erreur est survenue'
   } finally {
     loading.value = false
   }
