@@ -16,7 +16,9 @@ from prometheus_fastapi_instrumentator import Instrumentator
 
 from .champions import CHAMPION_ID_TO_NAME
 from .draft import router as draft_router
+from .lolalytics_scraper import get_champion_stats
 from .models import UserLogin, UserRegister, UserResponse
+from .recommender import get_meta_tierlist, get_recommendations
 from .riot_api import fetch_masteries_from_riot, get_puuid_from_riot_id
 
 # ============================================
@@ -294,8 +296,7 @@ async def lookup_masteries(game_name: str, tag_line: str, limit: int = 50):
 # ============================================
 # Recommandations basées sur Méta + Masteries + Counters
 # ============================================
-from api.recommender import get_recommendations, get_meta_tierlist
-from typing import List
+
 
 @app.get("/recommend/{riot_id}")
 async def recommend_champions(
@@ -306,11 +307,11 @@ async def recommend_champions(
     mode: str = "balanced",
     enemy_champions: Optional[str] = None,
     ally_champions: Optional[str] = None,
-    banned_champions: Optional[str] = None
+    banned_champions: Optional[str] = None,
 ):
     """
     Recommande des champions basés sur la méta, les masteries ET le contexte du draft
-    
+
     - riot_id: Riot ID du joueur (ex: "Player#EUW")
     - role: Rôle spécifique (top, jng, mid, bot, sup) ou tous si non spécifié
     - top_n: Nombre de recommandations par rôle
@@ -325,23 +326,25 @@ async def recommend_champions(
     - banned_champions: Champions bannis séparés par virgule
     """
     riot_id = unquote(riot_id)
-    
+
     # Parser les listes de champions
     enemy_list = [c.strip() for c in enemy_champions.split(",")] if enemy_champions else None
     ally_list = [c.strip() for c in ally_champions.split(",")] if ally_champions else None
     banned_list = [c.strip() for c in banned_champions.split(",")] if banned_champions else None
-    
+
     # Charger les masteries du joueur
     masteries_data = load_json(MASTERIES_FILE)
-    
+
     if riot_id not in masteries_data:
-        raise HTTPException(status_code=404, detail="Masteries non trouvées. Connectez-vous d'abord.")
-    
-    player_masteries = masteries_data[riot_id].get('masteries', [])
-    
+        raise HTTPException(
+            status_code=404, detail="Masteries non trouvées. Connectez-vous d'abord."
+        )
+
+    player_masteries = masteries_data[riot_id].get("masteries", [])
+
     if not player_masteries:
         raise HTTPException(status_code=400, detail="Aucune mastery trouvée pour ce joueur")
-    
+
     # Obtenir les recommandations
     recommendations = get_recommendations(
         masteries=player_masteries,
@@ -351,24 +354,24 @@ async def recommend_champions(
         enemy_champions=enemy_list,
         ally_champions=ally_list,
         banned_champions=banned_list,
-        mode=mode
+        mode=mode,
     )
-    
+
     # Grouper par rôle
     by_role = {}
     for rec in recommendations:
-        r = rec['role']
+        r = rec["role"]
         if r not in by_role:
             by_role[r] = []
         by_role[r].append(rec)
-    
+
     return {
         "riot_id": riot_id,
         "role_filter": role,
         "mode": mode,
         "enemy_champions": enemy_list,
         "recommendations": by_role,
-        "total_masteries": len(player_masteries)
+        "total_masteries": len(player_masteries),
     }
 
 
@@ -379,37 +382,37 @@ async def add_player(game_name: str, tag_line: str):
     Utile pour tracker les masteries des joueurs de l'équipe
     """
     riot_id = f"{game_name}#{tag_line}"
-    
+
     # Vérifier si déjà dans la base
     masteries_data = load_json(MASTERIES_FILE)
     if riot_id in masteries_data:
         # Rafraîchir les masteries
-        puuid = masteries_data[riot_id].get('puuid')
+        puuid = masteries_data[riot_id].get("puuid")
         if puuid:
             await update_user_masteries(riot_id, puuid)
             return {"message": "Masteries rafraîchies", "riot_id": riot_id}
         return {"message": "Joueur déjà enregistré", "riot_id": riot_id}
-    
+
     # Récupérer le PUUID
     puuid = get_puuid_from_riot_id(game_name, tag_line)
     if not puuid:
         raise HTTPException(status_code=404, detail="Joueur non trouvé sur le serveur Riot")
-    
+
     # Sauvegarder les masteries
     raw_masteries = fetch_masteries_from_riot(puuid)
-    
+
     masteries_data[riot_id] = {
         "puuid": puuid,
         "masteries": transform_masteries(raw_masteries),
-        "updated_at": int(time.time())
+        "updated_at": int(time.time()),
     }
     save_json(MASTERIES_FILE, masteries_data)
-    
+
     return {
         "message": "Joueur ajouté avec succès",
         "riot_id": riot_id,
         "puuid": puuid,
-        "masteries_count": len(masteries_data[riot_id]["masteries"])
+        "masteries_count": len(masteries_data[riot_id]["masteries"]),
     }
 
 
@@ -417,15 +420,17 @@ async def add_player(game_name: str, tag_line: str):
 async def list_players():
     """Liste tous les joueurs enregistrés"""
     masteries_data = load_json(MASTERIES_FILE)
-    
+
     players = []
     for riot_id, data in masteries_data.items():
-        players.append({
-            "riot_id": riot_id,
-            "masteries_count": len(data.get("masteries", [])),
-            "updated_at": data.get("updated_at")
-        })
-    
+        players.append(
+            {
+                "riot_id": riot_id,
+                "masteries_count": len(data.get("masteries", [])),
+                "updated_at": data.get("updated_at"),
+            }
+        )
+
     return {"players": players, "total": len(players)}
 
 
@@ -433,18 +438,15 @@ async def list_players():
 async def meta_tierlist(role: Optional[str] = None):
     """
     Retourne la tierlist de la méta actuelle
-    
+
     - role: Filtrer par rôle (top, jng, mid, bot, sup)
     """
     tierlist = get_meta_tierlist(role=role)
-    
+
     if not tierlist:
         raise HTTPException(status_code=503, detail="Dataset non disponible")
-    
-    return {
-        "role_filter": role,
-        "tierlist": tierlist
-    }
+
+    return {"role_filter": role, "tierlist": tierlist}
 
 
 @app.get("/meta/champion/{champion}")
@@ -453,32 +455,30 @@ async def meta_champion_stats(champion: str, role: str = "mid"):
     Retourne les stats d'un champion depuis Lolalytics
     """
     from api.lolalytics_scraper import get_champion_stats
-    
+
     stats = get_champion_stats(champion, role)
-    
+
     if not stats or stats.get("games", 0) == 0:
-        raise HTTPException(status_code=404, detail=f"Champion '{champion}' non trouvé dans la méta")
-    
-    return {
-        "champion": champion,
-        "role": role,
-        "stats": stats
-    }
+        raise HTTPException(
+            status_code=404, detail=f"Champion '{champion}' non trouvé dans la méta"
+        )
+
+    return {"champion": champion, "role": role, "stats": stats}
 
 
 # ============================================
 # Lolalytics Stats - Matchups et Counters
 # ============================================
-from api.lolalytics_scraper import get_champion_stats
+
 
 @app.get("/lolalytics/{champion}/{role}")
 async def lolalytics_champion_stats(champion: str, role: str):
     """
     Récupère les stats d'un champion depuis Lolalytics
-    
+
     - champion: Nom du champion (ex: "Yone", "LeeSin")
     - role: Rôle (top, jng, mid, bot, sup)
-    
+
     Returns:
         - counters: Champions contre lesquels on est fort (WR >= 52%)
         - weak_against: Champions contre lesquels on est faible (WR <= 48%)
@@ -487,14 +487,10 @@ async def lolalytics_champion_stats(champion: str, role: str):
     """
     try:
         stats = get_champion_stats(champion, role)
-        
+
         if not stats or stats.get("games", 0) == 0:
             raise HTTPException(status_code=404, detail=f"Pas de données pour {champion} {role}")
-        
-        return {
-            "champion": champion,
-            "role": role,
-            "stats": stats
-        }
+
+        return {"champion": champion, "role": role, "stats": stats}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
