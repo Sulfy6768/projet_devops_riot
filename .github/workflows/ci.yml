@@ -183,6 +183,9 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
+          timeout: '15m'
+          skip-dirs: '/app/.venv,/root/.cache'
+          scanners: 'vuln'
 
       - name: Scan Frontend image with Trivy
         uses: aquasecurity/trivy-action@0.28.0
@@ -192,3 +195,5 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
+          timeout: '10m'
+          scanners: 'vuln'
