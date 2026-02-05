@@ -93,17 +93,18 @@
               <button class="remove-btn" @click.stop="removeChampion('blue', index)">×</button>
             </div>
             <div v-else class="empty-slot" @click="selectSlot('blue', index)">
-              <!-- Recommendations based on masteries -->
+              <!-- Recommendations based on meta + masteries -->
               <div v-if="slot.recommendations.length > 0" class="recommendations-mini">
                 <div 
                   v-for="(rec, recIndex) in slot.recommendations" 
                   :key="`blue-${index}-${recIndex}-${rec.champion_name}`"
                   class="rec-mini"
-                  :class="getMasteryClass(rec.champion_level)"
+                  :class="[getMasteryClass(rec.champion_level), getTierClass(rec.tier)]"
                   @click.stop="quickPick('blue', index, rec.champion_name)"
-                  :title="`${rec.champion_name} - M${rec.champion_level}`"
+                  :title="getRecTooltip(rec)"
                 >
                   <img :src="rec.image" :alt="rec.champion_name" />
+                  <span v-if="rec.tier" class="tier-badge" :class="'tier-' + rec.tier">{{ rec.tier }}</span>
                 </div>
               </div>
               <span v-else class="slot-placeholder">Cliquez pour pick</span>
@@ -178,11 +179,12 @@
                   v-for="(rec, recIndex) in slot.recommendations" 
                   :key="`red-${index}-${recIndex}-${rec.champion_name}`"
                   class="rec-mini"
-                  :class="getMasteryClass(rec.champion_level)"
+                  :class="[getMasteryClass(rec.champion_level), getTierClass(rec.tier)]"
                   @click.stop="quickPick('red', index, rec.champion_name)"
-                  :title="`${rec.champion_name} - M${rec.champion_level}`"
+                  :title="getRecTooltip(rec)"
                 >
                   <img :src="rec.image" :alt="rec.champion_name" />
+                  <span v-if="rec.tier" class="tier-badge" :class="'tier-' + rec.tier">{{ rec.tier }}</span>
                 </div>
               </div>
               <span v-else class="slot-placeholder">Cliquez pour pick</span>
@@ -227,6 +229,10 @@ interface RecommendationItem {
   champion_name: string
   champion_level: number
   image: string
+  winrate?: number
+  tier?: string
+  score?: number
+  reason?: string
 }
 
 interface PlayerSlot {
@@ -484,60 +490,133 @@ async function loadPlayerMasteries(team: 'blue' | 'red', index: number) {
   slot.masteries = []
   slot.recommendations = []
   
+  const role = getRoleKey(index) // top, jng, mid, bot, sup
+  
   try {
+    // D'abord charger les masteries pour le champion pool via lookup (pas besoin d'être enregistré)
     const parts = slot.riotId.split('#')
     const gameName = parts[0] || ''
     const tagLine = parts[1] || ''
     if (!gameName || !tagLine) return
     
-    const response = await fetch(`${API_URL}/masteries/lookup/${encodeURIComponent(gameName)}/${encodeURIComponent(tagLine)}?limit=50`)
+    const masteryResponse = await fetch(`${API_URL}/masteries/lookup/${encodeURIComponent(gameName)}/${encodeURIComponent(tagLine)}?limit=50`)
     
-    if (response.ok) {
-      const data = await response.json()
-      slot.masteries = data.masteries || []
-      // Calculate recommendations once after loading
-      updateSlotRecommendations(slot)
+    if (masteryResponse.ok) {
+      const masteryData = await masteryResponse.json()
+      slot.masteries = masteryData.masteries || []
+      
+      // Auto-ajouter le joueur à la BDD pour les futures recommandations
+      fetch(`${API_URL}/players/add/${encodeURIComponent(gameName)}/${encodeURIComponent(tagLine)}`, { method: 'POST' })
+        .catch(() => {}) // Ignorer les erreurs silencieusement
+    }
+    
+    // Construire les paramètres pour les recommandations
+    const enemyTeamSlots = team === 'blue' ? redSlots.value : blueSlots.value
+    const allyTeamSlots = team === 'blue' ? blueSlots.value : redSlots.value
+    
+    // Champions ennemis déjà pickés
+    const enemyChampions = enemyTeamSlots
+      .filter(s => s.champion)
+      .map(s => s.champion!.name)
+    
+    // Champions alliés déjà pickés (exclure le slot actuel)
+    const allyChampions = allyTeamSlots
+      .filter((s, i) => s.champion && i !== index)
+      .map(s => s.champion!.name)
+    
+    // Champions bannis
+    const bannedChampions = [...blueBans.value, ...redBans.value]
+      .filter(b => b)
+      .map(b => b!.name)
+    
+    // Déterminer le mode: counter si ennemis, sinon blind
+    const mode = enemyChampions.length > 0 ? 'counter' : 'balanced'
+    
+    // Construire l'URL avec les paramètres
+    let recUrl = `${API_URL}/recommend/${encodeURIComponent(slot.riotId)}?role=${role}&top_n=4&min_pickrate=0.5&mode=${mode}`
+    
+    if (enemyChampions.length > 0) {
+      recUrl += `&enemy_champions=${encodeURIComponent(enemyChampions.join(','))}`
+    }
+    if (allyChampions.length > 0) {
+      recUrl += `&ally_champions=${encodeURIComponent(allyChampions.join(','))}`
+    }
+    if (bannedChampions.length > 0) {
+      recUrl += `&banned_champions=${encodeURIComponent(bannedChampions.join(','))}`
+    }
+    
+    const recResponse = await fetch(recUrl)
+    
+    if (recResponse.ok) {
+      const recData = await recResponse.json()
+      const roleRecs = recData.recommendations?.[role] || []
+      
+      // Mapper les recommandations avec les images
+      slot.recommendations = roleRecs
+        .filter((rec: any) => {
+          const champ = champions.value.find(c => c.name.toLowerCase() === rec.champion.toLowerCase())
+          return champ && !isChampionUnavailable(champ.id)
+        })
+        .slice(0, 4)
+        .map((rec: any) => {
+          const fileName = rec.champion.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/\./g, '')
+          return {
+            champion_name: rec.champion,
+            champion_level: rec.mastery_level || 0,
+            image: `/champ_img/${fileName}.png`,
+            winrate: rec.winrate,
+            tier: rec.tier,
+            score: rec.score,
+            reason: rec.reason,
+            counter_score: rec.counter_score
+          }
+        })
+    } else {
+      // Pas de recommandations disponibles - ne pas faire de fallback sur les masteries
+      slot.recommendations = []
     }
   } catch (error) {
-    console.error('Error loading masteries:', error)
+    console.error('Error loading recommendations:', error)
+    // En cas d'erreur, ne pas faire de fallback sur les masteries
+    slot.recommendations = []
   } finally {
     slot.loading = false
   }
 }
 
-function updateSlotRecommendations(slot: PlayerSlot) {
-  if (slot.masteries.length === 0) {
-    slot.recommendations = []
-    return
-  }
-  
-  // Filter champions that are not already picked/banned
-  const available = slot.masteries.filter(m => {
-    const champ = champions.value.find(c => c.name.toLowerCase() === m.champion_name.toLowerCase())
-    return champ && !isChampionUnavailable(champ.id)
-  })
-  
-  // Sort by mastery level then points, then map to RecommendationItem with pre-computed image
-  slot.recommendations = available
-    .sort((a, b) => {
-      if (b.champion_level !== a.champion_level) return b.champion_level - a.champion_level
-      return b.champion_points - a.champion_points
-    })
-    .slice(0, 4)
-    .map(m => {
-      // Convert champion name to file format (lowercase, spaces -> underscore)
-      const fileName = m.champion_name.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/\./g, '')
-      return {
-        champion_name: m.champion_name,
-        champion_level: m.champion_level,
-        image: `/champ_img/${fileName}.png`
-      }
-    })
+function getRoleKey(index: number): string {
+  const roles = ['top', 'jng', 'mid', 'bot', 'sup']
+  return roles[index] || 'top'
 }
 
-function updateAllRecommendations() {
-  blueSlots.value.forEach(slot => updateSlotRecommendations(slot))
-  redSlots.value.forEach(slot => updateSlotRecommendations(slot))
+function updateSlotRecommendations(slot: PlayerSlot) {
+  // Ne plus faire de fallback sur les masteries pures
+  // Les recommandations viennent uniquement de l'API avec les stats Lolalytics
+  // Cette fonction est maintenant utilisée uniquement pour vider les recommendations si besoin
+  slot.recommendations = []
+}
+
+async function updateAllRecommendations() {
+  // Recharger les recommandations pour tous les slots qui ont un riotId
+  // Cela prend en compte le nouveau contexte du draft
+  const slotsToUpdate: Array<{ team: 'blue' | 'red', index: number }> = []
+  
+  blueSlots.value.forEach((slot, index) => {
+    if (slot.riotId && slot.riotId.includes('#') && !slot.champion) {
+      slotsToUpdate.push({ team: 'blue', index })
+    }
+  })
+  
+  redSlots.value.forEach((slot, index) => {
+    if (slot.riotId && slot.riotId.includes('#') && !slot.champion) {
+      slotsToUpdate.push({ team: 'red', index })
+    }
+  })
+  
+  // Mettre à jour en parallèle
+  await Promise.all(
+    slotsToUpdate.map(({ team, index }) => loadPlayerMasteries(team, index))
+  )
 }
 
 function currentSlotHasMastery(championName: string): boolean {
@@ -559,6 +638,20 @@ function getMasteryClass(level: number): string {
   if (level >= 6) return 'm6'
   if (level >= 5) return 'm5'
   return 'mlow'
+}
+
+function getTierClass(tier?: string): string {
+  if (!tier) return ''
+  return 'tier-' + tier.toLowerCase()
+}
+
+function getRecTooltip(rec: RecommendationItem): string {
+  let tooltip = rec.champion_name
+  if (rec.tier) tooltip += ` | Tier ${rec.tier}`
+  if (rec.winrate) tooltip += ` | ${rec.winrate}% WR`
+  if (rec.champion_level > 0) tooltip += ` | M${rec.champion_level}`
+  if (rec.reason) tooltip += `\n${rec.reason}`
+  return tooltip
 }
 
 function getRoleName(index: number): string {
@@ -864,6 +957,32 @@ function handleImageError(event: Event) {
 .rec-mini.m6 { border-color: #e74c3c; }
 .rec-mini.m5 { border-color: #f39c12; }
 .rec-mini.mlow { border-color: #555; }
+
+/* Tier styling */
+.rec-mini.tier-s { box-shadow: 0 0 8px rgba(255, 215, 0, 0.7); }
+.rec-mini.tier-a { box-shadow: 0 0 6px rgba(0, 191, 255, 0.6); }
+.rec-mini.tier-b { box-shadow: 0 0 4px rgba(50, 205, 50, 0.5); }
+
+.rec-mini {
+  position: relative;
+}
+
+.tier-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 1px 3px;
+  border-radius: 3px 0 0 0;
+  background: rgba(0,0,0,0.8);
+}
+
+.tier-badge.tier-S { color: #ffd700; }
+.tier-badge.tier-A { color: #00bfff; }
+.tier-badge.tier-B { color: #32cd32; }
+.tier-badge.tier-C { color: #888; }
+.tier-badge.tier-D { color: #666; }
 
 .rec-mini img {
   width: 100%;

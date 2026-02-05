@@ -15,7 +15,11 @@ services:
       - RIOT_REGION=${RIOT_REGION:-euw1}
     volumes:
       - ./drafts_data.json:/app/drafts_data.json:ro
+      - ./riot/public/master_dataset.csv:/app/data/master_dataset.csv:ro
       - api_data:/app/data
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 30s
