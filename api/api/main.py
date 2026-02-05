@@ -112,7 +112,7 @@ def get_draft_predictor():
 
             _draft_predictor = DraftPredictor(
                 model_path="/app/mlflow/best_draft_model.pth",
-                encoders_path="/app/mlflow/draft_encoders.json"
+                encoders_path="/app/mlflow/draft_encoders.json",
             )
             print("✅ Draft Transformer model loaded!")
         except Exception as e:
@@ -417,9 +417,7 @@ async def register(user: UserRegister):
 
     # Parser le Riot ID
     if "#" not in user.riot_id:
-        raise HTTPException(
-            status_code=400, detail="Format invalide. Utilisez: GameName#TagLine"
-        )
+        raise HTTPException(status_code=400, detail="Format invalide. Utilisez: GameName#TagLine")
 
     game_name, tag_line = user.riot_id.rsplit("#", 1)
 
@@ -479,9 +477,7 @@ async def update_user_masteries(riot_id: str, puuid: str):
         masteries.append(
             {
                 "champion_id": champion_id,
-                "champion_name": CHAMPION_NAMES.get(
-                    champion_id, f"Champion_{champion_id}"
-                ),
+                "champion_name": CHAMPION_NAMES.get(champion_id, f"Champion_{champion_id}"),
                 "champion_level": m.get("championLevel", 0),
                 "champion_points": m.get("championPoints", 0),
                 "last_play_time": m.get("lastPlayTime"),
@@ -518,9 +514,7 @@ async def get_top_masteries(riot_id: str, limit: int = 10):
 
     masteries = masteries_data[riot_id].get("masteries", [])
     # Trier par points décroissants
-    sorted_masteries = sorted(
-        masteries, key=lambda x: x["champion_points"], reverse=True
-    )
+    sorted_masteries = sorted(masteries, key=lambda x: x["champion_points"], reverse=True)
 
     return {"masteries": sorted_masteries[:limit]}
 
@@ -577,9 +571,7 @@ async def lookup_masteries(game_name: str, tag_line: str, limit: int = 50):
         masteries.append(
             {
                 "champion_id": champion_id,
-                "champion_name": CHAMPION_NAMES.get(
-                    champion_id, f"Champion_{champion_id}"
-                ),
+                "champion_name": CHAMPION_NAMES.get(champion_id, f"Champion_{champion_id}"),
                 "champion_level": m.get("championLevel", 0),
                 "champion_points": m.get("championPoints", 0),
             }
@@ -831,9 +823,7 @@ async def analyze_draft(request: DraftAnalysisRequest):
 
         # Exclure les bans et les picks déjà pris
         excluded = set(
-            request.banned_champions
-            + request.picked_champions
-            + request.enemy_champions
+            request.banned_champions + request.picked_champions + request.enemy_champions
         )
         available_champions = role_champions - excluded
 
@@ -937,9 +927,7 @@ async def predict_draft_winrate(request: DraftPredictionRequest):
             "blue_winrate": blue_winrate,
             "red_winrate": red_winrate,
             "confidence": (
-                "high"
-                if len(draft["blue_picks"]) >= 3 and len(draft["red_picks"]) >= 3
-                else "low"
+                "high" if len(draft["blue_picks"]) >= 3 and len(draft["red_picks"]) >= 3 else "low"
             ),
         }
 
@@ -953,9 +941,7 @@ async def predict_draft_winrate(request: DraftPredictionRequest):
 
 
 @app.post("/draft/suggest")
-async def suggest_champion(
-    request: DraftPredictionRequest, step: int = 0, top_k: int = 5
-):
+async def suggest_champion(request: DraftPredictionRequest, step: int = 0, top_k: int = 5):
     """
     Suggère les meilleurs champions pour une étape de la draft.
 
