@@ -9,13 +9,6 @@ global:
 rule_files:
   - "alerts.yml"
 
-# Configuration Alertmanager (optionnel)
-# alerting:
-#   alertmanagers:
-#     - static_configs:
-#         - targets:
-#           - alertmanager:9093
-
 # Configuration des cibles de scraping
 scrape_configs:
   # Prometheus lui-même
