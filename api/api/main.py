@@ -833,6 +833,7 @@ async def analyze_draft(request: DraftAnalysisRequest):
 # Recommandations basées sur Méta + Masteries + Counters
 # ============================================
 
+
 @app.get("/recommend/{riot_id}")
 async def recommend_champions(
     riot_id: str,
@@ -1017,6 +1018,7 @@ async def meta_champion_stats(champion: str, role: str = "mid"):
 # ============================================
 # Lolalytics Stats - Matchups et Counters
 # ============================================
+
 
 @app.get("/lolalytics/{champion}/{role}")
 async def lolalytics_champion_stats(champion: str, role: str):
