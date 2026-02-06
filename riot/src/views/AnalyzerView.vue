@@ -240,6 +240,17 @@ interface RecommendationItem {
   tier?: string
   score?: number
   reason?: string
+  counter_score?: number
+}
+
+interface ApiRecommendation {
+  champion: string
+  mastery_level?: number
+  winrate?: number
+  tier?: string
+  score?: number
+  reason?: string
+  counter_score?: number
 }
 
 interface PlayerSlot {
@@ -662,12 +673,12 @@ async function loadPlayerMasteries(team: 'blue' | 'red', index: number) {
       
       // Mapper les recommandations avec les images
       slot.recommendations = roleRecs
-        .filter((rec: any) => {
+        .filter((rec: ApiRecommendation) => {
           const champ = champions.value.find(c => c.name.toLowerCase() === rec.champion.toLowerCase())
           return champ && !isChampionUnavailable(champ.id)
         })
         .slice(0, 4)
-        .map((rec: any) => {
+        .map((rec: ApiRecommendation) => {
           const fileName = rec.champion.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/\./g, '')
           return {
             champion_name: rec.champion,
@@ -696,13 +707,6 @@ async function loadPlayerMasteries(team: 'blue' | 'red', index: number) {
 function getRoleKey(index: number): string {
   const roles = ['top', 'jng', 'mid', 'bot', 'sup']
   return roles[index] || 'top'
-}
-
-function updateSlotRecommendations(slot: PlayerSlot) {
-  // Ne plus faire de fallback sur les masteries pures
-  // Les recommandations viennent uniquement de l'API avec les stats Lolalytics
-  // Cette fonction est maintenant utilisée uniquement pour vider les recommendations si besoin
-  slot.recommendations = []
 }
 
 async function updateAllRecommendations() {
