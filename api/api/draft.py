@@ -6,9 +6,9 @@ import time
 
 from fastapi import APIRouter, HTTPException
 from prometheus_client import Counter, Histogram
-from pydantic import BaseModel
 
-from .champions import CHAMPION_ID_TO_NAME
+from .champions import CHAMPION_ID_TO_NAME, CHAMPIONS_BY_ROLE
+from .models import DraftAnalyzeRequest, DraftPredictionRequest
 
 router = APIRouter(prefix="/draft", tags=["draft"])
 
@@ -26,28 +26,6 @@ DRAFT_PREDICTION_LATENCY = Histogram(
     "Latency of draft predictions",
     buckets=[0.01, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0],
 )
-
-# ============================================
-# Models
-# ============================================
-
-
-class DraftPredictionRequest(BaseModel):
-    """Request for draft winrate prediction."""
-
-    blue_bans: list[str] = []
-    red_bans: list[str] = []
-    blue_picks: list[str] = []  # Format: ["Champion.position", ...]
-    red_picks: list[str] = []  # Format: ["Champion.position", ...]
-
-
-class DraftAnalysisRequest(BaseModel):
-    """Request for draft analysis with player masteries."""
-
-    players: list[dict]  # [{"riot_id": "Name#TAG", "role": "TOP"}, ...]
-    banned_champions: list[str] = []
-    picked_champions: list[str] = []
-    enemy_champions: list[str] = []
 
 
 # ============================================
@@ -84,198 +62,6 @@ def parse_pick(p: str) -> tuple:
         parts = p.rsplit(".", 1)
         return (parts[0], parts[1])
     return (p, "mid")  # fallback position
-
-
-# ============================================
-# Champions by role
-# ============================================
-
-ROLES = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
-
-CHAMPIONS_BY_ROLE = {
-    "TOP": [
-        "Aatrox",
-        "Camille",
-        "Darius",
-        "Fiora",
-        "Gangplank",
-        "Garen",
-        "Gnar",
-        "Gwen",
-        "Illaoi",
-        "Irelia",
-        "Jax",
-        "Jayce",
-        "KSante",
-        "Kayle",
-        "Kennen",
-        "Kled",
-        "Malphite",
-        "Mordekaiser",
-        "Nasus",
-        "Olaf",
-        "Ornn",
-        "Pantheon",
-        "Poppy",
-        "Quinn",
-        "Renekton",
-        "Riven",
-        "Rumble",
-        "Sett",
-        "Shen",
-        "Singed",
-        "Sion",
-        "Teemo",
-        "Trundle",
-        "Tryndamere",
-        "Urgot",
-        "Vayne",
-        "Volibear",
-        "Yorick",
-    ],
-    "JUNGLE": [
-        "Amumu",
-        "BelVeth",
-        "Briar",
-        "Diana",
-        "Ekko",
-        "Elise",
-        "Evelynn",
-        "Fiddlesticks",
-        "Gragas",
-        "Graves",
-        "Hecarim",
-        "Ivern",
-        "JarvanIV",
-        "Karthus",
-        "Kayn",
-        "KhaZix",
-        "Kindred",
-        "LeeSin",
-        "Lillia",
-        "MasterYi",
-        "Naafiri",
-        "Nidalee",
-        "Nocturne",
-        "Nunu",
-        "Olaf",
-        "Poppy",
-        "Rammus",
-        "RekSai",
-        "Rengar",
-        "Sejuani",
-        "Shaco",
-        "Shyvana",
-        "Skarner",
-        "Taliyah",
-        "Udyr",
-        "Vi",
-        "Viego",
-        "Volibear",
-        "Warwick",
-        "MonkeyKing",
-        "XinZhao",
-        "Zac",
-    ],
-    "MIDDLE": [
-        "Ahri",
-        "Akali",
-        "Akshan",
-        "Anivia",
-        "Annie",
-        "AurelionSol",
-        "Azir",
-        "Brand",
-        "Cassiopeia",
-        "Corki",
-        "Diana",
-        "Ekko",
-        "Fizz",
-        "Galio",
-        "Hwei",
-        "Irelia",
-        "Kassadin",
-        "Katarina",
-        "LeBlanc",
-        "Lissandra",
-        "Lux",
-        "Malzahar",
-        "Naafiri",
-        "Neeko",
-        "Orianna",
-        "Pantheon",
-        "Qiyana",
-        "Ryze",
-        "Sylas",
-        "Syndra",
-        "Talon",
-        "TwistedFate",
-        "Veigar",
-        "Vex",
-        "Viktor",
-        "Vladimir",
-        "Xerath",
-        "Yasuo",
-        "Yone",
-        "Zed",
-        "Ziggs",
-        "Zoe",
-    ],
-    "BOTTOM": [
-        "Aphelios",
-        "Ashe",
-        "Caitlyn",
-        "Draven",
-        "Ezreal",
-        "Jhin",
-        "Jinx",
-        "KaiSa",
-        "Kalista",
-        "KogMaw",
-        "Lucian",
-        "MissFortune",
-        "Nilah",
-        "Samira",
-        "Senna",
-        "Sivir",
-        "Smolder",
-        "Tristana",
-        "Twitch",
-        "Varus",
-        "Vayne",
-        "Xayah",
-        "Zeri",
-    ],
-    "UTILITY": [
-        "Alistar",
-        "Bard",
-        "Blitzcrank",
-        "Braum",
-        "Janna",
-        "Karma",
-        "Leona",
-        "Lulu",
-        "Lux",
-        "Milio",
-        "Morgana",
-        "Nami",
-        "Nautilus",
-        "Pyke",
-        "Rakan",
-        "Rell",
-        "Renata",
-        "Senna",
-        "Seraphine",
-        "Sona",
-        "Soraka",
-        "TahmKench",
-        "Taric",
-        "Thresh",
-        "Yuumi",
-        "Zilean",
-        "Zyra",
-    ],
-}
 
 
 # ============================================
@@ -362,7 +148,7 @@ async def suggest_champion(request: DraftPredictionRequest, step: int = 0, top_k
 
 
 @router.post("/analyze")
-async def analyze_draft(request: DraftAnalysisRequest):
+async def analyze_draft(request: DraftAnalyzeRequest):
     """Analyze a draft and recommend champions based on player masteries."""
     from .riot_api import fetch_masteries_from_riot, get_puuid_from_riot_id
 
