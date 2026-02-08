@@ -51,6 +51,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import draftsData from '../../drafts_data.json'
+import { getChampionImagePath } from '../utils/championLoader'
 
 interface Champion {
   championId: number
@@ -95,7 +96,7 @@ const ALL_CHAMPIONS = [
   'Ivern', 'Janna', 'JarvanIV', 'Jax', 'Jayce', 'Jhin', 'Jinx', 'KaiSa', 'Kalista', 'Karma',
   'Karthus', 'Kassadin', 'Katarina', 'Kayle', 'Kayn', 'Kennen', 'KhaZix', 'Kindred', 'Kled',
   'KogMaw', 'KSante', 'LeBlanc', 'LeeSin', 'Leona', 'Lillia', 'Lissandra', 'Lucian', 'Lulu', 'Lux',
-  'Malphite', 'Malzahar', 'Maokai', 'MasterYi', 'Mel', 'Milio', 'MissFortune', 'MonkeyKing', 'Mordekaiser', 'Morgana',
+  'Malphite', 'Malzahar', 'Maokai', 'MasterYi', 'Mel', 'Milio', 'MissFortune', 'Mordekaiser', 'Morgana',
   'Naafiri', 'Nami', 'Nasus', 'Nautilus', 'Neeko', 'Nidalee', 'Nilah', 'Nocturne', 'Nunu', 'Olaf',
   'Orianna', 'Ornn', 'Pantheon', 'Poppy', 'Pyke', 'Qiyana', 'Quinn', 'Rakan', 'Rammus', 'RekSai',
   'Rell', 'Renata', 'Renekton', 'Rengar', 'Riven', 'Rumble', 'Ryze', 'Samira', 'Sejuani', 'Senna',
@@ -103,7 +104,7 @@ const ALL_CHAMPIONS = [
   'Sona', 'Soraka', 'Swain', 'Sylas', 'Syndra', 'TahmKench', 'Taliyah', 'Talon', 'Taric', 'Teemo',
   'Thresh', 'Tristana', 'Trundle', 'Tryndamere', 'TwistedFate', 'Twitch', 'Udyr', 'Urgot', 'Varus',
   'Vayne', 'Veigar', 'VelKoz', 'Vex', 'Vi', 'Viego', 'Viktor', 'Vladimir', 'Volibear', 'Warwick',
-  'Wukong', 'Xayah', 'Xerath', 'XinZhao', 'Yasuo', 'Yone', 'Yorick', 'Yuumi', 'Zac','Zaahen', 'Zed',
+  'Wukong', 'Xayah', 'Xerath', 'XinZhao', 'Yasuo', 'Yone', 'Yorick', 'Yuumi', 'Yunara', 'Zac', 'Zed',
   'Zeri', 'Ziggs', 'Zilean', 'Zoe', 'Zyra'
 ]
 
@@ -196,9 +197,7 @@ function getWinRateClass(winRate: number): string {
 }
 
 function getChampionImage(name: string): string {
-  // Convertir le nom en format fichier (minuscules, espaces -> underscore)
-  const fileName = name.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/\./g, '')
-  return `/champ_img/${fileName}.png`
+  return getChampionImagePath(name)
 }
 
 function onImageError(event: Event) {

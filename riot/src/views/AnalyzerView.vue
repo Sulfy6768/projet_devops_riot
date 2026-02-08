@@ -214,7 +214,7 @@
 
 <script setup lang="ts">
 import { computed, ref, onMounted, watch } from 'vue'
-import { loadChampionsSync } from '../utils/championLoader'
+import { loadChampionsSync, normalizeChampionName, getChampionImagePath } from '../utils/championLoader'
 
 interface Champion {
   id: string
@@ -674,16 +674,17 @@ async function loadPlayerMasteries(team: 'blue' | 'red', index: number) {
       // Mapper les recommandations avec les images
       slot.recommendations = roleRecs
         .filter((rec: ApiRecommendation) => {
-          const champ = champions.value.find(c => c.name.toLowerCase() === rec.champion.toLowerCase())
+          const normalizedName = normalizeChampionName(rec.champion)
+          const champ = champions.value.find(c => c.name.toLowerCase() === normalizedName.toLowerCase())
           return champ && !isChampionUnavailable(champ.id)
         })
         .slice(0, 4)
         .map((rec: ApiRecommendation) => {
-          const fileName = rec.champion.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/\./g, '')
+          const displayName = normalizeChampionName(rec.champion)
           return {
-            champion_name: rec.champion,
+            champion_name: displayName,
             champion_level: rec.mastery_level || 0,
-            image: `/champ_img/${fileName}.png`,
+            image: getChampionImagePath(rec.champion),
             winrate: rec.winrate,
             tier: rec.tier,
             score: rec.score,

@@ -34,6 +34,33 @@ const ROLE_MAP: Record<string, string> = {
 }
 
 /**
+ * Mapping from Riot API champion names to display/image names.
+ * Keys are lowercase for case-insensitive matching.
+ */
+export const CHAMPION_NAME_MAPPING: Record<string, string> = {
+  'monkeyking': 'Wukong',
+}
+
+/**
+ * Normalize a champion name from API format to display/image format.
+ * Handles special cases like MonkeyKing -> Wukong.
+ */
+export function normalizeChampionName(name: string): string {
+  const lowercaseName = name.toLowerCase()
+  return CHAMPION_NAME_MAPPING[lowercaseName] || name
+}
+
+/**
+ * Get the image filename for a champion.
+ * Handles special cases and returns the correct filename.
+ */
+export function getChampionImagePath(championName: string): string {
+  const normalized = normalizeChampionName(championName)
+  const fileName = normalized.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/\./g, '')
+  return `/champ_img/${fileName}.png`
+}
+
+/**
  * Convert file name to champion name
  * e.g., "ahri.png" -> "Ahri", "miss_fortune.png" -> "MissFortune"
  */
@@ -136,7 +163,7 @@ export function loadChampionsSync(): Champion[] {
     'Ivern', 'Janna', 'JarvanIV', 'Jax', 'Jayce', 'Jhin', 'Jinx', 'KaiSa', 'Kalista', 'Karma',
     'Karthus', 'Kassadin', 'Katarina', 'Kayle', 'Kayn', 'Kennen', 'KhaZix', 'Kindred', 'Kled',
     'KogMaw', 'KSante', 'LeBlanc', 'LeeSin', 'Leona', 'Lillia', 'Lissandra', 'Lucian', 'Lulu', 'Lux',
-    'Malphite', 'Malzahar', 'Maokai', 'MasterYi', 'Mel', 'Milio', 'MissFortune', 'MonkeyKing', 'Mordekaiser', 'Morgana',
+    'Malphite', 'Malzahar', 'Maokai', 'MasterYi', 'Mel', 'Milio', 'MissFortune', 'Mordekaiser', 'Morgana',
     'Naafiri', 'Nami', 'Nasus', 'Nautilus', 'Neeko', 'Nidalee', 'Nilah', 'Nocturne', 'Nunu', 'Olaf',
     'Orianna', 'Ornn', 'Pantheon', 'Poppy', 'Pyke', 'Qiyana', 'Quinn', 'Rakan', 'Rammus', 'RekSai',
     'Rell', 'Renata', 'Renekton', 'Rengar', 'Riven', 'Rumble', 'Ryze', 'Samira', 'Sejuani', 'Senna',
@@ -144,8 +171,8 @@ export function loadChampionsSync(): Champion[] {
     'Sona', 'Soraka', 'Swain', 'Sylas', 'Syndra', 'TahmKench', 'Taliyah', 'Talon', 'Taric', 'Teemo',
     'Thresh', 'Tristana', 'Trundle', 'Tryndamere', 'TwistedFate', 'Twitch', 'Udyr', 'Urgot', 'Varus',
     'Vayne', 'Veigar', 'VelKoz', 'Vex', 'Vi', 'Viego', 'Viktor', 'Vladimir', 'Volibear', 'Warwick',
-    'Wukong', 'Xayah', 'Xerath', 'XinZhao', 'Yasuo', 'Yone', 'Yorick', 'Yuumi', 'Zac', 'Zaahen', 'Zed',
-    'Zeri', 'Ziggs', 'Zilean', 'Zoe', 'Zyra'
+    'Wukong', 'Xayah', 'Xerath', 'XinZhao', 'Yasuo', 'Yone', 'Yorick', 'Yuumi', 'Yunara', 'Zac', 'Zaahen',
+    'Zed', 'Zeri', 'Ziggs', 'Zilean', 'Zoe', 'Zyra'
   ]
 
   return championNames.map(champName => {

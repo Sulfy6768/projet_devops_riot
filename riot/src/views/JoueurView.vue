@@ -167,6 +167,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { getChampionImagePath } from '../utils/championLoader'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
@@ -310,8 +311,7 @@ function isSearchedPlayer(player: Champion): boolean {
 }
 
 function getChampionImage(name: string): string {
-  const fileName = name.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/\./g, '')
-  return `/champ_img/${fileName}.png`
+  return getChampionImagePath(name)
 }
 
 function onImageError(event: Event) {

@@ -70,6 +70,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useUserStore } from '../stores/user'
+import { getChampionImagePath } from '../utils/championLoader'
 
 interface Mastery {
   champion_id: number
@@ -151,8 +152,7 @@ async function refreshMasteries() {
 }
 
 function getChampionImage(name: string): string {
-  const fileName = name.toLowerCase().replace(/\s+/g, '_').replace(/'/g, '').replace(/\./g, '')
-  return `/champ_img/${fileName}.png`
+  return getChampionImagePath(name)
 }
 
 function onImageError(event: Event) {
