@@ -33,18 +33,10 @@ from .utils import (
 # Prometheus Business Metrics
 # ============================================
 
-USERS_REGISTERED = Counter(
-    "users_registered_total", "Total number of registered users"
-)
-PLAYERS_TRACKED = Gauge(
-    "players_tracked_total", "Number of unique players being tracked"
-)
-MASTERY_REFRESHES = Counter(
-    "mastery_refreshes_total", "Total mastery data refreshes"
-)
-RECOMMENDATIONS_SERVED = Counter(
-    "recommendations_served_total", "Total recommendations served"
-)
+USERS_REGISTERED = Counter("users_registered_total", "Total number of registered users")
+PLAYERS_TRACKED = Gauge("players_tracked_total", "Number of unique players being tracked")
+MASTERY_REFRESHES = Counter("mastery_refreshes_total", "Total mastery data refreshes")
+RECOMMENDATIONS_SERVED = Counter("recommendations_served_total", "Total recommendations served")
 
 # ============================================
 # Application
