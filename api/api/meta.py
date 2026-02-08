@@ -5,11 +5,17 @@ Meta statistics and Lolalytics routes.
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException
+from prometheus_client import Counter
 
 from .lolalytics_scraper import get_champion_stats
 from .recommender import get_meta_tierlist
 
 router = APIRouter(tags=["meta"])
+
+# Prometheus metrics
+CHAMPION_LOOKUPS = Counter(
+    "champion_lookups_total", "Champion lookups by name", ["champion", "role"]
+)
 
 
 @router.get("/meta/tierlist")
@@ -37,6 +43,9 @@ async def meta_champion_stats(champion: str, role: str = "mid"):
     if not stats or stats.get("games", 0) == 0:
         raise HTTPException(status_code=404, detail=f"Champion '{champion}' not found in meta")
 
+    # Track metric
+    CHAMPION_LOOKUPS.labels(champion=champion, role=role).inc()
+
     return {"champion": champion, "role": role, "stats": stats}
 
 
@@ -59,6 +68,9 @@ async def lolalytics_champion_stats(champion: str, role: str):
 
         if not stats or stats.get("games", 0) == 0:
             raise HTTPException(status_code=404, detail=f"No data for {champion} {role}")
+
+        # Track metric
+        CHAMPION_LOOKUPS.labels(champion=champion, role=role).inc()
 
         return {"champion": champion, "role": role, "stats": stats}
     except HTTPException:

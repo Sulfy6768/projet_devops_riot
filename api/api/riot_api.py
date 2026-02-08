@@ -6,9 +6,22 @@ import os
 from typing import Optional
 
 import requests
+from prometheus_client import Counter
 
 RIOT_API_KEY = os.getenv("RIOT_API_KEY", "")
 RIOT_REGION = os.getenv("RIOT_REGION", "euw1")
+
+# Prometheus metrics for Riot API errors
+RIOT_API_ERRORS = Counter(
+    "riot_api_errors_total",
+    "Riot API errors by status code",
+    ["endpoint", "status_code"],
+)
+RIOT_API_REQUESTS = Counter(
+    "riot_api_requests_total",
+    "Total Riot API requests by endpoint",
+    ["endpoint"],
+)
 
 # Region to routing mapping
 ROUTING_MAP = {
@@ -41,6 +54,9 @@ def get_puuid_from_riot_id(game_name: str, tag_line: str) -> Optional[str]:
     if not RIOT_API_KEY:
         return None
 
+    endpoint = "account/by-riot-id"
+    RIOT_API_REQUESTS.labels(endpoint=endpoint).inc()
+
     routing = get_routing(RIOT_REGION)
     url = f"https://{routing}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{game_name}/{tag_line}"
     headers = {"X-Riot-Token": RIOT_API_KEY}
@@ -49,7 +65,10 @@ def get_puuid_from_riot_id(game_name: str, tag_line: str) -> Optional[str]:
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code == 200:
             return response.json().get("puuid")
+        RIOT_API_ERRORS.labels(endpoint=endpoint, status_code=str(response.status_code)).inc()
+        print(f"Riot API error [{endpoint}]: {response.status_code} - {response.text[:200]}")
     except Exception as e:
+        RIOT_API_ERRORS.labels(endpoint=endpoint, status_code="exception").inc()
         print(f"Error getting PUUID: {e}")
     return None
 
@@ -59,6 +78,9 @@ def get_summoner_id_from_puuid(puuid: str) -> Optional[str]:
     if not RIOT_API_KEY:
         return None
 
+    endpoint = "summoner/by-puuid"
+    RIOT_API_REQUESTS.labels(endpoint=endpoint).inc()
+
     url = f"https://{RIOT_REGION}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
     headers = {"X-Riot-Token": RIOT_API_KEY}
 
@@ -66,7 +88,10 @@ def get_summoner_id_from_puuid(puuid: str) -> Optional[str]:
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code == 200:
             return response.json().get("id")
+        RIOT_API_ERRORS.labels(endpoint=endpoint, status_code=str(response.status_code)).inc()
+        print(f"Riot API error [{endpoint}]: {response.status_code}")
     except Exception as e:
+        RIOT_API_ERRORS.labels(endpoint=endpoint, status_code="exception").inc()
         print(f"Error getting Summoner ID: {e}")
     return None
 
@@ -76,6 +101,9 @@ def fetch_masteries_from_riot(puuid: str) -> list:
     if not RIOT_API_KEY:
         return []
 
+    endpoint = "champion-mastery/by-puuid"
+    RIOT_API_REQUESTS.labels(endpoint=endpoint).inc()
+
     url = f"https://{RIOT_REGION}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/{puuid}"
     headers = {"X-Riot-Token": RIOT_API_KEY}
 
@@ -83,7 +111,10 @@ def fetch_masteries_from_riot(puuid: str) -> list:
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code == 200:
             return response.json()
+        RIOT_API_ERRORS.labels(endpoint=endpoint, status_code=str(response.status_code)).inc()
+        print(f"Riot API error [{endpoint}]: {response.status_code}")
     except Exception as e:
+        RIOT_API_ERRORS.labels(endpoint=endpoint, status_code="exception").inc()
         print(f"Error fetching masteries: {e}")
     return []
 
@@ -97,6 +128,9 @@ def get_match_ids(puuid: str, count: int = 20) -> list:
     """Get recent ranked match IDs for a player."""
     if not RIOT_API_KEY:
         return []
+
+    endpoint = "match/by-puuid/ids"
+    RIOT_API_REQUESTS.labels(endpoint=endpoint).inc()
 
     routing = get_routing(RIOT_REGION)
     url = f"https://{routing}.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids"
@@ -112,8 +146,10 @@ def get_match_ids(puuid: str, count: int = 20) -> list:
         response = requests.get(url, headers=headers, params=params, timeout=10)
         if response.status_code == 200:
             return response.json()
-        print(f"Error getting match IDs: {response.status_code} - {response.text}")
+        RIOT_API_ERRORS.labels(endpoint=endpoint, status_code=str(response.status_code)).inc()
+        print(f"Riot API error [{endpoint}]: {response.status_code} - {response.text[:200]}")
     except Exception as e:
+        RIOT_API_ERRORS.labels(endpoint=endpoint, status_code="exception").inc()
         print(f"Error getting match IDs: {e}")
     return []
 
@@ -123,6 +159,9 @@ def get_match_details(match_id: str) -> Optional[dict]:
     if not RIOT_API_KEY:
         return None
 
+    endpoint = "match/details"
+    RIOT_API_REQUESTS.labels(endpoint=endpoint).inc()
+
     routing = get_routing(RIOT_REGION)
     url = f"https://{routing}.api.riotgames.com/lol/match/v5/matches/{match_id}"
     headers = {"X-Riot-Token": RIOT_API_KEY}
@@ -131,7 +170,10 @@ def get_match_details(match_id: str) -> Optional[dict]:
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code == 200:
             return response.json()
+        RIOT_API_ERRORS.labels(endpoint=endpoint, status_code=str(response.status_code)).inc()
+        print(f"Riot API error [{endpoint}]: {response.status_code}")
     except Exception as e:
+        RIOT_API_ERRORS.labels(endpoint=endpoint, status_code="exception").inc()
         print(f"Error getting match details: {e}")
     return None
 

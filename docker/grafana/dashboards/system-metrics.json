@@ -190,8 +190,7 @@
           "unit": "percent"
         },
         "overrides": [
-          { "matcher": { "id": "byName", "options": "GPU Usage" }, "properties": [{ "id": "color", "value": { "fixedColor": "purple", "mode": "fixed" } }] }
-        ]
+          { "matcher": { "id": "byName", "options": "GPU Usage" }, "properties": [{ "id": "color", "value": { "fixedColor": "purple", "mode": "fixed" } }] }        ]
       },
       "gridPos": { "h": 8, "w": 24, "x": 0, "y": 7 },
       "id": 5,
@@ -202,14 +201,106 @@
       "targets": [
         { "expr": "100 - (avg(rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)", "legendFormat": "CPU Usage", "refId": "A" },
         { "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100", "legendFormat": "RAM Usage", "refId": "B" },
-        { "expr": "nvidia_gpu_utilization_gpu", "legendFormat": "GPU Usage", "refId": "C" }
+        { "expr": "nvidia_gpu_utilization_gpu", "legendFormat": "GPU Usage", "refId": "C" },
+        { "expr": "nvidia_gpu_memory_used_bytes / nvidia_gpu_memory_total_bytes * 100", "legendFormat": "GPU Memory", "refId": "D" }
       ],
       "title": "Resource Usage Over Time",
       "type": "timeseries"
     },
     {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "Bps"
+        }
+      },
+      "gridPos": { "h": 6, "w": 12, "x": 0, "y": 15 },
+      "id": 20,
+      "options": {
+        "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "targets": [
+        { "expr": "rate(node_disk_read_bytes_total[5m])", "legendFormat": "Disk Read", "refId": "A" },
+        { "expr": "rate(node_disk_written_bytes_total[5m])", "legendFormat": "Disk Write", "refId": "B" }
+      ],
+      "title": "Disk I/O",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "Bps"
+        },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "Network Out" }, "properties": [{ "id": "custom.transform", "value": "negative-Y" }] }
+        ]
+      },
+      "gridPos": { "h": 6, "w": 12, "x": 12, "y": 15 },
+      "id": 21,
+      "options": {
+        "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "targets": [
+        { "expr": "rate(node_network_receive_bytes_total{device!=\"lo\"}[5m])", "legendFormat": "Network In", "refId": "A" },
+        { "expr": "rate(node_network_transmit_bytes_total{device!=\"lo\"}[5m])", "legendFormat": "Network Out", "refId": "B" }
+      ],
+      "title": "Network I/O",
+      "type": "timeseries"
+    },
+    {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 15 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 21 },
       "id": 101,
       "title": "🟢 Services Status",
       "type": "row"
@@ -226,7 +317,7 @@
           "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
         }
       },
-      "gridPos": { "h": 3, "w": 6, "x": 0, "y": 16 },
+      "gridPos": { "h": 3, "w": 6, "x": 0, "y": 22 },
       "id": 6,
       "options": {
         "colorMode": "background",
@@ -253,7 +344,7 @@
           "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
         }
       },
-      "gridPos": { "h": 3, "w": 6, "x": 6, "y": 16 },
+      "gridPos": { "h": 3, "w": 6, "x": 6, "y": 22 },
       "id": 16,
       "options": {
         "colorMode": "background",
@@ -280,7 +371,7 @@
           "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
         }
       },
-      "gridPos": { "h": 3, "w": 6, "x": 12, "y": 16 },
+      "gridPos": { "h": 3, "w": 6, "x": 12, "y": 22 },
       "id": 17,
       "options": {
         "colorMode": "background",
@@ -307,7 +398,7 @@
           "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
         }
       },
-      "gridPos": { "h": 3, "w": 6, "x": 18, "y": 16 },
+      "gridPos": { "h": 3, "w": 6, "x": 18, "y": 22 },
       "id": 18,
       "options": {
         "colorMode": "background",
@@ -324,7 +415,7 @@
     },
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 20 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 25 },
       "id": 102,
       "title": "🚀 API Metrics",
       "type": "row"
@@ -336,10 +427,10 @@
           "color": { "mode": "palette-classic" },
           "mappings": [],
           "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
-          "unit": "reqps"
+          "unit": "short"
         }
       },
-      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 21 },
+      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 26 },
       "id": 7,
       "options": {
         "colorMode": "value",
@@ -349,8 +440,8 @@
         "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
         "textMode": "auto"
       },
-      "targets": [{ "expr": "sum(rate(http_requests_total{job=\"riot-api\"}[5m]))", "legendFormat": "Requests/s", "refId": "A" }],
-      "title": "API Request Rate",
+      "targets": [{ "expr": "sum(rate(http_requests_total{job=\"riot-api\"}[5m])) * 60", "legendFormat": "Requests/min", "refId": "A" }],
+      "title": "API Request Rate (/min)",
       "type": "stat"
     },
     {
@@ -363,7 +454,7 @@
           "unit": "short"
         }
       },
-      "gridPos": { "h": 5, "w": 6, "x": 6, "y": 21 },
+      "gridPos": { "h": 5, "w": 6, "x": 6, "y": 26 },
       "id": 8,
       "options": {
         "colorMode": "value",
@@ -387,7 +478,7 @@
           "unit": "short"
         }
       },
-      "gridPos": { "h": 5, "w": 6, "x": 12, "y": 21 },
+      "gridPos": { "h": 5, "w": 6, "x": 12, "y": 26 },
       "id": 9,
       "options": {
         "colorMode": "value",
@@ -411,7 +502,7 @@
           "unit": "short"
         }
       },
-      "gridPos": { "h": 5, "w": 6, "x": 18, "y": 21 },
+      "gridPos": { "h": 5, "w": 6, "x": 18, "y": 26 },
       "id": 10,
       "options": {
         "colorMode": "value",
@@ -423,6 +514,102 @@
       },
       "targets": [{ "expr": "sum(mastery_lookups_total) or vector(0)", "legendFormat": "Mastery Lookups", "refId": "A" }],
       "title": "Mastery Lookups",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "yellow", "value": 95 }, { "color": "green", "value": 99 }] },
+          "unit": "percent"
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 31 },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "targets": [{ "expr": "(sum(increase(http_requests_total{job=\"riot-api\", status=~\"2..\"}[1h])) + sum(increase(riot_api_requests_total[1h])) - sum(increase(riot_api_errors_total[1h]))) / (sum(increase(http_requests_total{job=\"riot-api\"}[1h])) + sum(increase(riot_api_requests_total[1h]))) * 100 or vector(100)", "legendFormat": "Success Rate", "refId": "A" }],
+      "title": "Success Rate (1h)",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 5 }, { "color": "red", "value": 20 }] },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 31 },
+      "id": 23,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "targets": [{ "expr": "(sum(increase(http_requests_total{job=\"riot-api\", status=~\"4..|5..\"}[1h])) or vector(0)) + (sum(increase(riot_api_errors_total[1h])) or vector(0))", "legendFormat": "Errors", "refId": "A" }],
+      "title": "Errors (1h)",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 5 }] },
+          "unit": "percent"
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 31 },
+      "id": 24,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "targets": [{ "expr": "sum(rate(http_requests_total{job=\"riot-api\", status=~\"5..\"}[5m])) / sum(rate(http_requests_total{job=\"riot-api\"}[5m])) * 100 or vector(0)", "legendFormat": "Error Rate", "refId": "A" }],
+      "title": "5xx Error Rate",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 0.5 }, { "color": "red", "value": 1 }] },
+          "unit": "s"
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 31 },
+      "id": 25,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "targets": [{ "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket{job=\"riot-api\"}[5m])) by (le))", "legendFormat": "p50 Latency", "refId": "A" }],
+      "title": "Avg Response Time",
       "type": "stat"
     },
     {
@@ -453,17 +640,36 @@
           },
           "mappings": [],
           "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
-          "unit": "reqps"
+          "unit": "short"
         }
       },
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 26 },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 35 },
       "id": 11,
       "options": {
         "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true },
         "tooltip": { "mode": "multi", "sort": "desc" }
       },
-      "targets": [{ "expr": "sum by(handler) (rate(http_requests_total{job=\"riot-api\", handler!~\"/metrics|/health\"}[5m]))", "legendFormat": "{{handler}}", "refId": "A" }],
-      "title": "Request Rate by Endpoint",
+      "targets": [
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=\"/health\"}[5m]) * 60", "legendFormat": "/health", "refId": "A" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=\"/auth/register\"}[5m]) * 60", "legendFormat": "/auth/register", "refId": "B" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=\"/auth/login\"}[5m]) * 60", "legendFormat": "/auth/login", "refId": "C" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=~\"/users/.*\"}[5m]) * 60", "legendFormat": "/users/{riot_id}", "refId": "D" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=~\"/masteries/[^/]+$\"}[5m]) * 60", "legendFormat": "/masteries/{riot_id}", "refId": "E" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=~\"/masteries/.*/top\"}[5m]) * 60", "legendFormat": "/masteries/{riot_id}/top", "refId": "F" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=~\"/masteries/.*/refresh\"}[5m]) * 60", "legendFormat": "/masteries/{riot_id}/refresh", "refId": "G" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=~\"/masteries/lookup/.*\"}[5m]) * 60", "legendFormat": "/masteries/lookup/{name}/{tag}", "refId": "H" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=~\"/recommend/.*\"}[5m]) * 60", "legendFormat": "/recommend/{riot_id}", "refId": "I" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=\"/draft/predict\"}[5m]) * 60", "legendFormat": "/draft/predict", "refId": "J" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=\"/draft/suggest\"}[5m]) * 60", "legendFormat": "/draft/suggest", "refId": "K" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=\"/draft/analyze\"}[5m]) * 60", "legendFormat": "/draft/analyze", "refId": "L" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=~\"/matches/.*\"}[5m]) * 60", "legendFormat": "/matches/{name}/{tag}", "refId": "M" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=~\"/players/add/.*\"}[5m]) * 60", "legendFormat": "/players/add/{name}/{tag}", "refId": "N" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=\"/players\"}[5m]) * 60", "legendFormat": "/players", "refId": "O" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=\"/meta/tierlist\"}[5m]) * 60", "legendFormat": "/meta/tierlist", "refId": "P" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=~\"/meta/champion/.*\"}[5m]) * 60", "legendFormat": "/meta/champion/{champion}", "refId": "Q" },
+        { "expr": "rate(http_requests_total{job=\"riot-api\", handler=~\"/lolalytics/.*\"}[5m]) * 60", "legendFormat": "/lolalytics/{champion}/{role}", "refId": "R" }
+      ],
+      "title": "Request Rate by Endpoint (/min)",
       "type": "timeseries"
     },
     {
@@ -497,7 +703,7 @@
           "unit": "s"
         }
       },
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 26 },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 35 },
       "id": 12,
       "options": {
         "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true },
@@ -513,7 +719,7 @@
     },
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 34 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 54 },
       "id": 103,
       "title": "🤖 MLflow & Draft Predictions",
       "type": "row"
@@ -549,7 +755,7 @@
           "unit": "short"
         }
       },
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 35 },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 55 },
       "id": 13,
       "options": {
         "legend": { "calcs": ["sum"], "displayMode": "table", "placement": "bottom", "showLegend": true },
@@ -590,7 +796,7 @@
           "unit": "s"
         }
       },
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 35 },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 55 },
       "id": 14,
       "options": {
         "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true },
@@ -605,7 +811,151 @@
       "type": "timeseries"
     },
     {
-      "gridPos": { "h": 3, "w": 24, "x": 0, "y": 43 },
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 43 },
+      "id": 104,
+      "title": "📊 Business Metrics",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "blue", "value": null }] },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 44 },
+      "id": 26,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "targets": [{ "expr": "players_tracked_total or vector(0)", "legendFormat": "Players", "refId": "A" }],
+      "title": "Players Tracked",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "purple", "value": null }] },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 44 },
+      "id": 27,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "targets": [{ "expr": "users_registered_total or vector(0)", "legendFormat": "Registered", "refId": "A" }],
+      "title": "Users Registered",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "orange", "value": null }] },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 44 },
+      "id": 28,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "targets": [{ "expr": "sum(champion_lookups_total) or vector(0)", "legendFormat": "Champion Lookups", "refId": "A" }],
+      "title": "Champions Analyzed",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 44 },
+      "id": 29,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "targets": [{ "expr": "recommendations_served_total or vector(0)", "legendFormat": "Recommendations", "refId": "A" }],
+      "title": "Recommendations Served",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 50,
+            "gradientMode": "none",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 6, "w": 24, "x": 0, "y": 48 },
+      "id": 30,
+      "options": {
+        "legend": { "calcs": ["sum"], "displayMode": "table", "placement": "right", "showLegend": true },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "targets": [{ "expr": "topk(10, sum by(champion) (champion_lookups_total))", "legendFormat": "{{champion}}", "refId": "A" }],
+      "title": "Top 10 Champions Analyzed",
+      "type": "timeseries"
+    },
+    {
+      "gridPos": { "h": 3, "w": 24, "x": 0, "y": 63 },
       "id": 15,
       "options": {
         "content": "**Quick Links:** [MLflow UI](http://localhost:5000) | [API Docs](http://localhost:8000/docs) | [Prometheus](http://localhost:9090) | [Grafana](http://localhost:3001)",

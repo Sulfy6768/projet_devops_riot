@@ -10,6 +10,7 @@ from urllib.parse import unquote
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from prometheus_client import Counter, Gauge
 from prometheus_fastapi_instrumentator import Instrumentator
 
 from .draft import router as draft_router
@@ -26,6 +27,23 @@ from .utils import (
     load_json,
     save_json,
     transform_masteries,
+)
+
+# ============================================
+# Prometheus Business Metrics
+# ============================================
+
+USERS_REGISTERED = Counter(
+    "users_registered_total", "Total number of registered users"
+)
+PLAYERS_TRACKED = Gauge(
+    "players_tracked_total", "Number of unique players being tracked"
+)
+MASTERY_REFRESHES = Counter(
+    "mastery_refreshes_total", "Total mastery data refreshes"
+)
+RECOMMENDATIONS_SERVED = Counter(
+    "recommendations_served_total", "Total recommendations served"
 )
 
 # ============================================
@@ -49,6 +67,13 @@ app.include_router(draft_router)
 app.include_router(matches_router)
 app.include_router(players_router)
 app.include_router(meta_router)
+
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize metrics on startup."""
+    users = load_json(USERS_FILE)
+    PLAYERS_TRACKED.set(len(users))
 
 
 # ============================================
@@ -110,6 +135,10 @@ async def register(user: UserRegister):
         "created_at": int(time.time()),
     }
     save_json(USERS_FILE, users)
+
+    # Track metrics
+    USERS_REGISTERED.inc()
+    PLAYERS_TRACKED.inc()
 
     if puuid:
         await update_user_masteries(user.riot_id, puuid)
@@ -204,10 +233,23 @@ async def refresh_masteries(riot_id: str):
         raise HTTPException(status_code=404, detail="User not found")
 
     puuid = users[riot_id].get("puuid")
+
+    # If PUUID is missing, try to fetch it
     if not puuid:
-        raise HTTPException(status_code=400, detail="PUUID not available")
+        if "#" not in riot_id:
+            raise HTTPException(status_code=400, detail="Invalid Riot ID format")
+        game_name, tag_line = riot_id.rsplit("#", 1)
+        puuid = get_puuid_from_riot_id(game_name, tag_line)
+        if not puuid:
+            raise HTTPException(status_code=404, detail="Player not found on Riot API")
+        # Save the PUUID for future use
+        users[riot_id]["puuid"] = puuid
+        save_json(USERS_FILE, users)
 
     await update_user_masteries(riot_id, puuid)
+
+    # Track metric
+    MASTERY_REFRESHES.inc()
 
     return {"message": "Masteries updated"}
 
@@ -295,6 +337,9 @@ async def recommend_champions(
         if r not in by_role:
             by_role[r] = []
         by_role[r].append(rec)
+
+    # Track metric
+    RECOMMENDATIONS_SERVED.inc()
 
     return {
         "riot_id": riot_id,
