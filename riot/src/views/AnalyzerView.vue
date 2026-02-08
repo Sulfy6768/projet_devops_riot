@@ -332,8 +332,8 @@ const selectedSlot = ref<{ team: 'blue' | 'red' | null; index: number | null; ty
 
 // ML Prediction state
 const mlPrediction = ref({
-  blue_winrate: 50.0,
-  red_winrate: 50.0,
+  blue_winrate: 0.5,
+  red_winrate: 0.5,
   model_loaded: false,
   loading: false,
   confidence: 'low' as 'low' | 'high'
@@ -358,11 +358,11 @@ const currentPhaseLabel = computed(() => {
 
 // Use ML prediction for winrates
 const blueWinRate = computed(() => {
-  return mlPrediction.value.blue_winrate.toFixed(1)
+  return (mlPrediction.value.blue_winrate * 100).toFixed(1)
 })
 
 const redWinRate = computed(() => {
-  return mlPrediction.value.red_winrate.toFixed(1)
+  return (mlPrediction.value.red_winrate * 100).toFixed(1)
 })
 
 const currentSlotMasteries = computed(() => {
@@ -438,8 +438,8 @@ async function fetchMLPrediction() {
   if (blueBanNames.length === 0 && redBanNames.length === 0 && 
       bluePicks.length === 0 && redPicks.length === 0) {
     mlPrediction.value = {
-      blue_winrate: 50.0,
-      red_winrate: 50.0,
+      blue_winrate: 0.5,
+      red_winrate: 0.5,
       model_loaded: false,
       loading: false,
       confidence: 'low'
@@ -464,9 +464,9 @@ async function fetchMLPrediction() {
     if (response.ok) {
       const data = await response.json()
       mlPrediction.value = {
-        blue_winrate: data.blue_winrate || 50.0,
-        red_winrate: data.red_winrate || 50.0,
-        model_loaded: data.model_loaded || false,
+        blue_winrate: data.blue_winrate || 0.5,
+        red_winrate: data.red_winrate || 0.5,
+        model_loaded: true,
         loading: false,
         confidence: data.confidence || 'low'
       }

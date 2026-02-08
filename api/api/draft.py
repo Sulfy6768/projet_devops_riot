@@ -46,22 +46,14 @@ def get_draft_predictor():
             from draft_predictor import DraftPredictor
 
             _draft_predictor = DraftPredictor(
-                model_path="/app/mlflow/best_draft_model.pth",
-                encoders_path="/app/mlflow/draft_encoders.json",
+                model_path="/app/mlflow/best_draft_transformer.pt",
+                vocab_path="/app/mlflow/vocab.json",
             )
             print("✅ Draft Transformer model loaded!")
         except Exception as e:
             print(f"⚠️ Could not load Draft Transformer: {e}")
             _draft_predictor = "error"
     return _draft_predictor if _draft_predictor != "error" else None
-
-
-def parse_pick(p: str) -> tuple:
-    """Parse pick string 'Champion.position' to tuple ('Champion', 'position')."""
-    if "." in p:
-        parts = p.rsplit(".", 1)
-        return (parts[0], parts[1])
-    return (p, "mid")  # fallback position
 
 
 # ============================================
@@ -86,16 +78,14 @@ async def predict_draft_winrate(request: DraftPredictionRequest):
         raise HTTPException(status_code=503, detail="Draft prediction model not loaded")
 
     try:
+        # Le nouveau modèle utilise uniquement les picks (pas de bans)
         draft = {
-            "blue_bans": [b for b in request.blue_bans if b],
-            "red_bans": [b for b in request.red_bans if b],
-            "blue_picks": [parse_pick(p) for p in request.blue_picks if p],
-            "red_picks": [parse_pick(p) for p in request.red_picks if p],
+            "blue_picks": [p for p in request.blue_picks if p],
+            "red_picks": [p for p in request.red_picks if p],
         }
 
-        result = predictor.predict_win_probability(draft)
-        blue_winrate = result["blue_win_probability"]
-        red_winrate = result["red_win_probability"]
+        blue_winrate = predictor.predict_win(draft)
+        red_winrate = 1.0 - blue_winrate
 
         DRAFT_PREDICTIONS_TOTAL.labels(model_loaded="true").inc()
         DRAFT_PREDICTION_LATENCY.observe(time.time() - start_time)
@@ -118,11 +108,17 @@ async def predict_draft_winrate(request: DraftPredictionRequest):
 
 
 @router.post("/suggest")
-async def suggest_champion(request: DraftPredictionRequest, step: int = 0, top_k: int = 5):
+async def suggest_champion(
+    request: DraftPredictionRequest,
+    position: int = 1,
+    role: str = "mid",
+    top_k: int = 5,
+):
     """
-    Suggest best champions for a draft step.
+    Suggest best champions for a position.
 
-    step: 0-19 according to competitive draft order
+    position: 1-10 (1-5 for Blue picks, 6-10 for Red picks)
+    role: top, jng, mid, bot, sup
     top_k: number of suggestions to return
     """
     predictor = get_draft_predictor()
@@ -132,15 +128,24 @@ async def suggest_champion(request: DraftPredictionRequest, step: int = 0, top_k
 
     try:
         draft = {
-            "blue_bans": [b for b in request.blue_bans if b],
-            "red_bans": [b for b in request.red_bans if b],
             "blue_picks": [p for p in request.blue_picks if p],
             "red_picks": [p for p in request.red_picks if p],
         }
 
-        suggestions = predictor.suggest_champion(draft, step=step, top_k=top_k)
+        suggestions = predictor.suggest_champion(
+            draft,
+            position_index=position,
+            role=role.lower(),
+            top_k=top_k,
+            exclude_picked=True,
+        )
 
-        return {"suggestions": suggestions, "step": step}
+        return {
+            "suggestions": suggestions,
+            "position": position,
+            "role": role,
+            "side": "Blue" if position <= 5 else "Red",
+        }
 
     except Exception as e:
         print(f"Error suggesting champion: {e}")

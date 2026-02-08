@@ -1,294 +1,568 @@
 """
-Draft Prediction - Live Inference
-Use trained model to recommend picks/bans during live draft
+Draft Predictor - Chargement et Test du Modèle Simplifié
+=========================================================
+
+Ce script permet de :
+1. Charger un modèle entraîné
+2. Prédire le winrate d'une draft (basé uniquement sur les picks)
+3. Suggérer les meilleurs picks
+
+Usage :
+    python draft_predictor.py
 """
 
 import torch
-import torch.nn as nn
-import json
-import numpy as np
-from typing import List, Dict, Optional, Tuple
+import torch.nn.functional as F
+import pandas as pd
+from draft_transformer import (
+    DraftTransformer,
+    ChampionVocabulary,
+    SPECIAL_TOKENS,
+    POSITIONS,
+    CONFIG,
+)
 
-# Import model architecture
-from draft_model import DraftLSTM, POSITIONS
+# Constantes pour les sides
+BLUE_SIDE_ID = 0
+RED_SIDE_ID = 1
+
+# Mapping des noms de champions du frontend vers les noms du vocabulaire
+# Frontend utilise PascalCase sans espaces, vocab utilise des espaces et apostrophes
+CHAMPION_NAME_MAP = {
+    # Noms avec espaces
+    "leesin": "Lee Sin",
+    "jarvaniv": "Jarvan IV",
+    "xinzhao": "Xin Zhao",
+    "missfortune": "Miss Fortune",
+    "masteryi": "Master Yi",
+    "tahmkench": "Tahm Kench",
+    "twistedfate": "Twisted Fate",
+    "aurelionsol": "Aurelion Sol",
+    "drmundo": "Dr. Mundo",
+    "renataglasc": "Renata Glasc",
+    # Noms avec apostrophes
+    "reksai": "Rek'Sai",
+    "khazix": "Kha'Zix",
+    "chogath": "Cho'Gath",
+    "kogmaw": "Kog'Maw",
+    "velkoz": "Vel'Koz",
+    "kaisa": "Kai'Sa",
+    "belveth": "Bel'Veth",
+    "ksante": "K'Sante",
+    # Autres cas spéciaux
+    "nunu": "Nunu & Willump",
+    "wukong": "Wukong",
+    "monkeyking": "Wukong",
+    "leblanc": "LeBlanc",
+    "fiddlesticks": "Fiddlesticks",
+}
+
+
+def normalize_champion_name(name: str) -> str:
+    """
+    Normalise un nom de champion du format frontend vers le format vocabulaire.
+    
+    Ex: "LeeSin" -> "Lee Sin", "KhaZix" -> "Kha'Zix"
+    """
+    if not name:
+        return name
+    
+    # Essayer le mapping direct (en minuscules)
+    lower_name = name.lower().replace("'", "").replace(" ", "").replace(".", "")
+    if lower_name in CHAMPION_NAME_MAP:
+        return CHAMPION_NAME_MAP[lower_name]
+    
+    # Sinon retourner le nom original (peut déjà être correct)
+    return name
 
 
 class DraftPredictor:
-    """Live draft prediction and recommendation system"""
-    
-    def __init__(self, model_path: str, encoders_path: str, device: str = "cpu"):
-        self.device = device
-        
-        # Load encoders
-        with open(encoders_path, "r") as f:
-            encoders = json.load(f)
-        
-        self.champion_encoder = encoders["champion_encoder"]
-        self.champion_decoder = {int(k): v for k, v in encoders["champion_decoder"].items()}
-        self.config = encoders["config"]
-        
-        # Load model
-        self.model = DraftLSTM(
-            num_champions=len(self.champion_encoder),
-            embedding_dim=self.config["embedding_dim"],
-            hidden_dim=self.config["hidden_dim"],
-            num_layers=self.config["num_layers"],
-            dropout=0  # No dropout for inference
+    """
+    Classe pour charger et utiliser le modèle Draft Transformer simplifié
+
+    Le modèle prend en entrée uniquement les picks (pas de bans):
+    - 5 picks Blue avec position
+    - 5 picks Red avec position
+    """
+
+    def __init__(
+        self,
+        model_path: str = "best_draft_transformer.pt",
+        vocab_path: str = "vocab.json",
+    ):
+        """
+        Charge le modèle depuis un checkpoint
+
+        Args:
+            model_path: Chemin vers le fichier .pt
+            vocab_path: Chemin vers le vocabulaire JSON
+        """
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print(f"🖥️  Device: {self.device}")
+
+        # Charger le checkpoint
+        print(f"📂 Chargement du modèle: {model_path}")
+        checkpoint = torch.load(
+            model_path, map_location=self.device, weights_only=False
         )
-        self.model.load_state_dict(torch.load(model_path, map_location=device))
-        self.model.to(device)
+
+        # Charger le vocabulaire
+        self.vocab = ChampionVocabulary.load(vocab_path)
+        self.config = checkpoint.get("config", CONFIG)
+
+        # Recréer le modèle
+        vocab_size = checkpoint.get("vocab_size", len(self.vocab))
+        self.model = DraftTransformer(vocab_size=vocab_size).to(self.device)
+        self.model.load_state_dict(checkpoint["model_state_dict"])
         self.model.eval()
-        
-        # All champions list
-        self.all_champions = list(self.champion_encoder.keys())
-    
-    def encode_draft_state(self, draft_state: Dict) -> Tuple[torch.Tensor, ...]:
+
+        print(f"✅ Modèle chargé! (Epoch {checkpoint.get('epoch', '?')})")
+        print(f"   Vocab: {len(self.vocab)} tokens")
+
+    def _parse_pick(self, pick_str: str):
+        """Parse 'Varus.bot' en (champion, position) avec normalisation du nom"""
+        if pd.isna(pick_str) or pick_str == "" or pick_str is None:
+            return "[PAD]", "unknown"
+
+        parts = str(pick_str).split(".")
+        champion = parts[0]
+        position = parts[1].lower() if len(parts) > 1 else "unknown"
+
+        if position not in POSITIONS:
+            position = "unknown"
+
+        # Normaliser le nom du champion pour correspondre au vocabulaire
+        champion = normalize_champion_name(champion)
+
+        return champion, position
+
+    def _build_sequence(self, draft: dict, mask_index: int = None):
         """
-        Encode current draft state into model input tensors
-        
-        draft_state format:
-        {
-            "blue_bans": ["Champ1", "Champ2", ...],
-            "red_bans": ["Champ1", "Champ2", ...],
-            "blue_picks": [("Champ", "pos"), ("Champ", "pos"), ...],
-            "red_picks": [("Champ", "pos"), ("Champ", "pos"), ...]
-        }
+        Construit la séquence d'entrée pour le modèle
+
+        Args:
+            draft: Dict avec les clés:
+                - blue_picks: ["Champion1.pos", "Champion2.pos", ...]
+                - red_picks: ["Champion1.pos", "Champion2.pos", ...]
+            mask_index: Index du pick à masquer (1-10, 1-5 pour Blue, 6-10 pour Red)
+
+        Returns:
+            Dict avec les tenseurs d'entrée
         """
-        sequence = []
-        
-        # Blue bans
-        for champ in draft_state.get("blue_bans", []):
-            if champ:
-                champ_id = self.champion_encoder.get(champ, 0)
-                sequence.append({
-                    "champ_id": champ_id,
-                    "pos_id": 5,  # ban
-                    "is_ban": 1,
-                    "is_blue": 1
-                })
-        
-        # Red bans
-        for champ in draft_state.get("red_bans", []):
-            if champ:
-                champ_id = self.champion_encoder.get(champ, 0)
-                sequence.append({
-                    "champ_id": champ_id,
-                    "pos_id": 5,  # ban
-                    "is_ban": 1,
-                    "is_blue": 0
-                })
-        
-        # Blue picks
-        for pick in draft_state.get("blue_picks", []):
-            if pick:
-                champ, pos = pick if isinstance(pick, tuple) else (pick, "mid")
-                champ_id = self.champion_encoder.get(champ, 0)
-                pos_id = POSITIONS.index(pos) if pos in POSITIONS else 0
-                sequence.append({
-                    "champ_id": champ_id,
-                    "pos_id": pos_id,
-                    "is_ban": 0,
-                    "is_blue": 1
-                })
-        
-        # Red picks
-        for pick in draft_state.get("red_picks", []):
-            if pick:
-                champ, pos = pick if isinstance(pick, tuple) else (pick, "mid")
-                champ_id = self.champion_encoder.get(champ, 0)
-                pos_id = POSITIONS.index(pos) if pos in POSITIONS else 0
-                sequence.append({
-                    "champ_id": champ_id,
-                    "pos_id": pos_id,
-                    "is_ban": 0,
-                    "is_blue": 0
-                })
-        
-        # Pad to 20
-        max_len = 20
-        while len(sequence) < max_len:
-            sequence.append({"champ_id": 0, "pos_id": 0, "is_ban": 0, "is_blue": 0})
-        
-        # Convert to tensors
-        champ_ids = torch.tensor([[s["champ_id"] for s in sequence[:max_len]]], dtype=torch.long)
-        pos_ids = torch.tensor([[s["pos_id"] for s in sequence[:max_len]]], dtype=torch.long)
-        is_ban = torch.tensor([[s["is_ban"] for s in sequence[:max_len]]], dtype=torch.float)
-        is_blue = torch.tensor([[s["is_blue"] for s in sequence[:max_len]]], dtype=torch.float)
-        
-        return champ_ids.to(self.device), pos_ids.to(self.device), \
-               is_ban.to(self.device), is_blue.to(self.device)
-    
-    def predict_win_probability(self, draft_state: Dict) -> Dict[str, float]:
-        """Predict win probability for both teams given current draft"""
-        champ_ids, pos_ids, is_ban, is_blue = self.encode_draft_state(draft_state)
-        
-        with torch.no_grad():
-            win_prob, _ = self.model(champ_ids, pos_ids, is_ban, is_blue)
-            blue_win_prob = win_prob.item()
-        
-        return {
-            "blue_win_probability": round(blue_win_prob * 100, 2),
-            "red_win_probability": round((1 - blue_win_prob) * 100, 2)
-        }
-    
-    def get_unavailable_champions(self, draft_state: Dict) -> set:
-        """Get set of champions that are already picked or banned"""
-        unavailable = set()
-        
-        for champ in draft_state.get("blue_bans", []):
-            if champ:
-                unavailable.add(champ)
-        for champ in draft_state.get("red_bans", []):
-            if champ:
-                unavailable.add(champ)
-        for pick in draft_state.get("blue_picks", []):
-            if pick:
-                champ = pick[0] if isinstance(pick, tuple) else pick
-                unavailable.add(champ)
-        for pick in draft_state.get("red_picks", []):
-            if pick:
-                champ = pick[0] if isinstance(pick, tuple) else pick
-                unavailable.add(champ)
-        
-        return unavailable
-    
-    def recommend_pick(self, draft_state: Dict, team: str, position: str, 
-                       top_k: int = 5) -> List[Dict]:
-        """
-        Recommend best champions to pick for a team/position
-        
-        Returns list of {champion, score, win_probability_delta}
-        """
-        unavailable = self.get_unavailable_champions(draft_state)
-        available = [c for c in self.all_champions if c not in unavailable]
-        
-        # Get current win probability
-        current_probs = self.predict_win_probability(draft_state)
-        
-        recommendations = []
-        pick_key = "blue_picks" if team == "blue" else "red_picks"
-        
-        for champ in available:
-            # Create hypothetical draft with this pick
-            test_state = {
-                "blue_bans": draft_state.get("blue_bans", []).copy(),
-                "red_bans": draft_state.get("red_bans", []).copy(),
-                "blue_picks": [p for p in draft_state.get("blue_picks", [])],
-                "red_picks": [p for p in draft_state.get("red_picks", [])]
-            }
-            test_state[pick_key] = test_state[pick_key] + [(champ, position)]
-            
-            # Get new win probability
-            new_probs = self.predict_win_probability(test_state)
-            
-            # Calculate delta (positive = good for picking team)
-            if team == "blue":
-                delta = new_probs["blue_win_probability"] - current_probs["blue_win_probability"]
+        champion_ids = [SPECIAL_TOKENS["[CLS]"]]
+        position_ids = [0]  # Position pour [CLS]
+        side_ids = [BLUE_SIDE_ID]  # Side pour [CLS] (neutre, on met Blue par défaut)
+
+        # Picks Blue (indices 1-5)
+        blue_picks = draft.get("blue_picks", [])
+        for i in range(5):
+            pick_str = blue_picks[i] if i < len(blue_picks) else None
+            champ, pos = self._parse_pick(pick_str)
+
+            # Masquer si demandé
+            if mask_index is not None and mask_index == i + 1:
+                champ_id = SPECIAL_TOKENS["[MASK]"]
             else:
-                delta = new_probs["red_win_probability"] - current_probs["red_win_probability"]
-            
-            recommendations.append({
-                "champion": champ,
-                "position": position,
-                "score": delta,
-                "new_win_probability": new_probs[f"{team}_win_probability"]
-            })
-        
-        # Sort by score (highest first)
-        recommendations.sort(key=lambda x: x["score"], reverse=True)
-        
-        return recommendations[:top_k]
-    
-    def recommend_ban(self, draft_state: Dict, team: str, top_k: int = 5) -> List[Dict]:
+                champ_id = (
+                    self.vocab.get_id(champ)
+                    if champ != "[PAD]"
+                    else SPECIAL_TOKENS["[PAD]"]
+                )
+
+            pos_id = (
+                POSITIONS.index(pos) if pos in POSITIONS else POSITIONS.index("unknown")
+            )
+
+            champion_ids.append(champ_id)
+            position_ids.append(pos_id)
+            side_ids.append(BLUE_SIDE_ID)
+
+        # Picks Red (indices 6-10)
+        red_picks = draft.get("red_picks", [])
+        for i in range(5):
+            pick_str = red_picks[i] if i < len(red_picks) else None
+            champ, pos = self._parse_pick(pick_str)
+
+            # Masquer si demandé
+            if mask_index is not None and mask_index == i + 6:
+                champ_id = SPECIAL_TOKENS["[MASK]"]
+            else:
+                champ_id = (
+                    self.vocab.get_id(champ)
+                    if champ != "[PAD]"
+                    else SPECIAL_TOKENS["[PAD]"]
+                )
+
+            pos_id = (
+                POSITIONS.index(pos) if pos in POSITIONS else POSITIONS.index("unknown")
+            )
+
+            champion_ids.append(champ_id)
+            position_ids.append(pos_id)
+            side_ids.append(RED_SIDE_ID)
+
+        return {
+            "champion_ids": torch.tensor([champion_ids], dtype=torch.long).to(
+                self.device
+            ),
+            "position_ids": torch.tensor([position_ids], dtype=torch.long).to(
+                self.device
+            ),
+            "side_ids": torch.tensor([side_ids], dtype=torch.long).to(self.device),
+        }
+
+    def predict_win(self, draft: dict) -> float:
         """
-        Recommend best champions to ban for a team
-        
-        Bans the champions that would help the opponent the most
+        Prédit la probabilité de victoire de Blue
+
+        Args:
+            draft: Dict avec blue_picks, red_picks (format "Champion.position")
+
+        Returns:
+            Probabilité de victoire Blue (0-1)
         """
-        unavailable = self.get_unavailable_champions(draft_state)
-        available = [c for c in self.all_champions if c not in unavailable]
-        
-        opponent = "red" if team == "blue" else "blue"
-        
-        recommendations = []
-        
-        for champ in available:
-            # Test how much this champion would help the opponent if they picked it
-            max_delta = 0
-            
-            for pos in POSITIONS:
-                test_state = {
-                    "blue_bans": draft_state.get("blue_bans", []).copy(),
-                    "red_bans": draft_state.get("red_bans", []).copy(),
-                    "blue_picks": [p for p in draft_state.get("blue_picks", [])],
-                    "red_picks": [p for p in draft_state.get("red_picks", [])]
+        inputs = self._build_sequence(draft)
+
+        with torch.no_grad():
+            win_logits, _ = self.model(**inputs)
+            win_prob = torch.sigmoid(win_logits).item()
+
+        return win_prob
+
+    def suggest_champion(
+        self,
+        draft: dict,
+        position_index: int,  # 1-10 (1-5 Blue, 6-10 Red)
+        role: str = "unknown",
+        top_k: int = 10,
+        exclude_picked: bool = True,
+    ):
+        """
+        Suggère les meilleurs champions pour une position
+
+        Args:
+            draft: Draft actuelle (peut être partielle)
+            position_index: Position dans la séquence (1-5 pour Blue, 6-10 pour Red)
+            role: Rôle attendu (top, jng, mid, bot, sup)
+            top_k: Nombre de suggestions
+            exclude_picked: Exclure les champions déjà pick
+
+        Returns:
+            Liste de dict avec champion et probabilité
+        """
+        if position_index < 1 or position_index > 10:
+            raise ValueError("position_index doit être entre 1 et 10")
+
+        side = "Blue" if position_index <= 5 else "Red"
+
+        # Construire la séquence avec un MASK à la position demandée
+        inputs = self._build_sequence(draft, mask_index=position_index)
+
+        with torch.no_grad():
+            _, mlm_logits = self.model(**inputs)
+            probs = F.softmax(mlm_logits[0, position_index], dim=-1)
+
+        # Exclure les champions déjà utilisés
+        if exclude_picked:
+            used_champs = set()
+            for picks in [draft.get("blue_picks", []), draft.get("red_picks", [])]:
+                for p in picks:
+                    if p:
+                        champ, _ = self._parse_pick(p)
+                        used_champs.add(champ)
+
+            for champ in used_champs:
+                champ_id = self.vocab.get_id(champ)
+                if champ_id < len(probs):
+                    probs[champ_id] = 0.0
+
+            # Exclure les tokens spéciaux
+            for token_id in SPECIAL_TOKENS.values():
+                probs[token_id] = 0.0
+
+        # Top-k
+        top_probs, top_ids = torch.topk(probs, top_k)
+
+        suggestions = []
+        for prob, champ_id in zip(top_probs.tolist(), top_ids.tolist()):
+            champ_name = self.vocab.get_champion(champ_id)
+            suggestions.append(
+                {
+                    "champion": champ_name,
+                    "probability": prob,
+                    "side": side,
+                    "role": role,
                 }
-                
-                pick_key = f"{opponent}_picks"
-                test_state[pick_key] = test_state[pick_key] + [(champ, pos)]
-                
-                new_probs = self.predict_win_probability(test_state)
-                delta = new_probs[f"{opponent}_win_probability"]
-                
-                if delta > max_delta:
-                    max_delta = delta
-            
-            recommendations.append({
-                "champion": champ,
-                "opponent_win_boost": max_delta,
-                "ban_value": max_delta  # Higher = more valuable to ban
-            })
-        
-        # Sort by ban value (highest first = most impactful to ban)
-        recommendations.sort(key=lambda x: x["ban_value"], reverse=True)
-        
-        return recommendations[:top_k]
+            )
+
+        return suggestions
+
+    def complete_draft(self, blue_picks=None, red_picks=None):
+        """
+        Complète une draft partielle en suggérant les picks manquants
+
+        Returns:
+            Draft complète avec les suggestions
+        """
+        draft = {
+            "blue_picks": list(blue_picks) if blue_picks else [],
+            "red_picks": list(red_picks) if red_picks else [],
+        }
+
+        print("\n🎮 Complétion de draft")
+        print("=" * 50)
+
+        # Rôles dans l'ordre standard
+        roles = ["top", "jng", "mid", "bot", "sup"]
+
+        # Compléter les picks Blue
+        for i in range(5):
+            if i < len(draft["blue_picks"]) and draft["blue_picks"][i]:
+                champ, pos = self._parse_pick(draft["blue_picks"][i])
+                print(f"  Blue {i+1} ({roles[i]}): {champ} (existant)")
+            else:
+                suggestions = self.suggest_champion(
+                    draft, i + 1, role=roles[i], top_k=5
+                )
+                best = suggestions[0]
+                pick = f"{best['champion']}.{roles[i]}"
+
+                # Ajouter ou remplacer
+                if i < len(draft["blue_picks"]):
+                    draft["blue_picks"][i] = pick
+                else:
+                    draft["blue_picks"].append(pick)
+
+                print(
+                    f"  Blue {i+1} ({roles[i]}): {best['champion']} ({best['probability']*100:.1f}%)"
+                )
+
+        # Compléter les picks Red
+        for i in range(5):
+            if i < len(draft["red_picks"]) and draft["red_picks"][i]:
+                champ, pos = self._parse_pick(draft["red_picks"][i])
+                print(f"  Red {i+1} ({roles[i]}): {champ} (existant)")
+            else:
+                suggestions = self.suggest_champion(
+                    draft, i + 6, role=roles[i], top_k=5
+                )
+                best = suggestions[0]
+                pick = f"{best['champion']}.{roles[i]}"
+
+                if i < len(draft["red_picks"]):
+                    draft["red_picks"][i] = pick
+                else:
+                    draft["red_picks"].append(pick)
+
+                print(
+                    f"  Red {i+1} ({roles[i]}): {best['champion']} ({best['probability']*100:.1f}%)"
+                )
+
+        # Prédiction finale
+        win_prob = self.predict_win(draft)
+        print("\n" + "=" * 50)
+        print(f"📊 Prédiction: Blue {win_prob*100:.1f}% - Red {(1-win_prob)*100:.1f}%")
+
+        return draft, win_prob
+
+
+def print_draft(draft: dict):
+    """Affiche une draft de manière lisible"""
+    print("\n" + "=" * 50)
+    print("📋 DRAFT (Picks uniquement)")
+    print("=" * 50)
+
+    print("\n🔵 BLUE SIDE")
+    picks = draft.get("blue_picks", [])
+    for i, p in enumerate(picks, 1):
+        if p:
+            champ, pos = p.rsplit(".", 1) if "." in p else (p, "?")
+            print(f"   Pick {i} ({pos}): {champ}")
+        else:
+            print(f"   Pick {i}: (vide)")
+
+    print("\n🔴 RED SIDE")
+    picks = draft.get("red_picks", [])
+    for i, p in enumerate(picks, 1):
+        if p:
+            champ, pos = p.rsplit(".", 1) if "." in p else (p, "?")
+            print(f"   Pick {i} ({pos}): {champ}")
+        else:
+            print(f"   Pick {i}: (vide)")
 
 
 # ============================================
-# Example Usage
+# TESTS
 # ============================================
-def demo():
-    """Demo the predictor"""
-    print("Loading model...")
-    predictor = DraftPredictor(
-        model_path="mlflow/best_draft_model.pth",
-        encoders_path="mlflow/draft_encoders.json"
-    )
-    
-    # Example draft state (mid-draft)
-    draft_state = {
-        "blue_bans": ["Yone", "Aurora", "Corki"],
-        "red_bans": ["Ksante", "Rumble", "Viego"],
-        "blue_picks": [("Jinx", "bot")],
-        "red_picks": [("Nautilus", "sup"), ("Graves", "jng")]
+def test_win_prediction(predictor: DraftPredictor):
+    """Test de prédiction de victoire"""
+    print("\n" + "=" * 60)
+    print("TEST 1: Prédiction de victoire")
+    print("=" * 60)
+
+    draft = {
+        "blue_picks": [
+            "Ksante.top",
+            "Viego.jng",
+            "Syndra.mid",
+            "Jinx.bot",
+            "Thresh.sup",
+        ],
+        "red_picks": [
+            "Gnar.top",
+            "Lee Sin.jng",
+            "Ahri.mid",
+            "Ezreal.bot",
+            "Nautilus.sup",
+        ],
     }
-    
-    print("\n" + "="*50)
-    print("Current Draft State:")
-    print(f"  Blue bans: {draft_state['blue_bans']}")
-    print(f"  Red bans: {draft_state['red_bans']}")
-    print(f"  Blue picks: {draft_state['blue_picks']}")
-    print(f"  Red picks: {draft_state['red_picks']}")
-    
-    # Win probability
-    probs = predictor.predict_win_probability(draft_state)
-    print(f"\nWin Probabilities:")
-    print(f"  Blue: {probs['blue_win_probability']}%")
-    print(f"  Red: {probs['red_win_probability']}%")
-    
-    # Recommend pick for Blue team mid
-    print(f"\nRecommended picks for Blue (mid):")
-    picks = predictor.recommend_pick(draft_state, "blue", "mid", top_k=5)
-    for i, rec in enumerate(picks, 1):
-        print(f"  {i}. {rec['champion']} (+{rec['score']:.2f}% win rate)")
-    
-    # Recommend ban for Blue team
-    print(f"\nRecommended bans for Blue:")
-    bans = predictor.recommend_ban(draft_state, "blue", top_k=5)
-    for i, rec in enumerate(bans, 1):
-        print(f"  {i}. {rec['champion']} (opponent +{rec['ban_value']:.2f}% if picked)")
+
+    print_draft(draft)
+
+    win_prob = predictor.predict_win(draft)
+    print(f"\n🎯 Prédiction: Blue {win_prob*100:.1f}% - Red {(1-win_prob)*100:.1f}%")
+
+
+def test_champion_suggestion(predictor: DraftPredictor):
+    """Test de suggestion de champion"""
+    print("\n" + "=" * 60)
+    print("TEST 2: Suggestion de champion")
+    print("=" * 60)
+
+    draft = {
+        "blue_picks": ["Ksante.top", "Viego.jng"],
+        "red_picks": ["Gnar.top"],
+    }
+
+    print("\nDraft actuelle:")
+    print_draft(draft)
+
+    # Suggérer le mid Blue (position 3)
+    print(f"\n🎯 Suggestions pour Blue mid (pick 3):")
+    suggestions = predictor.suggest_champion(
+        draft, position_index=3, role="mid", top_k=10
+    )
+
+    for i, s in enumerate(suggestions, 1):
+        print(f"  {i:2d}. {s['champion']:15s} - {s['probability']*100:.1f}%")
+
+
+def test_complete_draft(predictor: DraftPredictor):
+    """Test de complétion de draft"""
+    print("\n" + "=" * 60)
+    print("TEST 3: Complétion de draft")
+    print("=" * 60)
+
+    # Draft partielle
+    blue_picks = ["Ksante.top", "Viego.jng"]
+    red_picks = ["Gnar.top", "Lee Sin.jng", "Ahri.mid"]
+
+    draft, win_prob = predictor.complete_draft(blue_picks, red_picks)
+    print_draft(draft)
+
+
+def interactive_mode(predictor: DraftPredictor):
+    """Mode interactif pour tester le modèle"""
+    print("\n" + "=" * 60)
+    print("MODE INTERACTIF")
+    print("=" * 60)
+    print("\nCommandes:")
+    print("  win             - Prédire le winrate")
+    print("  suggest <1-10>  - Suggérer un champion (1-5 Blue, 6-10 Red)")
+    print("  complete        - Compléter la draft")
+    print("  blue <n> <champ.pos> - Définir pick Blue n")
+    print("  red <n> <champ.pos>  - Définir pick Red n")
+    print("  reset           - Réinitialiser la draft")
+    print("  quit            - Quitter")
+
+    draft = {
+        "blue_picks": [None] * 5,
+        "red_picks": [None] * 5,
+    }
+
+    while True:
+        print("\n" + "-" * 40)
+        print_draft(draft)
+
+        cmd = input("\n> ").strip()
+        cmd_lower = cmd.lower()
+
+        if cmd_lower == "quit" or cmd_lower == "q":
+            break
+
+        elif cmd_lower == "complete":
+            # Nettoyer les None
+            bp = [p for p in draft["blue_picks"] if p]
+            rp = [p for p in draft["red_picks"] if p]
+            draft, _ = predictor.complete_draft(bp, rp)
+
+        elif cmd_lower == "win":
+            win_prob = predictor.predict_win(draft)
+            print(f"\n🎯 Blue {win_prob*100:.1f}% - Red {(1-win_prob)*100:.1f}%")
+
+        elif cmd_lower.startswith("suggest"):
+            parts = cmd.split()
+            pos = int(parts[1]) if len(parts) > 1 else 1
+            role = parts[2] if len(parts) > 2 else "unknown"
+            suggestions = predictor.suggest_champion(draft, pos, role=role, top_k=5)
+            side = "Blue" if pos <= 5 else "Red"
+            print(f"\nSuggestions pour {side} pick {pos if pos <= 5 else pos - 5}:")
+            for i, s in enumerate(suggestions, 1):
+                print(f"  {i}. {s['champion']} ({s['probability']*100:.1f}%)")
+
+        elif cmd_lower.startswith("blue "):
+            parts = cmd.split(maxsplit=2)
+            if len(parts) >= 3:
+                n = int(parts[1]) - 1
+                pick = parts[2]
+                if 0 <= n < 5:
+                    draft["blue_picks"][n] = pick
+                    print(f"  ✓ Blue pick {n+1} = {pick}")
+
+        elif cmd_lower.startswith("red "):
+            parts = cmd.split(maxsplit=2)
+            if len(parts) >= 3:
+                n = int(parts[1]) - 1
+                pick = parts[2]
+                if 0 <= n < 5:
+                    draft["red_picks"][n] = pick
+                    print(f"  ✓ Red pick {n+1} = {pick}")
+
+        elif cmd_lower == "reset":
+            draft = {"blue_picks": [None] * 5, "red_picks": [None] * 5}
+            print("  ✓ Draft réinitialisée")
+
+        elif cmd_lower == "help":
+            print(
+                "\nCommandes: win, suggest <pos>, complete, blue/red <n> <pick>, reset, quit"
+            )
+
+        else:
+            print("❓ Commande non reconnue. Tape 'help' pour l'aide.")
+
+
+# ============================================
+# MAIN
+# ============================================
+def main():
+    print("=" * 60)
+    print("DRAFT PREDICTOR (SIMPLIFIÉ) - Test & Prédiction")
+    print("=" * 60)
+
+    # Charger le modèle
+    predictor = DraftPredictor("best_draft_transformer.pt", "vocab.json")
+
+    # Tests
+    test_win_prediction(predictor)
+    test_champion_suggestion(predictor)
+    test_complete_draft(predictor)
+
+    # Mode interactif
+    print("\n" + "=" * 60)
+    response = input("\nLancer le mode interactif? (y/n): ")
+    if response.lower() == "y":
+        interactive_mode(predictor)
 
 
 if __name__ == "__main__":
-    demo()
+    main()
