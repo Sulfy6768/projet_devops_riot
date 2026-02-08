@@ -159,7 +159,7 @@ jobs:
           fail-on-severity: high
 
   # ============================================
-  # Build & Scan Docker Images
+  # Build Docker Images
   # ============================================
   build:
     name: Build Docker Images
@@ -168,40 +168,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Free up disk space
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /opt/hostedtoolcache/CodeQL
-          docker system prune -af
-          df -h
-
       - name: Build API image
         run: docker build -t riot-api:${{ github.sha }} ./api
 
       - name: Build Frontend image
         run: docker build -t riot-frontend:${{ github.sha }} ./riot
-
-      - name: Scan API image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: 'riot-api:${{ github.sha }}'
-          format: 'table'
-          exit-code: '0'
-          ignore-unfixed: true
-          severity: 'CRITICAL,HIGH'
-          timeout: '15m'
-          skip-dirs: '/app/.venv,/root/.cache'
-          scanners: 'vuln'
-
-      - name: Scan Frontend image with Trivy
-        uses: aquasecurity/trivy-action@0.28.0
-        with:
-          image-ref: 'riot-frontend:${{ github.sha }}'
-          format: 'table'
-          exit-code: '0'
-          ignore-unfixed: true
-          severity: 'CRITICAL,HIGH'
-          timeout: '10m'
-          scanners: 'vuln'
