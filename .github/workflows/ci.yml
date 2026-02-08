@@ -63,7 +63,6 @@ jobs:
 
       - name: Run tests
         run: uv run pytest -v --tb=short
-        continue-on-error: true  # TODO: Remove when tests are implemented
 
   # ============================================
   # Frontend Vue.js
