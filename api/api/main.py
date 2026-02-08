@@ -5,6 +5,7 @@ Main application entry point.
 
 import hashlib
 import time
+from contextlib import asynccontextmanager
 from typing import Optional
 from urllib.parse import unquote
 
@@ -42,7 +43,18 @@ RECOMMENDATIONS_SERVED = Counter("recommendations_served_total", "Total recommen
 # Application
 # ============================================
 
-app = FastAPI(title="Riot Stats API", version="1.0.0")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan context manager for startup/shutdown events."""
+    # Startup
+    users = load_json(USERS_FILE)
+    PLAYERS_TRACKED.set(len(users))
+    yield
+    # Shutdown (nothing to do)
+
+
+app = FastAPI(title="Riot Stats API", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -59,13 +71,6 @@ app.include_router(draft_router)
 app.include_router(matches_router)
 app.include_router(players_router)
 app.include_router(meta_router)
-
-
-@app.on_event("startup")
-async def startup_event():
-    """Initialize metrics on startup."""
-    users = load_json(USERS_FILE)
-    PLAYERS_TRACKED.set(len(users))
 
 
 # ============================================
